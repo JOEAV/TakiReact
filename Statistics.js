@@ -10,7 +10,10 @@ export default class Statistics extends Component{
         return(
             <div>
                 <StatsFragment title="Total Moves" val={this.props.totalMoves} />
-                <button id="restart-button"  title='click' name='click1' onClick={(event)=>test()}>restart</button>
+                <StatsFragment title="Avg Moves Time" val={this.props.avgMoveTime} />
+                <StatsFragment title="Reached Last Card" val={this.props.reachLastCard} />
+                <StatsFragment title="Time ELapsed" val={this.props.timeElapsed.timeElapsed} />
+
             </div>
         )
 

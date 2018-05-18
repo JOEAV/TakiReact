@@ -14,7 +14,8 @@ class GameManager{
         this.activePlayer = 0;
         this.players[0] = new PlayerFactory.Player('player');
         this.players[1] = new PlayerFactory.Algo();
-        this.timerElapsed = timer;
+        this.timer = timer;
+        this.timerElapsed = this.timer.timerElapsed;
         this.howMany2Plus=0;
         this.lastTime={ ms :0, sec :0, min : 0};
         this.nowTime={ ms :0, sec :0, min : 0};
@@ -22,6 +23,21 @@ class GameManager{
         this._isTakiMode=false;
         this._winner=NoWinner;
         this.restarted=false;
+        this._totalMoves=0;
+    }
+
+    initGame(restarted=false){
+        this.resetPlayersPotAndGameDeck();
+        //deal cards
+        this.activePlayer = 0;
+        this.timer.start();
+        this.howMany2Plus=0;
+        this.lastTime={ ms :0, sec :0, min : 0};
+        this.nowTime={ ms :0, sec :0, min : 0};
+        this.animationDelayCounter=0;
+        this._isTakiMode=false;
+        this._winner=NoWinner;
+        this.restarted=restarted;
         this._totalMoves=0;
     }
 

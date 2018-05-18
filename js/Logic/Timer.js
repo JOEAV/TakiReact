@@ -1,3 +1,5 @@
+import {timerElapsed} from "../Controllers/controller";
+
 class Timer{
     constructor(){
         this.count;
@@ -5,6 +7,7 @@ class Timer{
         this.min;
         this.sec;
         this.ms;
+        this.timeElapsed;
     };
     stop() {
         if (this.count) {
@@ -15,8 +18,8 @@ class Timer{
 
     start(){
         let update = function(txt){
-            let  temp = document.getElementById("timer");
-            temp.firstChild.nodeValue = txt;
+            this.timeElapsed=txt;
+
         }
        let pad =  function(time){
             let  temp;
@@ -58,7 +61,7 @@ class Timer{
                 let msalt = pad(this.ms);
 
 
-                update( malt + ":" + salt );
+              update( malt + ":" + salt );
             }, 10);
         }
 
