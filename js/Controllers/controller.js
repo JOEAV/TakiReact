@@ -28,18 +28,24 @@ const test =()=>{
 const addDroppedCardToPot = (droppedCard) =>{
 //HOWMANY2PLUS
     gameManager.addDroppedCardToPot(droppedCard);
-    updateStateByRef('howMany2Plus','pot')
-
+    updateStateByRef('howMany2Plus','pot');
 }
 
-
+const initGame = () =>{
+    gameManager.initGame();
+    updateStateByRef('pot','players','gameDeck','activePlayer',
+        'timerElapsed','howMany2Plus','lastTime','nowTime','animationDelayCounter','timer',
+        '_isTakiMode','_winner','restarted');
+}
 
 const isTakiMode = (mode)=>{
     gameManager.isTakiMode=mode;
     updateStateByRef('_isTakiMode')
 }
 
-
+const timerElapsed =()=>{
+    updateStateByRef('timerElapsed')
+}
 
 
 const winner=(index)=>{
@@ -110,5 +116,5 @@ const thereIsAWinner=()=>{
 }
 
 export{
-    registerListener,test
+    registerListener,test,timerElapsed,initGame
 }

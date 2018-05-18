@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import {Component} from 'react'
 import {gameManager} from "./js/Logic/GameManager.js";
 import TopBar from "./TopBar"
-import {registerListener} from "./js/Controllers/controller"
+import {registerListener,initGame} from "./js/Controllers/controller"
 export default class App extends Component{
     constructor(){
         super();
@@ -21,8 +21,12 @@ export default class App extends Component{
             _winner:-1,
             restarted:false,
             _totalMoves:0,
-
+            timer:null,
         }
+    }
+
+    componentWillMount(){
+        initGame();
     }
 
     componentDidMount(){
@@ -32,7 +36,11 @@ export default class App extends Component{
     render(){
         return(
             <div>
-            <TopBar totalMoves={this.state._totalMoves} />
+            <TopBar totalMoves={this.state._totalMoves}
+                    avgMoveTime={this.state.players[0].avgMovesTime}
+                    reachedLastCard={this.state.players[0].reachLastCard}
+                    timeElapsed={this.state.timer}
+            />
         </div>
     )}
 }
