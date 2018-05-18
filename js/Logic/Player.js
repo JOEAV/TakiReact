@@ -1,7 +1,8 @@
+import CardFactory from './Card'
 class Player {
     constructor(name) {
         this._name = name;
-        this._deck = new window.CardFactory.CardDeck();
+        this._deck = new CardFactory.CardDeck();
         this._score = 0;
         this._moves = 0;
         this._avgMovesTime ={min:0,sec:0,ms:0};
@@ -394,8 +395,10 @@ class Algo extends Player {
 
 }
 
-window.PlayersFactory = {
+const PlayersFactory = {
 
     Player:Player,
     Algo:Algo
 }
+
+export default PlayersFactory;

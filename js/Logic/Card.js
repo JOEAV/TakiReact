@@ -193,12 +193,14 @@ class CardDeck {
 }
 
 
-window.CardFactory = {
+const  CardFactory = {
     CARD_COLORS: ['green', 'blue', 'red', 'yellow', 'colorful'],
 
-    CARD_RANKS: ['1', '3', '4', '5', '6', '7', '8', '9', 'taki', 'changeColor', 'stop', 'plus', '2plus'],
+        CARD_RANKS: ['1', '3', '4', '5', '6', '7', '8', '9', 'taki', 'changeColor', 'stop', 'plus', '2plus'],
 
-    Card: Card ,
-    CardDeck: CardDeck
+        Card: Card ,
+        CardDeck: CardDeck
+    }
 
-}
+
+export default CardFactory

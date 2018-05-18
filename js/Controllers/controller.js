@@ -4,7 +4,7 @@ import gameManager from '../Logic/GameManager'
 let reactCompRefs = [];
 const registerListener = (selfRef)=>{
 
-reactCompRefs.Push(selfRef);
+reactCompRefs.push(selfRef);
 
 }
 
@@ -14,19 +14,20 @@ function updateStateByRef(...refKeys){
     reactCompRefs.forEach((comp)=>{
         const newState = {};
         refKeys.forEach(key=>{
-            newState[`${key}`]= this.gameManager[`${key}`];
+            newState[`${key}`]= gameManager[`${key}`];
         })
         comp.setState(newState)
 
     })
 }
 const test =()=>{
-    this.gameManager.test();
+    gameManager.test();
     updateStateByRef('_totalMoves')
+    console.log(gameManager._totalMoves);
 }
 const addDroppedCardToPot = (droppedCard) =>{
 //HOWMANY2PLUS
-    this.gameManager.addDroppedCardToPot(droppedCard);
+    gameManager.addDroppedCardToPot(droppedCard);
     updateStateByRef('howMany2Plus','pot')
 
 }
@@ -34,7 +35,7 @@ const addDroppedCardToPot = (droppedCard) =>{
 
 
 const isTakiMode = (mode)=>{
-    this.gameManager.isTakiMode=mode;
+    gameManager.isTakiMode=mode;
     updateStateByRef('_isTakiMode')
 }
 
@@ -42,51 +43,51 @@ const isTakiMode = (mode)=>{
 
 
 const winner=(index)=>{
-    this.gameManager.winner=index;
+    gameManager.winner=index;
     updateStateByRef('_winner');
 
 }
 
 const flushShuffledPotToGameDeck= ()=> {
-    this.gameManager.flushShuffledPotToGameDeck();
+    gameManager.flushShuffledPotToGameDeck();
     updateStateByRef('pot','gameDeck');
 }
 
 
 const totalMoves= () => {
-    this.gameManager.totalMoves();
+    gameManager.totalMoves();
     updateStateByRef('_totalMoves');
 }
 
 const checkMoveValidity=(droppedCard)=> {
-    return this.gameManager.checkMoveValidity(droppedCard);
+    return gameManager.checkMoveValidity(droppedCard);
 }
 
 
 const ensureFirstCardNotSpecial=()=> {
-    this.gameManager.ensureFirstCardNotSpecial();
+    gameManager.ensureFirstCardNotSpecial();
     updateStateByRef('gameDeck');
 }
 
 
 
 const timeDiff=()=>{
-    return this.gameManager.timeDiff();
+    return gameManager.timeDiff();
 }
 
 const changeTurn=(isChangeTurn)=>{
-    let cardsToThrow = this.gameManager.changeTurn(isChangeTurn);
+    let cardsToThrow = gameManager.changeTurn(isChangeTurn);
     updateStateByRef('nowTime','lastTime','players','activePlayer');
     return cardsToThrow;
 }
 
 const resetPlayersPotAndGameDeck=()=> {
-    this.gameManager.resetPlayersPotAndGameDeck();
+    gameManager.resetPlayersPotAndGameDeck();
     updateStateByRef('pot','players','gameDeck');
 }
 
 const resetGame=()=>{
-    this.gameManager.resetGame();
+    gameManager.resetGame();
     updateStateByRef('pot','players','gameDeck','activePlayer',
         'timerElapsed','howMany2Plus','lastTime','nowTime','animationDelayCounter',
         '_isTakiMode','_winner','restarted');
@@ -94,7 +95,7 @@ const resetGame=()=>{
 
 
 const gameStatistics=()=> {
-    let statistics =this.gameManager.gameStatistics();
+    let statistics =gameManager.gameStatistics();
     updateStateByRef('timerElapsed');
     return statistics;
 }
@@ -102,12 +103,12 @@ const gameStatistics=()=> {
 
 
 const thereIsAWinner=()=>{
-    let winner =this.gameManager.thereIsAWinner();
+    let winner =gameManager.thereIsAWinner();
     updateStateByRef('_winner');
     return winner;
 
 }
 
 export{
-    registerListener
+    registerListener,test
 }

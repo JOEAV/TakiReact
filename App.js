@@ -8,19 +8,19 @@ export default class App extends Component{
     constructor(){
         super();
         this.state={
-            gameDeck,
-            players,
-            pot,
-            activePlayer,
-            timerElapsed,
-            howMany2Plus,
-            lastTime,
-            nowTime,
-            animationDelayCounter,
-            _isTakiMode,
-            _winner,
-            restarted,
-            _totalMoves,
+            gameDeck:null,
+            players:null,
+            pot:null,
+            activePlayer:0,
+            timerElapsed:null,
+            howMany2Plus:null,
+            lastTime:null,
+            nowTime:null,
+            animationDelayCounter:null,
+            _isTakiMode:false,
+            _winner:-1,
+            restarted:false,
+            _totalMoves:0,
 
         }
     }
@@ -32,7 +32,7 @@ export default class App extends Component{
     render(){
         return(
             <div>
-            <TopBar statistics={this.state._totalMoves} />
+            <TopBar totalMoves={this.state._totalMoves} />
         </div>
     )}
 }
