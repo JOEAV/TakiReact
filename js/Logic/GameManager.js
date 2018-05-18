@@ -1,17 +1,19 @@
 
 import timer from './Timer'
+import CardFactory from './Card.js'
+import PlayerFactory from  './Player'
 
 const NoWinner=-1;
 class GameManager{
 
     constructor(){
 
-        this.gameDeck = new window.CardFactory.CardDeck(true);
+        this.gameDeck = new CardFactory.CardDeck(true);
         this.players =  [];
-        this.pot = new window.CardFactory.CardDeck();
+        this.pot = new CardFactory.CardDeck();
         this.activePlayer = 0;
-        this.players[0] = new Player('player');
-        this.players[1] = new Algo();
+        this.players[0] = new PlayerFactory.Player('player');
+        this.players[1] = new PlayerFactory.Algo();
         this.timerElapsed = timer;
         this.howMany2Plus=0;
         this.lastTime={ ms :0, sec :0, min : 0};
@@ -20,7 +22,7 @@ class GameManager{
         this._isTakiMode=false;
         this._winner=NoWinner;
         this.restarted=false;
-        this,_totalMoves=0;
+        this._totalMoves=0;
     }
 
     addDroppedCardToPot(droppedCard){

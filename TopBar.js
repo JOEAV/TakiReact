@@ -6,8 +6,8 @@ export default class TopBar extends Component{
     render(){
         return(
             <div>
-                <Statistics statistics={this.props.statistics} />
-                <button id="restart-button" hidden="true" onClick="restartGame(event)">restart</button>
+                <Statistics totalMoves={this.props.totalMoves} />
+                <button id="restart-button"  title='click' name='click1' onClick={(event)=>console.log('clicked')}>restart</button>
             </div>
         )
 
