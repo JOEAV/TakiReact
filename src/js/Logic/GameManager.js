@@ -1,15 +1,17 @@
+import timer from 'Timer'
 
 const NoWinner=-1;
 class GameManager{
 
     constructor(){
+
         this.gameDeck = new window.CardFactory.CardDeck(true);
         this.players =  [];
         this.pot = new window.CardFactory.CardDeck();
         this.activePlayer = 0;
         this.players[0] = new Player('player');
         this.players[1] = new Algo();
-        this.timerElapsed = new window.StopwatchFactory.Stopwatch();
+        this.timerElapsed = timer;
         this.howMany2Plus=0;
         this.lastTime={ ms :0, sec :0, min : 0};
         this.nowTime={ ms :0, sec :0, min : 0};
@@ -17,12 +19,17 @@ class GameManager{
         this._isTakiMode=false;
         this._winner=NoWinner;
         this.restarted=false;
+        this,_totalMoves=0;
     }
 
     addDroppedCardToPot(droppedCard){
 
         this.howMany2Plus= droppedCard.rank==='2plus' ? this.howMany2Plus+1 :0;
         this.pot.add(droppedCard);
+    }
+
+    test(){
+        this._totalMoves++
     }
 
     set isTakiMode(mode){
@@ -57,7 +64,7 @@ class GameManager{
         {
             res+=this.players[i].moves;
         }
-        return res;
+        this._totalMoves=res;
     }
     checkMoveValidity(droppedCard) {
         if (this.activePlayer===0) {
@@ -130,9 +137,9 @@ class GameManager{
 
     changeTurn(isChangeTurn){
         let cards = [];
-        this.nowTime.ms = ms;
-        this.nowTime.min = min;
-        this.nowTime.sec = sec;
+        this.nowTime.ms = this.timerElapsed.ms;
+        this.nowTime.min = this.timerElapsed.min;
+        this.nowTime.sec = this.timerElapsed.sec;
         let time = this.timeDiff();
         this.lastTime.ms = this.nowTime.ms;
         this.lastTime.min = this.nowTime.min;
@@ -181,7 +188,9 @@ class GameManager{
         this._isTakiMode=false;
         this._winner=NoWinner;
         this.restarted=true;
+        this._totalMoves=0;
     }
+
 
     gameStatistics()
     {
@@ -212,5 +221,7 @@ class GameManager{
 }
 
 
-window.GameManager = GameManager;
+const gameManager = new GameManager();
+export default gameManager
+
 

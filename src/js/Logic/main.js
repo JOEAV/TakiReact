@@ -44,7 +44,6 @@ let createUiForCard = (card) => {
    // cardContainer.style.backgroundImage = `url(./img/${card.rank}_${card.color}.png)`;
 
     cardContainer.classList.add('cardWrapper');
-   // cardContainer.id = `${card.rank}_${card.color}_${card.c}`;
 
     cardContainer.appendChild(cardInner);
     return cardContainer;
@@ -277,12 +276,7 @@ function spreadCardsAnimation() {
     playersUiCards.forEach((uiCard)=>{uiCard.classList.add('cardInsideCardRowAfterSpread')});
     algoUiCards.forEach((uiCard)=>{uiCard.classList.remove('cardInsideCardRow')})
     algoUiCards.forEach((uiCard)=>{uiCard.classList.add('cardInsideCardRowAfterSpread')});
-    // classList.remove('cardInsideCardRow');
-    // algoCardsRow.classList.remove('cardInsideCardRow');
-    // playerCardsRow.classList.add('cardInsideCardRowAfterSpread');
-    // algoCardsRow.classList.add('cardInsideCardRowAfterSpread');
-    // document.styleSheets[2].cssRules[0].cssRules[17].style['marginRight'] = "0px";
-}
+
 
 
 function initBeforeRender() {
@@ -459,7 +453,7 @@ function pullTopCardFromGameDeck(index) {
             setDroppedCardCssInPot(topPulledCard);
         }
         else {
-            if(gameManager.totalMoves()!==0){
+            if(gameManager.totalMfoves()!==0){
                 topPulledCard.classList.add('cardInsideCardRowAfterSpread');
 
             }else{

@@ -1,8 +1,10 @@
-let hour,min,sec,ms,count, malt, salt, msalt;
-
 class Stopwatch{
     constructor(){
         this.count;
+        this.hour;
+        this.min;
+        this.sec;
+        this.ms;
     };
     stop() {
         if (this.count) {
@@ -26,37 +28,34 @@ class Stopwatch{
             }
             return temp;
         }
-        // if(document.getElementById("start").firstChild.nodeValue !== "Start"){
-        //     document.getElementById("start").firstChild.nodeValue = "Start";
-        // }
         if(!this.count){
-            ms = 0;
-            sec = 0;
-            min = 0;
-            hour = 0;
+            this.ms = 0;
+            this.sec = 0;
+            this.min = 0;
+            this.hour = 0;
             this.count = setInterval(function(){
-                if(min==60){
-                    min=0;
-                    hour++;
+                if(this.min==60){
+                    this.min=0;
+                    this.hour++;
                 }
-                if(ms == 100){
-                    ms = 0;
-                    if(sec == 60){
-                        sec = 0;
-                        min++;
+                if(this.ms == 100){
+                    this.ms = 0;
+                    if(this.sec == 60){
+                        this.sec = 0;
+                        this.min++;
                     }
                     else{
-                        sec++;
+                        this.sec++;
                     }
                 }
                 else{
-                    ms++;
+                    this.ms++;
                 }
 
-                let halt = pad(hour);
-                let malt = pad(min);
-                let salt = pad(sec);
-                let msalt = pad(ms);
+                let halt = pad(this.hour);
+                let malt = pad(this.min);
+                let salt = pad(this.sec);
+                let msalt = pad(this.ms);
 
 
                 update( malt + ":" + salt );
@@ -68,7 +67,5 @@ class Stopwatch{
 
 }
 
-window.StopwatchFactory = {
-
-    Stopwatch: Stopwatch
-};
+const timer = new Timer();
+export default timer
