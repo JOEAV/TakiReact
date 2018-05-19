@@ -15,7 +15,7 @@ class GameManager{
         this.players[0] = new PlayerFactory.Player('player');
         this.players[1] = new PlayerFactory.Algo();
         this.timer = timer;
-        this.timerElapsed = this.timer.timerElapsed;
+        this.timeElapsed = this.timer.timeElapsed;
         this.howMany2Plus=0;
         this.lastTime={ ms :0, sec :0, min : 0};
         this.nowTime={ ms :0, sec :0, min : 0};
@@ -156,9 +156,9 @@ class GameManager{
 
     changeTurn(isChangeTurn){
         let cards = [];
-        this.nowTime.ms = this.timerElapsed.ms;
-        this.nowTime.min = this.timerElapsed.min;
-        this.nowTime.sec = this.timerElapsed.sec;
+        this.nowTime.ms = this.timer.ms;
+        this.nowTime.min = this.timer.min;
+        this.nowTime.sec = this.timer.sec;
         let time = this.timeDiff();
         this.lastTime.ms = this.nowTime.ms;
         this.lastTime.min = this.nowTime.min;
@@ -166,7 +166,7 @@ class GameManager{
         this.players[this.activePlayer].updateAvgMovesTime(time);
         this.players[this.activePlayer].updateTotalAvgMoveTime(time);
         if (this.players[this.activePlayer].howManyCards() === 1)
-            this.players[this.activePlayer].reachLastCard++;
+            this.players[this.activePlayer].reachedLastCard++;
         if (isChangeTurn) {
             this.activePlayer = 1 - this.activePlayer;
         }
@@ -199,7 +199,7 @@ class GameManager{
     {
         this.resetPlayersPotAndGameDeck();
         this.activePlayer = 0;
-        this.timerElapsed.stop();
+        this.timer.stop();
         this.howMany2Plus=0;
         this.lastTime={ ms :0, sec :0, min : 0};
         this.nowTime={ ms :0, sec :0, min : 0};
@@ -213,7 +213,7 @@ class GameManager{
 
     gameStatistics()
     {
-        this.timerElapsed.stop();
+        this.timer.stop();
         let statistics={whoWon:NoWinner,totalTime:{min,sec},players:[]};
         statistics.whoWon=this._winner;
         this.players.forEach(player=>{

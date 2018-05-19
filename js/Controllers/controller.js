@@ -34,8 +34,9 @@ const addDroppedCardToPot = (droppedCard) =>{
 const initGame = () =>{
     gameManager.initGame();
     updateStateByRef('pot','players','gameDeck','activePlayer',
-        'timerElapsed','howMany2Plus','lastTime','nowTime','animationDelayCounter','timer',
+        'timeElapsed','howMany2Plus','lastTime','nowTime','animationDelayCounter','timer',
         '_isTakiMode','_winner','restarted');
+    reactCompRefs.forEach((comp)=>console.log('player init ',comp.state.players));
 }
 
 const isTakiMode = (mode)=>{
@@ -43,8 +44,8 @@ const isTakiMode = (mode)=>{
     updateStateByRef('_isTakiMode')
 }
 
-const timerElapsed =()=>{
-    updateStateByRef('timerElapsed')
+const timeElapsed =()=>{
+    updateStateByRef('timeElapsed')
 }
 
 
@@ -95,14 +96,14 @@ const resetPlayersPotAndGameDeck=()=> {
 const resetGame=()=>{
     gameManager.resetGame();
     updateStateByRef('pot','players','gameDeck','activePlayer',
-        'timerElapsed','howMany2Plus','lastTime','nowTime','animationDelayCounter',
+        'timeElapsed','howMany2Plus','lastTime','nowTime','animationDelayCounter',
         '_isTakiMode','_winner','restarted');
 }
 
 
 const gameStatistics=()=> {
     let statistics =gameManager.gameStatistics();
-    updateStateByRef('timerElapsed');
+    updateStateByRef('timeElapsed');
     return statistics;
 }
 
@@ -116,5 +117,5 @@ const thereIsAWinner=()=>{
 }
 
 export{
-    registerListener,test,timerElapsed,initGame
+    registerListener,test,timeElapsed,initGame
 }
