@@ -12,20 +12,6 @@ class Player {
 
     }
 
-    pad(time){
-        let  temp;
-        if(time < 10){
-            temp = "0" + time;
-        }
-        else{
-            temp = time;
-        }
-        return temp;
-    }
-
-    timeToString(time){
-        return this.pad(time.min)+":"+this.pad(time.sec)+":"+this.pad(time.ms);
-    }
 
     playerStatistics()
     {
@@ -65,6 +51,7 @@ class Player {
         this._moves += 1;
 
     }
+
 
     get avgMovesTime() {
         return this._avgMovesTime;
