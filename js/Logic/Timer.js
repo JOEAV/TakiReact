@@ -1,5 +1,5 @@
 import {timeElapsed} from "../Controllers/controller";
-
+import timeToString from "../serviceUtils/timeUtils"
 class Timer{
     constructor(){
         this.count;
@@ -23,16 +23,7 @@ class Timer{
             timeElapsed();
 
         }
-       let pad =  function(time){
-            let  temp;
-            if(time < 10){
-                temp = "0" + time;
-            }
-            else{
-                temp = time;
-            }
-            return temp;
-        }
+
             if (!this.count) {
                 this.ms = 0;
                 this.sec = 0;
@@ -57,12 +48,8 @@ class Timer{
                     else {
                         this.ms++;
                     }
-                    let halt = pad(this.hour);
-                    let malt = pad(this.min);
-                    let salt = pad(this.sec);
-                    let msalt = pad(this.ms);
-
-                    update(malt + ":" + salt);
+                    let time={sec:this.sec,min:this.min};
+                    update(timeToString(time,false));
                 }, 10);
             }
     }

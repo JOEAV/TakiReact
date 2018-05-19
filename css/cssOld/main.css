@@ -160,11 +160,11 @@
     }
 
     .backgroundImageBoy {
-        background-image: url('../img/boy.png')
+        background-image: url('../../img/boy.png')
     }
 
     .backgroundImageRobot {
-        background-image: url('../img/robot.png')
+        background-image: url('../../img/robot.png')
     }
 
     .surrender-button{
@@ -348,11 +348,11 @@
     }
 
     .backgroundImageBoy {
-        background-image: url('../img/boy.png')
+        background-image: url('../../img/boy.png')
     }
 
     .backgroundImageRobot {
-        background-image: url('../img/robot.png')
+        background-image: url('../../img/robot.png')
     }
     .surrender-button{
         margin-top:30px;
@@ -533,11 +533,11 @@
     }
 
     .backgroundImageBoy {
-        background-image: url('../img/boy.png')
+        background-image: url('../../img/boy.png')
     }
 
     .backgroundImageRobot {
-        background-image: url('../img/robot.png')
+        background-image: url('../../img/robot.png')
     }
 
     .surrender-button{
@@ -713,11 +713,11 @@
     }
 
     .backgroundImageBoy {
-        background-image: url('../img/boy.png')
+        background-image: url('../../img/boy.png')
     }
 
     .backgroundImageRobot {
-        background-image: url('../img/robot.png')
+        background-image: url('../../img/robot.png')
     }
 
     .surrender-button{
