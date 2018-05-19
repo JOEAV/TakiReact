@@ -5,10 +5,11 @@ import Statistics from './Statistics';
 export default class TopBar extends Component{
     render(){
         return(
+
             <div>
                 <Statistics totalMoves={this.props.totalMoves}
                             avgMoveTime={this.props.avgMoveTime}
-                            reachedLastCard={this.props.reachLastCard}
+                            reachedLastCard={this.props.reachedLastCard}
                             timeElapsed={this.props.timeElapsed}/>
                 <button id="restart-button"  title='click' name='click1' onClick={(event)=>console.log('clicked')}>restart</button>
             </div>

@@ -1,4 +1,4 @@
-import {timerElapsed} from "../Controllers/controller";
+import {timeElapsed} from "../Controllers/controller";
 
 class Timer{
     constructor(){
@@ -7,9 +7,10 @@ class Timer{
         this.min;
         this.sec;
         this.ms;
-        this.timeElapsed;
+        this.timeElapsed="00:00";
     };
-    stop() {
+
+    stop(){
         if (this.count) {
             clearInterval(this.count);
             this.count = null;
@@ -17,8 +18,9 @@ class Timer{
     }
 
     start(){
-        let update = function(txt){
+        let update = (txt)=>{
             this.timeElapsed=txt;
+            timeElapsed();
 
         }
        let pad =  function(time){
@@ -31,41 +33,38 @@ class Timer{
             }
             return temp;
         }
-        if(!this.count){
-            this.ms = 0;
-            this.sec = 0;
-            this.min = 0;
-            this.hour = 0;
-            this.count = setInterval(function(){
-                if(this.min==60){
-                    this.min=0;
-                    this.hour++;
-                }
-                if(this.ms == 100){
-                    this.ms = 0;
-                    if(this.sec == 60){
-                        this.sec = 0;
-                        this.min++;
+            if (!this.count) {
+                this.ms = 0;
+                this.sec = 0;
+                this.min = 0;
+                this.hour = 0;
+
+                this.count = setInterval(()=> {
+                    if (this.min == 60) {
+                        this.min = 0;
+                        this.hour++;
                     }
-                    else{
-                        this.sec++;
+                    if (this.ms == 100) {
+                        this.ms = 0;
+                        if (this.sec == 60) {
+                            this.sec = 0;
+                            this.min++;
+                        }
+                        else {
+                            this.sec++;
+                        }
                     }
-                }
-                else{
-                    this.ms++;
-                }
+                    else {
+                        this.ms++;
+                    }
+                    let halt = pad(this.hour);
+                    let malt = pad(this.min);
+                    let salt = pad(this.sec);
+                    let msalt = pad(this.ms);
 
-                let halt = pad(this.hour);
-                let malt = pad(this.min);
-                let salt = pad(this.sec);
-                let msalt = pad(this.ms);
-
-
-              update( malt + ":" + salt );
-            }, 10);
-        }
-
-
+                    update(malt + ":" + salt);
+                }, 10);
+            }
     }
 
 }

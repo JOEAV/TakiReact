@@ -6,14 +6,12 @@ import StatsFragment from './StatsFragment'
 
 export default class Statistics extends Component{
     render(){
-        console.log("Total ",this.props._totalMoves)
+        console.log(this.props.avgMoveTime);
         return(
             <div>
                 <StatsFragment title="Total Moves" val={this.props.totalMoves} />
-                <StatsFragment title="Avg Moves Time" val={this.props.avgMoveTime} />
-                <StatsFragment title="Reached Last Card" val={this.props.reachLastCard} />
-                <StatsFragment title="Time ELapsed" val={this.props.timeElapsed.timeElapsed} />
-
+                <StatsFragment title="Reached Last Card" val={this.props.reachedLastCard} />
+                <StatsFragment title="Time Elapsed" val={this.props.timeElapsed.timeElapsed} />
             </div>
         )
 
