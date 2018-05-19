@@ -6,35 +6,21 @@ class Player {
         this._score = 0;
         this._moves = 0;
         this._avgMovesTime ={min:0,sec:0,ms:0};
-        this.reachLastCard=0;
+        this.reachedLastCard=0;
         this._totalMoves=0;
         this._totalAvgMoveTime={min:0,sec:0,ms:0};
 
     }
 
-    pad(time){
-        let  temp;
-        if(time < 10){
-            temp = "0" + time;
-        }
-        else{
-            temp = time;
-        }
-        return temp;
-    }
-
-    timeToString(time){
-        return this.pad(time.min)+":"+this.pad(time.sec)+":"+this.pad(time.ms);
-    }
 
     playerStatistics()
     {
         let moves=this._moves;
         let avgMovesTime=this.timeToString(this._avgMovesTime);
-        let reachLastCard=this.reachLastCard;
+        let reachedLastCard=this.reachedLastCard;
         let totalMoves=this._totalMoves;
         let totalAvgMoveTime=this.timeToString(this._totalAvgMoveTime);
-        return {moves,avgMovesTime,reachLastCard,totalMoves,totalAvgMoveTime};
+        return {moves,avgMovesTime,reachedLastCard,totalMoves,totalAvgMoveTime};
     }
     resetPlayer()
     {
@@ -45,7 +31,7 @@ class Player {
         this._score = 0;
         this._moves = 0;
         this._avgMovesTime ={min:0,sec:0,ms:0};
-        this.reachLastCard=0;
+        this.reachedLastCard=0;
         return cards;
     }
 
@@ -65,6 +51,7 @@ class Player {
         this._moves += 1;
 
     }
+
 
     get avgMovesTime() {
         return this._avgMovesTime;

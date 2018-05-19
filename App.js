@@ -4,6 +4,7 @@ import {Component} from 'react'
 import {gameManager} from "./js/Logic/GameManager.js";
 import TopBar from "./TopBar"
 import {registerListener,initGame} from "./js/Controllers/controller"
+import timeToString from './js/serviceUtils/timeUtils'
 export default class App extends Component{
     constructor(){
         super();
@@ -12,7 +13,7 @@ export default class App extends Component{
             players:null,
             pot:null,
             activePlayer:0,
-            timerElapsed:null,
+            timeElapsed:null,
             howMany2Plus:null,
             lastTime:null,
             nowTime:null,
@@ -22,23 +23,23 @@ export default class App extends Component{
             restarted:false,
             _totalMoves:0,
             timer:null,
+
         }
     }
 
     componentWillMount(){
+        registerListener(this);
         initGame();
     }
 
-    componentDidMount(){
-        registerListener(this);
-    }
 
     render(){
+
         return(
             <div>
             <TopBar totalMoves={this.state._totalMoves}
-                    avgMoveTime={this.state.players[0].avgMovesTime}
-                    reachedLastCard={this.state.players[0].reachLastCard}
+                    avgMovesTime={timeToString(this.state.players[0].avgMovesTime)}
+                    reachedLastCard={this.state.players[0].reachedLastCard}
                     timeElapsed={this.state.timer}
             />
         </div>
