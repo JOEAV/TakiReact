@@ -1,7 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import {Component} from 'react'
-import {test} from './js/Controllers/controller.js'
 import './css/topBar.css'
 import StatsFragment from './StatsFragment'
 

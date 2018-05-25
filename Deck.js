@@ -5,12 +5,36 @@ import './css/card.css'
 export default class Deck extends Component{
     constructor(props) {
         super(props);
-        this.state = {
-            owner: this.props.owner,
-            deckBehaviour: {
-                droppable: this.props.droppable
-            },
-            cardsBehaviour: {
+
+
+        this.spreadAnimation = function (cardRef) {
+
+            setTimeout(function () {
+                let beforeSpeardBehaviour = cardRef.state.behaviour
+                let afterSpreadBehaviour = Object.assign(beforeSpeardBehaviour , {
+                    styleClasses:{
+                        cardWrapper: ['cardWrapper', 'cardInsideCardRowAfterSpread'],
+                        cardBase: ['cardBase']
+                    }
+                })
+                cardRef.setState({
+                    behaviour: afterSpreadBehaviour
+                })
+            }, 500)
+        }
+        this.mapCardBehaviourByOwner = () => {
+            let defaultBehaviour = {
+                clickable: false,
+                backgroundShown: false,
+                hoverable: false,
+                draggable: false,
+                styleClasses: {
+                    cardWrapper: ['cardWrapper'],
+                    cardBase: ['cardBase']
+                },
+                spreadAnimation: false
+            }
+            let newBehaviour = {
                 clickable: false,
                 backgroundShown: false,
                 hoverable: false,
@@ -19,31 +43,16 @@ export default class Deck extends Component{
                     cardWrapper: ['cardWrapper'],
                     cardBase: ['cardBase']
                 }
-
             }
-        }
-
-        this.mapCardBehaviourByOwner = () =>{
-            console.log('func ',this.props);
-            let cardsBehaviour = {
-                clickable:false,
-                backgroundShown:false,
-                hoverable:false,
-                draggable:false,
-                styleClasses:{
-                    cardWrapper:['cardWrapper'],
-                    cardBase:['cardBase']
-                }
-            }
-            switch (this.state.owner){
+            switch (this.props.owner) {
                 case 'player':
-                    cardsBehaviour.backgroundShown=true;
-                    cardsBehaviour.hoverable=true;
-                    cardsBehaviour.draggable=true;
-                    cardsBehaviour.styleClasses.cardWrapper.push(
+                    newBehaviour.backgroundShown = true;
+                    newBehaviour.hoverable = true;
+                    newBehaviour.draggable = true;
+                    newBehaviour.styleClasses.cardWrapper.push(
                         'cardInsideCardRow',
-
-                    )
+                    ),
+                        newBehaviour.spreadAnimation = this.spreadAnimation
 
                     break;
                 case 'pot':
@@ -51,32 +60,38 @@ export default class Deck extends Component{
                 case 'gameDeck':
                     break;
                 case 'algo':
-                    cardsBehaviour.backgroundShown=false;
-                    cardsBehaviour.hoverable=false;
-                    cardsBehaviour.draggable=false;
-                    cardsBehaviour.styleClasses.cardWrapper.push(
+                    newBehaviour.backgroundShown = false;
+                    newBehaviour.hoverable = false;
+                    newBehaviour.draggable = false;
+                    newBehaviour.styleClasses.cardWrapper.push(
                         'cardInsideCardRow',
-
-                    )
+                    ),
+                        newBehaviour.spreadAnimation = this.spreadAnimation
                     break;
                 default:
                     throw new Error('no such owner !');
 
             }
-            this.setState({cardsBehaviour});
+                return Object.assign(defaultBehaviour, newBehaviour);
+
         }
-    }
 
+
+        this.state = {
+            owner: this.props.owner,
+            deckBehaviour: {
+                droppable: this.props.droppable
+            },
+            cardsBehaviour: this.mapCardBehaviourByOwner()
+
+        }
+
+
+    }
     componentWillMount(){
-        console.log('will ',this.props);
-        this.mapCardBehaviourByOwner();
-    }
-
-    componentDidMount(){
-        console.log('did ',this);
-        console.log(this.props.children)
 
     }
+
 
     render(){
         return(

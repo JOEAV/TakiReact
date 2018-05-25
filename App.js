@@ -16,9 +16,6 @@ export default class App extends Component{
             activePlayer:0,
             timeElapsed:null,
             howMany2Plus:null,
-            // lastTime:null,
-            // nowTime:null,
-
             //TODO:refactor this
             animationDelayCounter:null,
 

@@ -23,92 +23,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9fad5119-6c9b-4428-89e6-a23623df3ff5" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/Card.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Deck.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GameDeck.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GameRow.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Player.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pot.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Stage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TurnIndicator.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/css/card.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/css/gameDeck.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/css/gameRow.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/css/main.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/css/player.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/css/playerDeck.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/css/pot.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/css/stage.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/css/turnIndicator.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Card.js" beforeDir="false" afterPath="$PROJECT_DIR$/Card.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Deck.js" beforeDir="false" afterPath="$PROJECT_DIR$/Deck.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Stage.js" beforeDir="false" afterPath="$PROJECT_DIR$/Stage.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Statistics.js" beforeDir="false" afterPath="$PROJECT_DIR$/Statistics.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/cssOld/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/cssOld/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/1_blue.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/1_blue.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/1_green.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/1_green.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/1_red.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/1_red.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/1_yellow.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/1_yellow.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/2plus_blue.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/2plus_blue.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/2plus_green.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/2plus_green.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/2plus_red.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/2plus_red.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/2plus_yellow.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/2plus_yellow.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/3_blue.JPG" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/3_blue.JPG" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/3_blue.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/3_blue.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/3_green.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/3_green.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/3_red.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/3_red.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/3_yellow.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/3_yellow.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/4_blue.JPG" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/4_blue.JPG" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/4_blue.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/4_blue.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/4_green.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/4_green.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/4_red.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/4_red.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/4_yellow.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/4_yellow.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/5_blue.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/5_blue.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/5_green.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/5_green.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/5_red.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/5_red.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/5_yellow.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/5_yellow.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/6_blue.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/6_blue.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/6_green.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/6_green.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/6_red.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/6_red.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/6_yellow.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/6_yellow.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/7_blue.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/7_blue.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/7_green.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/7_green.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/7_red.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/7_red.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/7_yellow.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/7_yellow.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/8_blue.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/8_blue.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/8_green.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/8_green.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/8_red.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/8_red.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/8_yellow.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/8_yellow.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/9_blue.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/9_blue.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/9_green.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/9_green.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/9_red.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/9_red.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/9_yellow.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/9_yellow.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/_DS_Store" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/_DS_Store" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/boy.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/boy.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/card_back.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/card_back.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/changeColor_blue.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/changeColor_blue.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/changeColor_colorful.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/changeColor_colorful.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/changeColor_green.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/changeColor_green.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/changeColor_red.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/changeColor_red.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/changeColor_yellow.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/changeColor_yellow.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/change_colorful.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/change_colorful.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/plus_blue.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/plus_blue.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/plus_green.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/plus_green.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/plus_red.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/plus_red.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/plus_yellow.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/plus_yellow.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/robot.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/robot.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/stop_blue.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/stop_blue.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/stop_green.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/stop_green.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/stop_red.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/stop_red.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/stop_yellow.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/stop_yellow.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/taki_blue.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/taki_blue.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/taki_colorful.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/taki_colorful.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/taki_green.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/taki_green.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/taki_red.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/taki_red.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/taki_yellow.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/taki_yellow.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/Controllers/controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/Controllers/controller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/Logic/Card.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/Logic/Card.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/Logic/GameManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/Logic/GameManager.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/Logic/Player.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/Logic/Player.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/bundle.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/bundle.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -123,20 +44,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="main.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/Logic/main.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6600">
-              <caret line="275" column="69" selection-start-line="275" selection-start-column="69" selection-end-line="275" selection-end-column="69" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Deck.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Deck.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Deck.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2088">
-              <caret line="87" column="34" selection-start-line="87" selection-start-column="34" selection-end-line="90" selection-end-column="36" />
+            <state relative-caret-position="360">
+              <caret line="15" column="85" selection-start-line="15" selection-start-column="85" selection-end-line="15" selection-end-column="85" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -144,14 +56,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="App.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="App.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/App.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="571">
-              <caret line="24" column="30" lean-forward="true" selection-start-line="24" selection-start-column="30" selection-end-line="24" selection-end-column="30" />
+            <state relative-caret-position="384">
+              <caret line="16" column="29" lean-forward="true" selection-start-line="16" selection-start-column="12" selection-end-line="16" selection-end-column="29" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Timer.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/Logic/Timer.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="504">
+              <caret line="22" column="23" selection-start-line="22" selection-start-column="12" selection-end-line="22" selection-end-column="23" />
             </state>
           </provider>
         </entry>
@@ -159,8 +80,8 @@
       <file leaf-file-name="GameManager.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/Logic/GameManager.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1152">
-              <caret line="50" column="12" selection-start-line="50" selection-start-column="7" selection-end-line="50" selection-end-column="12" />
+            <state relative-caret-position="226">
+              <caret line="31" column="8" selection-start-line="31" selection-start-column="8" selection-end-line="31" selection-end-column="27" />
             </state>
           </provider>
         </entry>
@@ -168,20 +89,8 @@
       <file leaf-file-name="controller.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/Controllers/controller.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="246">
-              <caret line="15" column="14" selection-start-line="15" selection-start-column="14" selection-end-line="15" selection-end-column="14" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Card.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Card.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="168">
-              <caret line="7" column="8" selection-start-line="7" selection-start-column="8" selection-end-line="7" selection-end-column="8" />
-              <folding>
-                <element signature="e#0#26#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="351">
+              <caret line="49" selection-start-line="49" selection-end-line="49" />
             </state>
           </provider>
         </entry>
@@ -189,7 +98,7 @@
       <file leaf-file-name="card.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/css/card.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3480">
+            <state relative-caret-position="938">
               <caret line="145" column="24" selection-start-line="145" selection-start-column="24" selection-end-line="145" selection-end-column="24" />
             </state>
           </provider>
@@ -198,8 +107,8 @@
       <file leaf-file-name="Stage.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Stage.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
-              <caret line="12" column="24" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="24" />
+            <state relative-caret-position="216">
+              <caret line="9" selection-start-line="9" selection-end-line="21" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -207,11 +116,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GameRow.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/GameRow.js">
+      <file leaf-file-name="GameDeck.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/GameDeck.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
-              <caret line="12" column="30" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="30" />
+            <state relative-caret-position="192">
+              <caret line="8" selection-start-line="8" selection-end-line="8" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -223,7 +132,19 @@
         <entry file="file://$PROJECT_DIR$/Pot.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="192">
-              <caret line="8" column="32" selection-start-line="8" selection-start-column="32" selection-end-line="8" selection-end-column="32" />
+              <caret line="8" column="33" selection-start-line="8" selection-start-column="33" selection-end-line="8" selection-end-column="33" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Card.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Card.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="312">
+              <caret line="13" column="21" selection-start-line="13" selection-start-column="12" selection-end-line="13" selection-end-column="21" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -319,17 +240,17 @@
         <option value="$PROJECT_DIR$/js/Logic/main.js" />
         <option value="$PROJECT_DIR$/PlayerDeck.js" />
         <option value="$PROJECT_DIR$/Player.js" />
-        <option value="$PROJECT_DIR$/js/Logic/GameManager.js" />
-        <option value="$PROJECT_DIR$/Statistics.js" />
-        <option value="$PROJECT_DIR$/js/Controllers/controller.js" />
         <option value="$PROJECT_DIR$/css/main.css" />
         <option value="$PROJECT_DIR$/css/card.css" />
         <option value="$PROJECT_DIR$/css/stage.css" />
-        <option value="$PROJECT_DIR$/Stage.js" />
+        <option value="$PROJECT_DIR$/App.js" />
+        <option value="$PROJECT_DIR$/Statistics.js" />
         <option value="$PROJECT_DIR$/Pot.js" />
+        <option value="$PROJECT_DIR$/js/Controllers/controller.js" />
+        <option value="$PROJECT_DIR$/js/Logic/GameManager.js" />
+        <option value="$PROJECT_DIR$/Stage.js" />
         <option value="$PROJECT_DIR$/Card.js" />
         <option value="$PROJECT_DIR$/Deck.js" />
-        <option value="$PROJECT_DIR$/App.js" />
       </list>
     </option>
   </component>
@@ -364,7 +285,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -415,6 +335,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -476,25 +397,26 @@
       <workItem from="1526028770946" duration="14042000" />
       <workItem from="1526635881675" duration="18154000" />
       <workItem from="1526913315293" duration="853000" />
+      <workItem from="1527247064974" duration="18125000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="53540000" />
+    <option name="totallyTimeSpent" value="71665000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="22" width="1920" height="1174" extended-state="0" />
+    <frame x="0" y="0" width="2560" height="1440" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24960506" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18668768" />
       <window_info anchor="bottom" id="TODO" order="13" />
       <window_info anchor="bottom" id="Docker" order="15" show_stripe_button="false" />
       <window_info anchor="bottom" id="TeamCity" order="17" />
       <window_info anchor="bottom" id="Event Log" order="18" side_tool="true" />
       <window_info anchor="bottom" id="Run" order="5" />
-      <window_info anchor="bottom" id="Version Control" order="16" weight="0.32953683" />
+      <window_info anchor="bottom" id="Version Control" order="16" visible="true" weight="0.32893774" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Terminal" order="19" visible="true" weight="0.3286908" />
+      <window_info anchor="bottom" id="Terminal" order="19" weight="0.25934067" />
       <window_info anchor="bottom" id="Debug" order="6" weight="0.4" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -508,20 +430,20 @@
     <layout-to-restore>
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Run" order="2" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24960506" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18668768" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Version Control" order="8" weight="0.32953683" />
+      <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="TeamCity" order="9" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.3286908" />
+      <window_info anchor="bottom" id="Terminal" order="11" visible="true" weight="0.25934067" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Version Control" order="8" weight="0.32953683" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info id="Favorites" order="2" side_tool="true" />
     </layout-to-restore>
@@ -545,30 +467,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Card.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="7" column="8" selection-start-line="7" selection-start-column="8" selection-end-line="7" selection-end-column="8" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/css/card.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3480">
-          <caret line="145" column="24" lean-forward="true" selection-start-line="145" selection-start-column="24" selection-end-line="145" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/Logic/Timer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="744">
-          <caret line="32" column="41" selection-start-line="32" selection-start-column="41" selection-end-line="32" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Stage.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="288">
@@ -661,16 +559,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TopBar.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="12" column="63" selection-start-line="12" selection-start-column="63" selection-end-line="12" selection-end-column="63" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/PlayerDeck.js" />
     <entry file="file://$PROJECT_DIR$/css/cssOld/endGame.css">
       <provider selected="true" editor-type-id="text-editor">
@@ -685,9 +573,6 @@
           <caret line="20" column="17" selection-start-line="20" selection-start-column="4" selection-end-line="20" selection-end-column="17" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/StatsFragment.js">
-      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
@@ -710,13 +595,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/Logic/Card.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="650">
-          <caret line="83" column="31" selection-start-line="83" selection-start-column="31" selection-end-line="83" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/TurnIndicator.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="72">
@@ -725,34 +603,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/PlayerDeck.js" />
-    <entry file="file://$PROJECT_DIR$/Statistics.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
-          <caret line="9" selection-start-line="9" selection-end-line="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/css/cssOld/main.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="6" column="25" lean-forward="true" selection-end-line="740" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/css/main.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3984">
-          <caret line="166" column="31" selection-start-line="166" selection-start-column="31" selection-end-line="166" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/css/cssOld/Card.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="143">
-          <caret line="121" column="21" selection-end-line="872" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/css/stage.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1457">
@@ -774,10 +624,83 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/Logic/Timer.js">
+    <entry file="file://$PROJECT_DIR$/public/6678a755ae8d70a83019903cb75bff33.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/f629660b1c21aa2a1a8de2407aafe9eb.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/img/robot.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/cssOld/main.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="744">
-          <caret line="32" column="41" selection-start-line="32" selection-start-column="41" selection-end-line="32" selection-end-column="41" />
+        <state relative-caret-position="-6105">
+          <caret line="6" column="25" lean-forward="true" selection-end-line="740" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/cssOld/Card.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-4231">
+          <caret line="137" column="28" lean-forward="true" selection-start-line="137" selection-start-column="28" selection-end-line="137" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/main.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-12956">
+          <caret line="166" column="31" selection-start-line="166" selection-start-column="31" selection-end-line="166" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/Logic/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="48">
+          <caret line="419" column="37" selection-start-line="419" selection-start-column="9" selection-end-line="419" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/StatsFragment.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Statistics.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="24">
+          <caret line="1" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/Logic/Card.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-5">
+          <caret line="30" column="5" lean-forward="true" selection-start-line="30" selection-start-column="5" selection-end-line="30" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TopBar.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="12" column="62" selection-start-line="12" selection-start-column="62" selection-end-line="12" selection-end-column="62" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GameRow.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="6" column="43" lean-forward="true" selection-start-line="6" selection-start-column="43" selection-end-line="6" selection-end-column="43" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -794,61 +717,48 @@
     <entry file="file://$PROJECT_DIR$/Pot.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="192">
-          <caret line="8" column="32" selection-start-line="8" selection-start-column="32" selection-end-line="8" selection-end-column="32" />
+          <caret line="8" column="33" selection-start-line="8" selection-start-column="33" selection-end-line="8" selection-end-column="33" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Stage.js">
+    <entry file="file://$PROJECT_DIR$/js/Logic/Timer.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="12" column="24" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="24" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="504">
+          <caret line="22" column="23" selection-start-line="22" selection-start-column="12" selection-end-line="22" selection-end-column="23" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GameRow.js">
+    <entry file="file://$PROJECT_DIR$/js/Controllers/controller.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="12" column="30" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="30" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/Logic/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6600">
-          <caret line="275" column="69" selection-start-line="275" selection-start-column="69" selection-end-line="275" selection-end-column="69" />
+        <state relative-caret-position="351">
+          <caret line="49" selection-start-line="49" selection-end-line="49" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/css/card.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3480">
+        <state relative-caret-position="938">
           <caret line="145" column="24" selection-start-line="145" selection-start-column="24" selection-end-line="145" selection-end-column="24" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Card.js">
+    <entry file="file://$PROJECT_DIR$/Stage.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="7" column="8" selection-start-line="7" selection-start-column="8" selection-end-line="7" selection-end-column="8" />
+        <state relative-caret-position="216">
+          <caret line="9" selection-start-line="9" selection-end-line="21" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Deck.js">
+    <entry file="file://$PROJECT_DIR$/App.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2088">
-          <caret line="87" column="34" selection-start-line="87" selection-start-column="34" selection-end-line="90" selection-end-column="36" />
+        <state relative-caret-position="384">
+          <caret line="16" column="29" lean-forward="true" selection-start-line="16" selection-start-column="12" selection-end-line="16" selection-end-column="29" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
@@ -857,22 +767,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/js/Logic/GameManager.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1152">
-          <caret line="50" column="12" selection-start-line="50" selection-start-column="7" selection-end-line="50" selection-end-column="12" />
+        <state relative-caret-position="226">
+          <caret line="31" column="8" selection-start-line="31" selection-start-column="8" selection-end-line="31" selection-end-column="27" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/Controllers/controller.js">
+    <entry file="file://$PROJECT_DIR$/Card.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="246">
-          <caret line="15" column="14" selection-start-line="15" selection-start-column="14" selection-end-line="15" selection-end-column="14" />
+        <state relative-caret-position="312">
+          <caret line="13" column="21" selection-start-line="13" selection-start-column="12" selection-end-line="13" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/App.js">
+    <entry file="file://$PROJECT_DIR$/Deck.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="571">
-          <caret line="24" column="30" lean-forward="true" selection-start-line="24" selection-start-column="30" selection-end-line="24" selection-end-column="30" />
+        <state relative-caret-position="360">
+          <caret line="15" column="85" selection-start-line="15" selection-start-column="85" selection-end-line="15" selection-end-column="85" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>

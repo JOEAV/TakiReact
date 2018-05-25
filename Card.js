@@ -1,7 +1,7 @@
 import React from 'react';
 import {Component} from 'react'
 import './css/card.css'
-
+import {foo} from './js/Controllers/controller.js'
 export default class Card extends Component{
     constructor(props){
     super(props)
@@ -10,12 +10,13 @@ export default class Card extends Component{
             backgroundImage: this.props.behaviour.backgroundShown
                 ? `url(./img/${this.props.rank}_${this.props.color}.png)`
                 : `url(./img/card_back.png)`
-         }
+             },
+            behaviour:this.props.behaviour
         }
     }
 
 
-    translateClassed(classesArray,cardScope){
+    translateClasses(classesArray,cardScope){
         let translate=(classesArray,cardScope) =>{
             let classes = '';
             classesArray[`${cardScope}`].forEach(styleClass => {
@@ -27,11 +28,15 @@ export default class Card extends Component{
         return translate(classesArray,cardScope);
     }
 
-
+    componentDidMount(){
+        if( this.state.behaviour.spreadAnimation !== false )  {
+            this.state.behaviour.spreadAnimation(this);
+        }
+    }
     render(){
         return(
-                    <span  style = {this.state.style} className={this.translateClassed(this.props.behaviour.styleClasses,'cardWrapper')}>
-                        <span className={this.translateClassed(this.props.behaviour.styleClasses,'cardBase')}>
+                    <span  style = {this.state.style} className={this.translateClasses(this.state.behaviour.styleClasses,'cardWrapper')}>
+                        <span className={this.translateClasses(this.state.behaviour.styleClasses,'cardBase')}>
                         </span>
                     </span>
         )

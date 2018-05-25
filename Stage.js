@@ -6,6 +6,21 @@ import GameRow from "./GameRow"
 
 
 export default class Stage extends Component{
+
+    shouldComponentUpdate(nextProps){
+
+        let propChanged=false;
+
+            for (const index in nextProps) {
+                if (nextProps[index] !== this.props[index]) {
+                    propChanged=true
+                    console.log(index, this.props[index], '-->', nextProps[index]);
+                }
+            }
+        return propChanged
+    }
+
+
     render(){
         return(
             <div id='mainContent'>

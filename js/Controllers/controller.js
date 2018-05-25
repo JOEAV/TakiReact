@@ -46,7 +46,9 @@ const isTakiMode = (mode)=>{
 }
 
 const timeElapsed =()=>{
-    updateStateByRef('timeElapsed')
+   updateStateByRef('timeElapsed')
+
+
 }
 
 
