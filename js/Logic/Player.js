@@ -34,7 +34,9 @@ class Player {
         this.reachedLastCard=0;
         return cards;
     }
-
+    get deck(){
+        return this._deck.deck;
+    }
     get score() {
         return this._score;
     }

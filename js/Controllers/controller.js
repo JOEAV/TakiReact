@@ -14,7 +14,9 @@ function updateStateByRef(...refKeys){
     reactCompRefs.forEach((comp)=>{
         const newState = {};
         refKeys.forEach(key=>{
-            newState[`${key}`]= gameManager[`${key}`];
+            if(typeof key === 'object'){
+                newState[`${key}`]= object.assign({},gameManager[`${key}`]);
+            }else newState[`${key}`]= gameManager[`${key}`];
         })
         comp.setState(newState)
 
@@ -36,7 +38,6 @@ const initGame = () =>{
     updateStateByRef('pot','players','gameDeck','activePlayer',
         'timeElapsed','howMany2Plus','lastTime','nowTime','animationDelayCounter','timer',
         '_isTakiMode','_winner','restarted');
-    reactCompRefs.forEach((comp)=>console.log('player init ',comp.state.players));
 }
 
 const isTakiMode = (mode)=>{

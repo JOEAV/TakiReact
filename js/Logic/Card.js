@@ -80,6 +80,9 @@ class CardDeck {
 
     }
 
+    get deck(){
+        return this._cardArray;
+    }
     shuffle() {
         this._cardArray = this._cardArray
             .map(card =>{

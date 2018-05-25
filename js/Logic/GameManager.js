@@ -27,7 +27,7 @@ class GameManager{
 
     initGame(restarted=false){
         this.resetPlayersPotAndGameDeck();
-        //deal cards
+        this.dealCardForPlayers();
         this.activePlayer = 0;
         this.timer.start();
         this.howMany2Plus=0;
@@ -38,6 +38,14 @@ class GameManager{
         this._winner=NoWinner;
         this.restarted=restarted;
         this._totalMoves=0;
+    }
+
+    dealCardForPlayers(){
+        for (let i = 0; i < 8; i++) {
+            this.players.forEach(player=> {
+                player.addCardToDeck(this.gameDeck.pop());
+            })
+        }
     }
 
     addDroppedCardToPot(droppedCard){
@@ -192,6 +200,7 @@ class GameManager{
             this.gameDeck.add(this.pot.pop());
         }
         this.gameDeck.shuffle();
+
     }
 
     resetGame()
