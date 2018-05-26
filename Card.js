@@ -6,11 +6,13 @@ export default class Card extends Component{
     constructor(props){
     super(props)
         this.state={
-            style:{
-            backgroundImage: this.props.behaviour.backgroundShown
+            style: Object.assign({},this.props.style,
+                {
+                    backgroundImage: this.props.behaviour.backgroundShown
                 ? `url(./img/${this.props.rank}_${this.props.color}.png)`
                 : `url(./img/card_back.png)`
-             },
+                }
+            ),
             behaviour:this.props.behaviour
         }
     }
@@ -28,13 +30,14 @@ export default class Card extends Component{
         return translate(classesArray,cardScope);
     }
 
+
     componentDidMount(){
-        if( this.state.behaviour.spreadAnimation !== false )  {
-            this.state.behaviour.spreadAnimation(this);
-        }
+        this.state.behaviour.initBehaviours(this)
     }
+
     render(){
         return(
+
                     <span  style = {this.state.style} className={this.translateClasses(this.state.behaviour.styleClasses,'cardWrapper')}>
                         <span className={this.translateClasses(this.state.behaviour.styleClasses,'cardBase')}>
                         </span>

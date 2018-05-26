@@ -28,6 +28,7 @@ class GameManager{
     initGame(restarted=false){
         this.resetPlayersPotAndGameDeck();
         this.dealCardForPlayers();
+        this.pot.add(this.gameDeck.pop());
         this.activePlayer = 0;
         this.timer.start();
         this.howMany2Plus=0;
