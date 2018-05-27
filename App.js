@@ -25,6 +25,11 @@ export default class App extends Component{
             _totalMoves:0,
             timer:null,
 
+
+            userInteractionsEvents:{
+                cardIsDragged:false,
+            }
+
         }
     }
 
@@ -44,6 +49,7 @@ export default class App extends Component{
                     timeElapsed={this.state.timer.timeElapsed}
             />
             <Stage
+                userInteractionsEvents={this.state.userInteractionsEvents}
                 gameDeck = {this.state.gameDeck}
                 players = {this.state.players}
                 pot = {this.state.pot}

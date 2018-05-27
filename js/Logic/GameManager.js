@@ -227,7 +227,6 @@ class GameManager{
         statistics.whoWon=this._winner;
         this.players.forEach(player=>{
                             statistics.players.push(player.playerStatistics());})
-        console.log(statistics);
         return statistics;
     }
 

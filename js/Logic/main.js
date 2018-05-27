@@ -66,9 +66,6 @@ function removeVisualDragCue(e) {
 }
 
 
-function allowDrop(e) {
-    e.preventDefault();
-}
 
 function drop(event) {
     event.preventDefault();

@@ -2,13 +2,17 @@ import React from 'react';
 import {Component} from 'react'
 import Card from './Card'
 import './css/card.css'
+
+
+import {updateCardIsDragged} from './js/Controllers/controller.js'
+
 export default class Deck extends Component{
     constructor(props) {
         super(props);
 
-        this.initBehaviours = this.initBehaviours.bind(this)
-
-
+        this.initBehaviours = this.initBehaviours.bind(this);
+        this.dragStartHandler = this.dragStartHandler.bind(this);
+        this.dragStoppedHandler = this.dragStoppedHandler.bind(this);
         this.state = {
             owner: this.props.owner,
             deckCssName:this.getDeckCssName(),
@@ -16,7 +20,9 @@ export default class Deck extends Component{
                 droppable: this.props.droppable
             },
             cardsBehaviour: this.mapCardBehaviourByOwner(),
-            cardsStyle:this.mapCardStyleByOwner()
+            cardsStyle:this.mapCardStyleByOwner(),
+            actions:this.mapActionsByOwner(),
+            deckCards:[]
         }
 
 
@@ -26,7 +32,8 @@ export default class Deck extends Component{
     getDeckCssName() {
         let res;
         switch (this.props.owner) {
-            case 'player':
+            case 'playerActive':
+            case 'playerNonActive':
                 res = 'cardsRowPlayer';
                 break;
             case 'algo':
@@ -41,6 +48,7 @@ export default class Deck extends Component{
         }
         return res;
     }
+
     mapCardBehaviourByOwner(){
 
         let defaultBehaviour = {
@@ -66,10 +74,16 @@ export default class Deck extends Component{
             }
         }
         switch (this.props.owner) {
-            case 'player':
+            case 'playerActive':
                 newBehaviour.backgroundShown = true;
                 newBehaviour.hoverable = true
                 newBehaviour.draggable = true;
+                newBehaviour.spreadable = true;
+                newBehaviour.styleClasses.cardWrapper=[...newBehaviour.styleClasses.cardWrapper,'cardInsideCardRow']
+
+                break;
+            case 'playerNonActive':
+                newBehaviour.backgroundShown = true;
                 newBehaviour.spreadable = true;
                 newBehaviour.styleClasses.cardWrapper=[...newBehaviour.styleClasses.cardWrapper,'cardInsideCardRow']
 
@@ -120,17 +134,38 @@ export default class Deck extends Component{
         }
         return Object.assign({}, defaultStyle, newStyle)
     }
+
+    mapActionsByOwner(){
+        let defaultsActions = {
+
+        }
+
+        let newActions = {
+
+        }
+
+        switch(this.props.owner){
+
+            case 'playerActive':
+            newActions.dragStartHandler = this.dragStartHandler
+            newActions.dragStoppedHandler = this.dragStoppedHandler
+
+
+        }
+        return Object.assign({},defaultsActions,newActions)
+
+
+    }
+
     initBehaviours(cardRef) {
         let {owner} = this.state;
         let delayTime = (owner === 'gameDeck' || owner ===  'pot' ) ? 0 : 500
 
         return new Promise((resolve)=>{
             setTimeout(function () {
-                console.log(cardRef);
                 let beforeSpeardStyleBehaviour = cardRef.state.behaviour
+                //behaviours = css behaviours
                 let newBehaviours = [];
-
-
 
                 cardRef.props.topCard ? newBehaviours.push('topCardInGameDeck') : null
                 beforeSpeardStyleBehaviour.spreadable ?  newBehaviours.push('cardInsideCardRowAfterSpread') : null
@@ -151,10 +186,32 @@ export default class Deck extends Component{
 
     }
 
+    dragStartHandler(e){
+        console.log(e.target.id ===null ? 'null' : e.target.id);
+        e.dataTransfer.effectAllowed = "copy";
+         let targetChildNodes = Array.from(e.target.childNodes);
+
+        if (targetChildNodes.length === 0 ) {
+
+        e.dataTransfer.setData("Text", e.target.parentNode.id);
+         }
+         else {
+        e.dataTransfer.setData("Text", e.target.id);
+         }
+             updateCardIsDragged(true)
+
+    }
+
+
+    dragStoppedHandler(e){
+        updateCardIsDragged(false)
+
+    }
     render(){
         let  numOfChildrenCards  = this.props.cards.length-1
         let behaviour=Object.assign({},this.state.cardsBehaviour);
         let style =Object.assign({},this.state.cardsStyle);
+        let actions = Object.assign({},this.state.actions);
         return(
             <div className={this.state.deckCssName}>
                 {
@@ -162,10 +219,11 @@ export default class Deck extends Component{
                     this.props.cards
                         ?
                     this.props.cards.map((card,index)=>{
+                        this.state.deckCards.push(card.id);
                         return(
-                            <Card key={card.id} rank={card.rank} color={card.color}  behaviour={behaviour} style={style}
-
-                             topCard={this.state.owner==='gameDeck' && index === numOfChildrenCards}/>
+                            <Card id={card.id} key={card.id} rank={card.rank} color={card.color}  behaviour={Object.assign({},this.state.cardsBehaviour)}
+                                  style={Object.assign({},this.state.cardsStyle)}  topCard={this.state.owner==='gameDeck' && index === numOfChildrenCards}
+                                  actions={ Object.assign({},this.state.actions)} />
                         )
                     })
                         :

@@ -9,23 +9,34 @@ reactCompRefs.push(selfRef);
 }
 
 
+function updateStateByObject(suppliedState){
+    reactCompRefs.forEach((comp)=> {
+        comp.setState(suppliedState)
 
+    })
+}
 function updateStateByRef(...refKeys){
     reactCompRefs.forEach((comp)=>{
-        const newState = {};
-        refKeys.forEach(key=>{
-            if(typeof key === 'object'){
-                newState[`${key}`]= object.assign({},gameManager[`${key}`]);
-            }else newState[`${key}`]= gameManager[`${key}`];
-        })
+
+        let newState = {};
+
+            refKeys.forEach(key=>{
+                if(typeof key === 'object'){
+                    newState[`${key}`]= object.assign({},gameManager[`${key}`]);
+                }else newState[`${key}`]= gameManager[`${key}`];
+            })
+
         comp.setState(newState)
 
     })
 }
-const test =()=>{
-    gameManager.test();
-    updateStateByRef('_totalMoves')
-    console.log(gameManager._totalMoves);
+
+const updateCardIsDragged = (isDragged) =>{
+    updateStateByObject({userInteractionsEvents:{
+            cardIsDragged:isDragged
+        }
+    })
+
 }
 const addDroppedCardToPot = (droppedCard) =>{
 //HOWMANY2PLUS
@@ -81,6 +92,16 @@ const ensureFirstCardNotSpecial=()=> {
 
 
 
+const onCardHover = (event)=>{
+    let target = event.target.id !== "" ? event.target : event.target.parentNode;
+    let islegalMove =  this.checkMoveValidity({rank:target.getAttribute('rank'),color:target.getAttribute('color')},'hover');
+    if(islegalMove){
+        target.classList.add('cardAllowedCue')
+    }else{
+        target.classList.add('cardNotAllowedCue')
+
+    }
+}
 const timeDiff=()=>{
     return gameManager.timeDiff();
 }
@@ -119,6 +140,38 @@ const thereIsAWinner=()=>{
 
 }
 
+const drop = (event) => {
+    event.preventDefault();
+    event.dataTransfer.dropEffect = "copy";
+    const data = event.dataTransfer.getData("Text");
+    const droppedCardElement = document.getElementById(data);
+    let droppedCardComp = gameManager.players[0].getCardByID(parseInt(droppedCardElement.getAttribute("id")));
+    let isLegalMove = gameManager.checkMoveValidity(droppedCardComp, 'drop');
+
+
+    if (isLegalMove) {
+
+        gameManager.addDroppedCardToPot(droppedCardComp);
+        gameManager.players[0].throwCard(droppedCardComp);
+        setDroppedCardCssInPot(droppedCardElement);
+        switch(droppedCardComp.rank){
+            case 'changeColor':
+                raiseColorChangePopup();
+                break;
+            case 'taki':
+                handleTakiCardDropped(droppedCardComp.color);
+                break;
+            default:
+                if(!gameManager.isTakiMode){
+                    handleTurnEnd(toChangeTurn(droppedCardComp));
+                }
+                break;
+        }
+
+    }
+
+
+}
 export{
-    registerListener,test,timeElapsed,initGame
+    registerListener,timeElapsed,initGame,updateCardIsDragged
 }

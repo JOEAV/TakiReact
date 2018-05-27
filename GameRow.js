@@ -11,8 +11,8 @@ export default class GameRow extends Component{
     render(){
         return(
             <div className={'gameDeckRow'}>
-                <TurnIndicator background={this.props.backgroundClass}/>
-                <Pot pot = {this.props.pot}/>
+                <TurnIndicator activePlayer={this.props.activePlayer}/>
+                <Pot pot = {this.props.pot} animation={this.props.userInteractionsEvents.cardIsDragged}/>
                 <GameDeck gameDeck = {this.props.gameDeck}/>
             </div>
         )

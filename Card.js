@@ -1,7 +1,6 @@
 import React from 'react';
 import {Component} from 'react'
 import './css/card.css'
-import {foo} from './js/Controllers/controller.js'
 export default class Card extends Component{
     constructor(props){
     super(props)
@@ -13,7 +12,8 @@ export default class Card extends Component{
                 : `url(./img/card_back.png)`
                 }
             ),
-            behaviour:this.props.behaviour
+            behaviour:this.props.behaviour,
+            actions: this.props.actions
         }
     }
 
@@ -35,11 +35,23 @@ export default class Card extends Component{
         this.state.behaviour.initBehaviours(this)
     }
 
+    preventCardInnerDrag(event){
+        event.preventDefault();
+
+    }
+
     render(){
         return(
 
-                    <span  style = {this.state.style} className={this.translateClasses(this.state.behaviour.styleClasses,'cardWrapper')}>
-                        <span className={this.translateClasses(this.state.behaviour.styleClasses,'cardBase')}>
+                    <span  id={this.props.id} style = {this.state.style} className={this.translateClasses(this.state.behaviour.styleClasses,'cardWrapper')}
+                           onDragStart={this.props.behaviour.draggable ? this.props.actions.dragStartHandler : null} draggable={this.props.behaviour.draggable}
+                           onDragEnd={this.props.behaviour.draggable ? this.props.actions.dragStoppedHandler : null}
+                           rank={this.props.rank} color={this.props.color}
+                    >
+
+                            <span  className={this.translateClasses(this.state.behaviour.styleClasses,'cardBase')}
+                                  // draggable={this.props.behaviour.draggable} onDragStart={this.props.behaviour.draggable ? this.props.actions.dragStartHandler : null}
+                             draggable={this.props.behaviour.draggable ? true : false}  onDragStart={this.props.behaviour.draggable ? this.props.actions.dragStartHandler : null}  onDragEnd={this.props.actions.dragStoppedHandler}>
                         </span>
                     </span>
         )

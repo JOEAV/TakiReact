@@ -6,6 +6,7 @@ import './css/TakiPopup.css'
 
 export default class TurnIndicator extends Component{
     render(){
+
         let background= this.props.activePlayer===0 ?
             'backgroundImageBoy':
             'backgroundImageRobot'
