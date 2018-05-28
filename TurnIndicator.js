@@ -5,6 +5,13 @@ import './css/card.css'
 import './css/TakiPopup.css'
 
 export default class TurnIndicator extends Component{
+    shouldComponentUpdate(nextProps){
+        if(nextProps.activePlayer && nextProps.activePlayer !== this.props.activePlayer){
+            return true
+        } else{
+            return false
+        }
+    }
     render(){
 
         let background= this.props.activePlayer===0 ?

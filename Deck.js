@@ -4,7 +4,8 @@ import Card from './Card'
 import './css/card.css'
 
 
-import {updateCardIsDragged} from './js/Controllers/controller.js'
+import {notifyCardIsDragged} from './js/Controllers/controller.js'
+import {onCardHoverStart, onCardHoverEnd, registerPotRef} from "./js/Controllers/controller";
 
 export default class Deck extends Component{
     constructor(props) {
@@ -22,7 +23,8 @@ export default class Deck extends Component{
             cardsBehaviour: this.mapCardBehaviourByOwner(),
             cardsStyle:this.mapCardStyleByOwner(),
             actions:this.mapActionsByOwner(),
-            deckCards:[]
+            deckCards:[],
+            cardsRotationDegree:this.setRotationDegrees()
         }
 
 
@@ -56,6 +58,7 @@ export default class Deck extends Component{
             backgroundShown: false,
             hoverable: false,
             draggable: false,
+            rotateable:false,
             styleClasses: {
                 cardWrapper: ['cardWrapper'],
                 cardBase: ['cardBase']
@@ -68,6 +71,7 @@ export default class Deck extends Component{
             backgroundShown: false,
             hoverable: false,
             draggable: false,
+            rotateable : false,
             styleClasses: {
                 cardWrapper: ['cardWrapper'],
                 cardBase: ['cardBase']
@@ -90,6 +94,7 @@ export default class Deck extends Component{
                 break;
             case 'pot':
                 newBehaviour.backgroundShown = true;
+                newBehaviour.rotateable = true;
                 newBehaviour.styleClasses.cardWrapper= [...newBehaviour.styleClasses.cardWrapper,'cardInsidePot']
                 break;
             case 'gameDeck':
@@ -121,10 +126,7 @@ export default class Deck extends Component{
             case 'pot':
                 let degree = Math.floor(Math.random() * 150);
                 newStyle = {
-                    position: "absolute",
-                    left: "10%",
-                    bottom: "10%",
-                    transform: `rotate(${degree}deg)`
+
                 }
 
                 break;
@@ -147,9 +149,11 @@ export default class Deck extends Component{
         switch(this.props.owner){
 
             case 'playerActive':
-            newActions.dragStartHandler = this.dragStartHandler
-            newActions.dragStoppedHandler = this.dragStoppedHandler
-
+            newActions.dragStartHandler = this.dragStartHandler;
+            newActions.dragStoppedHandler = this.dragStoppedHandler;
+            newActions.hoverStartHandler = this.hoverStartHandler;
+            newActions.hoverStoppedHandler = this.hoverStoppedHandler;
+            break;
 
         }
         return Object.assign({},defaultsActions,newActions)
@@ -187,7 +191,6 @@ export default class Deck extends Component{
     }
 
     dragStartHandler(e){
-        console.log(e.target.id ===null ? 'null' : e.target.id);
         e.dataTransfer.effectAllowed = "copy";
          let targetChildNodes = Array.from(e.target.childNodes);
 
@@ -198,20 +201,52 @@ export default class Deck extends Component{
          else {
         e.dataTransfer.setData("Text", e.target.id);
          }
-             updateCardIsDragged(true)
+        notifyCardIsDragged(true)
 
     }
 
 
     dragStoppedHandler(e){
-        updateCardIsDragged(false)
+        notifyCardIsDragged(false)
 
     }
+    hoverStartHandler(e){
+        onCardHoverStart(e);
+    }
+    hoverStoppedHandler(e){
+        onCardHoverEnd(e);
+    }
+
+    rotateCard(degree){
+        return  Object.assign({},{
+            position: "absolute",
+            left: "10%",
+            bottom: "10%",
+            transform: `rotate(${degree}deg)`
+        })
+    }
+    setRotationDegrees(){
+        let degrees = []
+        for(let i =0; i < 100; i++) {
+            degrees.push(Math.floor(Math.random() * 150));
+        }
+    return degrees
+    }
+
+
+    setCardBackground(rank,color){
+        return Object.assign({},{
+            backgroundImage: this.state.cardsBehaviour.backgroundShown
+                ? `url(./img/${rank}_${color}.png)`
+                : `url(./img/card_back.png)`
+        })
+
+   }
+
     render(){
+        if(this.props.owner === 'pot'){
+        }
         let  numOfChildrenCards  = this.props.cards.length-1
-        let behaviour=Object.assign({},this.state.cardsBehaviour);
-        let style =Object.assign({},this.state.cardsStyle);
-        let actions = Object.assign({},this.state.actions);
         return(
             <div className={this.state.deckCssName}>
                 {
@@ -221,8 +256,11 @@ export default class Deck extends Component{
                     this.props.cards.map((card,index)=>{
                         this.state.deckCards.push(card.id);
                         return(
-                            <Card id={card.id} key={card.id} rank={card.rank} color={card.color}  behaviour={Object.assign({},this.state.cardsBehaviour)}
-                                  style={Object.assign({},this.state.cardsStyle)}  topCard={this.state.owner==='gameDeck' && index === numOfChildrenCards}
+                            <Card id={card.id}  key={card.id} rank={card.rank} color={card.color}  behaviour={Object.assign({},this.state.cardsBehaviour)}
+                                  style={ this.state.cardsBehaviour.rotateable
+                                      ? Object.assign({},this.rotateCard(this.state.cardsRotationDegree[index]),this.setCardBackground(card.rank,card.color))
+                                      : Object.assign({},this.setCardBackground(card.rank,card.color))}
+                                  topCard={this.state.owner==='gameDeck' && index === numOfChildrenCards}
                                   actions={ Object.assign({},this.state.actions)} />
                         )
                     })

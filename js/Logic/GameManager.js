@@ -55,9 +55,6 @@ class GameManager{
         this.pot.add(droppedCard);
     }
 
-    test(){
-        this._totalMoves++
-    }
 
     set isTakiMode(mode){
         this._isTakiMode=mode;

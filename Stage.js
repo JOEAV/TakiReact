@@ -3,6 +3,7 @@ import {Component} from 'react'
 import './css/stage.css'
 import Player from "./Player"
 import GameRow from "./GameRow"
+import Popup from "./Popup"
 
 
 export default class Stage extends Component{
@@ -27,6 +28,7 @@ export default class Stage extends Component{
 
         return(
             <div id='mainContent'>
+                <Popup renderChooseColor = {this.props.userInteractionsEvents.chooseColorCardDropped} renderStatistics={this.props.winner !== -1}/>
                 <Player player={this.props.players[1]} owner={'algo'}  />
                 <GameRow userInteractionsEvents={this.props.userInteractionsEvents}
                     gameDeck = {this.props.gameDeck}
@@ -34,7 +36,7 @@ export default class Stage extends Component{
                     activePlayer={this.props.activePlayer}
 
                 />
-                <Player  player={this.props.players[0]} owner={'player'} cardIsDraggedAction = {this.updateCardIsDragged}
+                <Player  player={this.props.players[0]} owner={'player'}
                          activeDescription={this.props.activePlayer===0?
                              'Active':
                              'NonActive'}/>

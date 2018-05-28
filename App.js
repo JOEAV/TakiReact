@@ -28,6 +28,8 @@ export default class App extends Component{
 
             userInteractionsEvents:{
                 cardIsDragged:false,
+                chooseColorCardDropped:false,
+
             }
 
         }
@@ -55,8 +57,8 @@ export default class App extends Component{
                 pot = {this.state.pot}
                 activePlayer={this.state.activePlayer}
                 howMany2Plus = {this.state.howMany2Plus}
-                _isTakiMode={this.state._isTakiMode}
-                _winner={this.state._winner}
+                isTakiMode={this.state._isTakiMode}
+                winner={this.state._winner}
             />
         </div>
     )}

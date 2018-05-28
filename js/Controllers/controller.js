@@ -2,6 +2,7 @@ import gameManager from '../Logic/GameManager'
 
 
 let reactCompRefs = [];
+
 const registerListener = (selfRef)=>{
 
 reactCompRefs.push(selfRef);
@@ -9,9 +10,17 @@ reactCompRefs.push(selfRef);
 }
 
 
-function updateStateByObject(suppliedState){
+function updateStateByObject(parentKey,partialKey,partialValue){
     reactCompRefs.forEach((comp)=> {
-        comp.setState(suppliedState)
+        let newPartialState = {};
+        newPartialState[partialKey]=partialValue;
+
+        let oldPartialState = comp.state[parentKey];
+        let newState = {};
+
+        newState[parentKey] = Object.assign({},oldPartialState,newPartialState);
+
+        comp.setState(newState);
 
     })
 }
@@ -31,13 +40,27 @@ function updateStateByRef(...refKeys){
     })
 }
 
-const updateCardIsDragged = (isDragged) =>{
-    updateStateByObject({userInteractionsEvents:{
-            cardIsDragged:isDragged
-        }
-    })
+const notifyCardIsDragged = (isDragged) =>{
+    updateStateByObject('userInteractionsEvents','cardIsDragged',isDragged);
+
+
 
 }
+
+
+const notifyChangeColorCardDropped = () =>{
+    updateStateByObject('userInteractionsEvents','chooseColorCardDropped',true);
+
+
+
+}
+const notifyColorChoosed = () =>{
+    updateStateByObject('userInteractionsEvents','chooseColorCardDropped',false);
+
+
+
+}
+
 const addDroppedCardToPot = (droppedCard) =>{
 //HOWMANY2PLUS
     gameManager.addDroppedCardToPot(droppedCard);
@@ -92,16 +115,15 @@ const ensureFirstCardNotSpecial=()=> {
 
 
 
-const onCardHover = (event)=>{
-    let target = event.target.id !== "" ? event.target : event.target.parentNode;
-    let islegalMove =  this.checkMoveValidity({rank:target.getAttribute('rank'),color:target.getAttribute('color')},'hover');
-    if(islegalMove){
-        target.classList.add('cardAllowedCue')
-    }else{
-        target.classList.add('cardNotAllowedCue')
+const onCardHoverStart = (event) => {
+    gameManager.onCardHover(event);
 
-    }
 }
+
+const onCardHoverEnd = (event) => {
+    gameManager.onCardHoverEnd(event);
+}
+
 const timeDiff=()=>{
     return gameManager.timeDiff();
 }
@@ -139,13 +161,23 @@ const thereIsAWinner=()=>{
     return winner;
 
 }
+const handleColorChoosed = (event) => {
+    let choosedColor= event.target.getAttribute('color');
+    gameManager.pot.getTopCardValue().color=choosedColor;
+    notifyColorChoosed()
+    console.log(...gameManager.pot.deck)
+    // updateStateByObject('pot','_cardArray',...gameManager.pot.deck)
+    updateStateByRef('pot');
+    // potRef.forceUpdate()
+    // handleTurnEnd(true);
 
-const drop = (event) => {
+}
+
+const onCardDroppedHandler = (event) => {
     event.preventDefault();
     event.dataTransfer.dropEffect = "copy";
     const data = event.dataTransfer.getData("Text");
-    const droppedCardElement = document.getElementById(data);
-    let droppedCardComp = gameManager.players[0].getCardByID(parseInt(droppedCardElement.getAttribute("id")));
+    let droppedCardComp = gameManager.players[0].getCardByID(parseInt(data));
     let isLegalMove = gameManager.checkMoveValidity(droppedCardComp, 'drop');
 
 
@@ -153,17 +185,17 @@ const drop = (event) => {
 
         gameManager.addDroppedCardToPot(droppedCardComp);
         gameManager.players[0].throwCard(droppedCardComp);
-        setDroppedCardCssInPot(droppedCardElement);
+        updateStateByRef('players','pot');
         switch(droppedCardComp.rank){
             case 'changeColor':
-                raiseColorChangePopup();
+                notifyChangeColorCardDropped();
                 break;
             case 'taki':
-                handleTakiCardDropped(droppedCardComp.color);
+                // handleTakiCardDropped(droppedCardComp.color);
                 break;
             default:
                 if(!gameManager.isTakiMode){
-                    handleTurnEnd(toChangeTurn(droppedCardComp));
+                    // handleTurnEnd(toChangeTurn(droppedCardComp));
                 }
                 break;
         }
@@ -173,5 +205,8 @@ const drop = (event) => {
 
 }
 export{
-    registerListener,timeElapsed,initGame,updateCardIsDragged
+    registerListener,timeElapsed,initGame,
+    notifyCardIsDragged,onCardHoverStart,onCardHoverEnd,
+    onCardDroppedHandler,handleColorChoosed,notifyChangeColorCardDropped,
+
 }
