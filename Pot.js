@@ -19,7 +19,7 @@ export default class Pot extends Component{
 
         return(
 
-            <div className={`potContainer` } onDragOver={this.allowDrop} onDrop={this.dropHandler}>
+            <div className={`potContainer` } onDragOver={this.allowDrop} onDrop={this.dropHandler} style={{zIndex:this.props.containerZIndex}}>
                 <Deck owner='pot' cards={this.props.pot.deck} />
             </div>
         )

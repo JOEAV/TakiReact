@@ -29,13 +29,13 @@ export default class Stage extends Component{
         return(
             <div id='mainContent'>
                 <Popup renderChooseColor = {this.props.userInteractionsEvents.chooseColorCardDropped} renderStatistics={this.props.winner !== -1}/>
-                <Player player={this.props.players[1]} owner={'algo'} containerZIndex = {this.props.isTakiMode}  />
+                <Player player={this.props.players[1]} owner={'algo'} containerZIndex = {this.props.isTakiMode ? 100 : 1}  />
                 <GameRow userInteractionsEvents={this.props.userInteractionsEvents}
                     gameDeck = {this.props.gameDeck}
                     pot = {this.props.pot}
                     activePlayer={this.props.activePlayer}
                          containerZIndex = {this.props.isTakiMode ? 100 : 1}
-                         iaTakiMode={this.props.isTakiMode}
+                         isTakiMode={this.props.isTakiMode}
                 />
                 <Player  player={this.props.players[0]} owner={'player'} containerZIndex = {this.props.isTakiMode ? 100 : 1}
                          activeDescription={this.props.activePlayer===0?

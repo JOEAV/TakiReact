@@ -11,9 +11,9 @@ export default class GameRow extends Component{
     render(){
         return(
             <div className={'gameDeckRow'}>
-                <TurnIndicator activePlayer={this.props.activePlayer} takiMode={this.props.isTakiMode} takiAnimationColor={this.props.userInteractionsEvents.fireTakiColorAnimation}/>
-                <Pot pot = {this.props.pot}/>
-                <GameDeck gameDeck = {this.props.gameDeck}/>
+                <TurnIndicator activePlayer={this.props.activePlayer} isTakiMode={this.props.isTakiMode} takiAnimationColor={this.props.userInteractionsEvents.fireTakiColorAnimation}/>
+                <Pot pot = {this.props.pot}  containerZIndex={this.props. containerZIndex}/>
+                <GameDeck gameDeck = {this.props.gameDeck} containerZIndex={this.props. containerZIndex} />
             </div>
         )
     }

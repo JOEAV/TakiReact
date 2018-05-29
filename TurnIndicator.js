@@ -5,15 +5,9 @@ import './css/card.css'
 import './css/TakiPopup.css'
 import {TakiModeclickEventListener} from './js/Controllers/controller'
 export default class TurnIndicator extends Component{
-    shouldComponentUpdate(nextProps){
-        if(nextProps.activePlayer && nextProps.activePlayer !== this.props.activePlayer){
-            return true
-        } else{
-            return false
-        }
-    }
+
     fireTakiAnimation(){
-        return `scaleColorAnimation${this.props.fireTakiColorAnimation}`
+        return `scaleColorAnimation${this.props.takiAnimationColor.toUpperCase()}`
     }
 
     setTurnIndicatorBackground(){
@@ -32,7 +26,7 @@ export default class TurnIndicator extends Component{
         return(
             <div id={'turnIndicatorContainer'}>
                 <div className={this.setTurnIndicatorBackground()} style={{zIndex:100}} onClick={this.props.isTakiMode ? TakiModeclickEventListener : null}/>
-                <div className={`takiInteractionActive ${this.props.takiMode ?  this.fireTakiAnimation() : ""}`}/>
+                <div className={`takiInteractionActive ${this.props.isTakiMode ?  this.fireTakiAnimation() : ""}`}/>
             </div>
         )
 

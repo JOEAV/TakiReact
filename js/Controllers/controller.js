@@ -273,14 +273,14 @@ const onCardDroppedHandler = (event) => {
 const TakiModeclickEventListener =(event)=>{
     let colorUpperCase = gameManager.pot.getTopCardValue().color.toUpperCase();
     let playerCardsElems = Array.from(playerCardsRow.childNodes);
-    let playerCardsDifferentColor = playerCardsElems.filter(card=>card.getAttribute('color')!==colorUpperCase.toLowerCase())
+    let playerCardsDifferentColor = playerCardsElems.filter(card=>card.color!==colorUpperCase.toLowerCase())
     event.color = colorUpperCase;
     event.nonColorCards = playerCardsDifferentColor;
     takiButtonClicked(event)
 }
 const handleTakiCardDropped = (color)=>{
     gameManager.isTakiMode = true;
-    updateStateByRef('_isTakiMode')
+    reactRootCompRef.setState({_isTakiMode:true})
     notifyTakiCardDropped(color);
     let colorUpperCase = color.toUpperCase();
     let playerCardsDifferentColor = gameManager.players[0].deck.filter(card=>card.color!==colorUpperCase.toLowerCase())
@@ -288,9 +288,9 @@ const handleTakiCardDropped = (color)=>{
 
 
 
-    playerCardsDifferentColor.forEach((card)=>{
-        removePlayerCardBehavior(card)
-    });
+    // playerCardsDifferentColor.forEach((card)=>{
+    //     removePlayerCardBehavior(card)
+    // });
 }
 
 
