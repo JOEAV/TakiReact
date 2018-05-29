@@ -1,31 +1,42 @@
 import gameManager from '../Logic/GameManager'
 
 
-let reactCompRefs = [];
+let potRef = null;
+let reactRootCompRef = null;
+const eventCompListeners = {
+    cardIsDragged:[],
+    colorIsChoosed:[]
 
-const registerListener = (selfRef)=>{
-
-reactCompRefs.push(selfRef);
 
 }
 
 
+const registerListener = (selfRef)=>{
+
+    reactRootCompRef=selfRef
+
+}
+
+const registerPotRef = (potCompRef) => {
+    potRef=potCompRef
+    eventCompListeners.cardIsDragged.push(notifyCardIsDragged);
+
+}
+
 function updateStateByObject(parentKey,partialKey,partialValue){
-    reactCompRefs.forEach((comp)=> {
         let newPartialState = {};
         newPartialState[partialKey]=partialValue;
 
-        let oldPartialState = comp.state[parentKey];
+        let oldPartialState = reactRootCompRef.state[parentKey];
         let newState = {};
 
         newState[parentKey] = Object.assign({},oldPartialState,newPartialState);
 
-        comp.setState(newState);
+        reactRootCompRef.setState(newState);
 
-    })
+
 }
 function updateStateByRef(...refKeys){
-    reactCompRefs.forEach((comp)=>{
 
         let newState = {};
 
@@ -37,14 +48,18 @@ function updateStateByRef(...refKeys){
                 }else newState[`${key}`]= gameManager[`${key}`];
             })
 
-        comp.setState(newState)
+         reactRootCompRef.setState(newState)
 
-    })
+
 }
 
-const notifyCardIsDragged = (isDragged) =>{
-    updateStateByObject('userInteractionsEvents','cardIsDragged',isDragged);
 
+
+
+const notifyCardIsDragged = (isDragged) =>{
+    let newState = {};
+    newState['fireAnimation'] = isDragged;
+    potRef.setState(newState);
 
 
 }
@@ -195,6 +210,21 @@ const handleColorChoosed =  (event) => {
 
 }
 
+const onDragStart = (e) =>{
+    e.dataTransfer.effectAllowed = "copy";
+
+    if(e.target.id === "") {
+
+        e.dataTransfer.setData("Text", e.target.parentNode.id);
+    }
+    else {
+        e.dataTransfer.setData("Text", e.target.id);
+    }
+
+    eventCompListeners.cardIsDragged.forEach(cb=>cb.call())
+
+}
+
 const onCardDroppedHandler = (event) => {
     event.preventDefault();
     event.dataTransfer.dropEffect = "copy";
@@ -230,6 +260,7 @@ const onCardDroppedHandler = (event) => {
 export{
     registerListener,timeElapsed,initGame,
     notifyCardIsDragged,onCardHoverStart,onCardHoverEnd,
-    onCardDroppedHandler,handleColorChoosed,notifyChangeColorCardDropped,handlePulledTopCardClick
+    onCardDroppedHandler,handleColorChoosed,notifyChangeColorCardDropped,handlePulledTopCardClick,
+    onDragStart,registerPotRef
 
 }

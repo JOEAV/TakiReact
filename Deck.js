@@ -5,7 +5,7 @@ import './css/card.css'
 
 
 import {notifyCardIsDragged} from './js/Controllers/controller.js'
-import {onCardHoverStart, onCardHoverEnd, handlePulledTopCardClick} from "./js/Controllers/controller";
+import {onCardHoverStart, onCardHoverEnd, handlePulledTopCardClick,onDragStart} from "./js/Controllers/controller";
 
 export default class Deck extends Component{
     constructor(props) {
@@ -173,17 +173,7 @@ export default class Deck extends Component{
     }
 
     dragStartHandler(e){
-        e.dataTransfer.effectAllowed = "copy";
-
-        if(e.target.id === "") {
-
-        e.dataTransfer.setData("Text", e.target.parentNode.id);
-         }
-         else {
-        e.dataTransfer.setData("Text", e.target.id);
-         }
-        notifyCardIsDragged(true)
-
+        onDragStart(e)
     }
     clickHandler(e){
         handlePulledTopCardClick(e)

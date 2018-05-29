@@ -27,7 +27,6 @@ export default class App extends Component{
 
 
             userInteractionsEvents:{
-                cardIsDragged:false,
                 chooseColorCardDropped:false,
 
             }
