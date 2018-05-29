@@ -20,7 +20,6 @@ export default class Pot extends Component{
     }
     allowDrop(e) {
         e.preventDefault();
-        this.setState({fireAnimation:false})
     }
     render(){
 

@@ -221,7 +221,13 @@ const onDragStart = (e) =>{
         e.dataTransfer.setData("Text", e.target.id);
     }
 
-    eventCompListeners.cardIsDragged.forEach(cb=>cb.call())
+
+
+}
+
+
+const onDragEnd = (e) =>{
+
 
 }
 
@@ -261,6 +267,6 @@ export{
     registerListener,timeElapsed,initGame,
     notifyCardIsDragged,onCardHoverStart,onCardHoverEnd,
     onCardDroppedHandler,handleColorChoosed,notifyChangeColorCardDropped,handlePulledTopCardClick,
-    onDragStart,registerPotRef
+    onDragStart,registerPotRef,onDragEnd
 
 }

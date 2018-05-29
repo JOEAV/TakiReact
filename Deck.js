@@ -5,7 +5,7 @@ import './css/card.css'
 
 
 import {notifyCardIsDragged} from './js/Controllers/controller.js'
-import {onCardHoverStart, onCardHoverEnd, handlePulledTopCardClick,onDragStart} from "./js/Controllers/controller";
+import {onCardHoverStart, onCardHoverEnd, handlePulledTopCardClick,onDragStart,onDragEnd} from "./js/Controllers/controller";
 
 export default class Deck extends Component{
     constructor(props) {
@@ -180,7 +180,7 @@ export default class Deck extends Component{
     }
 
     dragStoppedHandler(e){
-        notifyCardIsDragged(false)
+        onDragEnd(e)
 
     }
     hoverStartHandler(e){
@@ -217,6 +217,7 @@ export default class Deck extends Component{
    }
 
     render(){
+        console.log('card is rendered');
         if(this.props.owner === 'pot'){
         }
         let  numOfChildrenCards  = this.props.cards.length-1
