@@ -232,6 +232,7 @@ const onDragEnd = (e) =>{
 
 const onCardDroppedHandler = (event) => {
     event.preventDefault();
+    onDragEnd(event);
     event.dataTransfer.dropEffect = "copy";
     const data = event.dataTransfer.getData("Text");
     let droppedCardComp = gameManager.players[0].getCardByID(parseInt(data));
