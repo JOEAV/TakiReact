@@ -13,7 +13,7 @@ export default class Pot extends Component{
     }
     allowDrop(e) {
         e.preventDefault();
-        notifyCardIsDragged(false)
+        // notifyCardIsDragged(false)
     }
     render(){
 

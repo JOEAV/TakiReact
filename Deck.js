@@ -174,9 +174,8 @@ export default class Deck extends Component{
 
     dragStartHandler(e){
         e.dataTransfer.effectAllowed = "copy";
-         let targetChildNodes = Array.from(e.target.childNodes);
 
-        if (targetChildNodes.length === 0 ) {
+        if(e.target.id === "") {
 
         e.dataTransfer.setData("Text", e.target.parentNode.id);
          }
