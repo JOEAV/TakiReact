@@ -3,7 +3,7 @@ import {Component} from 'react'
 import './css/main.css'
 import './css/card.css'
 import './css/TakiPopup.css'
-
+import {TakiModeclickEventListener} from './js/Controllers/controller'
 export default class TurnIndicator extends Component{
     shouldComponentUpdate(nextProps){
         if(nextProps.activePlayer && nextProps.activePlayer !== this.props.activePlayer){
@@ -12,15 +12,27 @@ export default class TurnIndicator extends Component{
             return false
         }
     }
+    fireTakiAnimation(){
+        return `scaleColorAnimation${this.props.fireTakiColorAnimation}`
+    }
+
+    setTurnIndicatorBackground(){
+        let classNames="";
+        if(this.props.isTakiMode){
+            classNames= `turnIndicatorTakiOn`
+        } else{
+            classNames =  this.props.activePlayer===0 ? `turnIndicator backgroundImageBoy` : `turnIndicator backgroundImageRobot`
+        }
+        return classNames;
+
+
+    }
     render(){
 
-        let background= this.props.activePlayer===0 ?
-            'backgroundImageBoy':
-            'backgroundImageRobot'
         return(
             <div id={'turnIndicatorContainer'}>
-                <div className={`turnIndicator ${background}`} style={{zIndex:100}}/>
-                <div className={'takiInteractionActive'}/>
+                <div className={this.setTurnIndicatorBackground()} style={{zIndex:100}} onClick={this.props.isTakiMode ? TakiModeclickEventListener : null}/>
+                <div className={`takiInteractionActive ${this.props.takiMode ?  this.fireTakiAnimation() : ""}`}/>
             </div>
         )
 

@@ -26,7 +26,7 @@ export default class App extends Component{
 
             userInteractionsEvents:{
                 chooseColorCardDropped:false,
-
+                fireTakiColorAnimation: 'none'
             }
 
         }

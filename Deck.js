@@ -223,7 +223,7 @@ export default class Deck extends Component{
         }
         let  numOfChildrenCards  = this.props.cards.length-1
         return(
-            <div className={this.state.deckCssName}>
+            <div className={this.state.deckCssName} style={{zIndex: this.props.containerZIndex}}>
                 {
 
                     this.props.cards

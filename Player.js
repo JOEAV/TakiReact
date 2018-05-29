@@ -7,9 +7,11 @@ export default class Player extends Component{
         return(
                 <Deck cards={this.props.player.deck ? this.props.player.deck : []}
                       owner={this.props.owner==='player' ?
-                          'player'+this.props.activeDescription:
-                          this.props.owner
-                }  />
+                          'player'+this.props.activeDescription
+                          :
+                          this.props.owner}
+                          containerZIndex={this.props.containerZIndex}
+                 />
 
         )
 

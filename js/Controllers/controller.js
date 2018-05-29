@@ -101,6 +101,10 @@ const notifyColorChoosed = () =>{
 
 
 }
+const notifyTakiCardDropped = (color) =>{
+    updateStateByObject('userInteractionsEvents','fireTakiColorAnimation',color);
+
+}
 
 const addDroppedCardToPot = (droppedCard) =>{
 //HOWMANY2PLUS
@@ -252,7 +256,7 @@ const onCardDroppedHandler = (event) => {
                 notifyChangeColorCardDropped();
                 break;
             case 'taki':
-                // handleTakiCardDropped(droppedCardComp.color);
+                handleTakiCardDropped(droppedCardComp.color);
                 break;
             default:
                 if(!gameManager.isTakiMode){
@@ -266,10 +270,34 @@ const onCardDroppedHandler = (event) => {
 
 
 }
+const TakiModeclickEventListener =(event)=>{
+    let colorUpperCase = gameManager.pot.getTopCardValue().color.toUpperCase();
+    let playerCardsElems = Array.from(playerCardsRow.childNodes);
+    let playerCardsDifferentColor = playerCardsElems.filter(card=>card.getAttribute('color')!==colorUpperCase.toLowerCase())
+    event.color = colorUpperCase;
+    event.nonColorCards = playerCardsDifferentColor;
+    takiButtonClicked(event)
+}
+const handleTakiCardDropped = (color)=>{
+    gameManager.isTakiMode = true;
+    updateStateByRef('_isTakiMode')
+    notifyTakiCardDropped(color);
+    let colorUpperCase = color.toUpperCase();
+    let playerCardsDifferentColor = gameManager.players[0].deck.filter(card=>card.color!==colorUpperCase.toLowerCase())
+
+
+
+
+    playerCardsDifferentColor.forEach((card)=>{
+        removePlayerCardBehavior(card)
+    });
+}
+
+
 export{
     timeElapsed,initGame,registerListener
     ,onCardHoverStart,onCardHoverEnd,registerPotRef,
     onCardDroppedHandler,handleColorChoosed,notifyChangeColorCardDropped,handlePulledTopCardClick,
-    onDragStart,onDragEnd,registerTimerCompRef
+    onDragStart,onDragEnd,registerTimerCompRef,TakiModeclickEventListener
 
 }
