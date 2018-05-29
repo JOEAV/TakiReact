@@ -30,7 +30,7 @@ class GameManager{
         this.dealCardForPlayers();
         this.pot.add(this.gameDeck.pop());
         this.activePlayer = 0;
-        // this.timer.start();
+        this.timer.start();
         this.howMany2Plus=0;
         this.lastTime={ ms :0, sec :0, min : 0};
         this.nowTime={ ms :0, sec :0, min : 0};

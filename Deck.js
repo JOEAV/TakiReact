@@ -144,6 +144,7 @@ export default class Deck extends Component{
     }
 
     initBehaviours(cardRef) {
+        console.log('**************init card behaviour*************');
         let {owner} = this.state;
         let delayTime = (owner === 'gameDeck' || owner ===  'pot' ) ? 0 : 500
 

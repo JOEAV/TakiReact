@@ -25,7 +25,7 @@ export default class Card extends Component{
     }
 
 
-    componentDidMount(){
+    componentWillMount(){
         this.state.behaviour.initBehaviours(this)
     }
 

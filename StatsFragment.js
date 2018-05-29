@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Component} from 'react'
+
 export default  class StatsFragment extends Component{
     render(){
         return(

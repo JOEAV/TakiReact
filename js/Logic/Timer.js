@@ -20,7 +20,7 @@ class Timer{
     start(){
         let update = (txt)=>{
             this.timeElapsed=txt;
-            timeElapsed();
+            timeElapsed(txt);
 
         }
 

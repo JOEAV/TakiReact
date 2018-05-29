@@ -14,7 +14,6 @@ export default class App extends Component{
             players:null,
             pot:null,
             activePlayer:0,
-            timeElapsed:null,
             howMany2Plus:null,
             //TODO:refactor this
             animationDelayCounter:null,
@@ -23,7 +22,6 @@ export default class App extends Component{
             _winner:-1,
             restarted:false,
             _totalMoves:0,
-            timer:null,
 
 
             userInteractionsEvents:{

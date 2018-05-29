@@ -3,6 +3,7 @@ import gameManager from '../Logic/GameManager'
 
 let potContainerRef = null;
 let reactRootCompRef = null;
+let timerCompRef =  null;
 const eventCompListeners = {
     cardIsDragged:[],
     colorIsChoosed:[]
@@ -20,6 +21,9 @@ const registerListener = (selfRef)=>{
 const registerPotRef = (potCompRef) => {
     potContainerRef=document.querySelector('.potContainer');
 
+}
+const registerTimerCompRef = (timerRef) =>{
+    timerCompRef = timerRef;
 }
 
 function updateStateByObject(parentKey,partialKey,partialValue){
@@ -116,9 +120,8 @@ const isTakiMode = (mode)=>{
     updateStateByRef('_isTakiMode')
 }
 
-const timeElapsed =()=>{
-   updateStateByRef('timeElapsed')
-
+const timeElapsed =(timeElapsedAsString)=>{
+    timerCompRef.setState({timeElapsed:timeElapsedAsString})
 
 }
 
@@ -243,7 +246,7 @@ const onCardDroppedHandler = (event) => {
 
         gameManager.addDroppedCardToPot(droppedCardComp);
         gameManager.players[0].throwCard(droppedCardComp);
-        updateStateByRef('players','pot');
+        updateStateByRef('pot');
         switch(droppedCardComp.rank){
             case 'changeColor':
                 notifyChangeColorCardDropped();
@@ -267,6 +270,6 @@ export{
     timeElapsed,initGame,registerListener
     ,onCardHoverStart,onCardHoverEnd,registerPotRef,
     onCardDroppedHandler,handleColorChoosed,notifyChangeColorCardDropped,handlePulledTopCardClick,
-    onDragStart,onDragEnd
+    onDragStart,onDragEnd,registerTimerCompRef
 
 }
