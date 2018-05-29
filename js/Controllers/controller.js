@@ -1,7 +1,7 @@
 import gameManager from '../Logic/GameManager'
 
 
-let potRef = null;
+let potContainerRef = null;
 let reactRootCompRef = null;
 const eventCompListeners = {
     cardIsDragged:[],
@@ -18,8 +18,7 @@ const registerListener = (selfRef)=>{
 }
 
 const registerPotRef = (potCompRef) => {
-    potRef=potCompRef
-    eventCompListeners.cardIsDragged.push(notifyCardIsDragged);
+    potContainerRef=document.querySelector('.potContainer');
 
 }
 
@@ -56,13 +55,13 @@ function updateStateByRef(...refKeys){
 
 
 
-const notifyCardIsDragged = (isDragged) =>{
-    let newState = {};
-    newState['fireAnimation'] = isDragged;
-    potRef.setState(newState);
-
-
-}
+// const notifyCardIsDragged = (isDragged) =>{
+//     let newState = {};
+//     newState['fireAnimation'] = isDragged;
+//     potRef.setState(newState);
+//
+//
+// }
 
 const  isPlayerHasLegitCardToThrow= () => gameManager.players[0].deck.some((card)=>gameManager.checkMoveValidity(card))
 
@@ -221,13 +220,13 @@ const onDragStart = (e) =>{
         e.dataTransfer.setData("Text", e.target.id);
     }
 
-
+    potContainerRef.classList.add('potFadeInAnimation')
 
 }
 
 
 const onDragEnd = (e) =>{
-
+    potContainerRef.classList.remove('potFadeInAnimation')
 
 }
 
@@ -264,9 +263,9 @@ const onCardDroppedHandler = (event) => {
 
 }
 export{
-    registerListener,timeElapsed,initGame,
-    notifyCardIsDragged,onCardHoverStart,onCardHoverEnd,
+    timeElapsed,initGame,registerListener
+    ,onCardHoverStart,onCardHoverEnd,registerPotRef,
     onCardDroppedHandler,handleColorChoosed,notifyChangeColorCardDropped,handlePulledTopCardClick,
-    onDragStart,registerPotRef,onDragEnd
+    onDragStart,onDragEnd
 
 }
