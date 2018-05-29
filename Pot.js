@@ -2,7 +2,7 @@ import React from 'react';
 import {Component} from 'react'
 import './css/main.css'
 import Deck from './Deck'
-import {onCardDroppedHandler} from "./js/Controllers/controller";
+import {notifyCardIsDragged, onCardDroppedHandler} from "./js/Controllers/controller";
 export default class Pot extends Component{
 
 
@@ -13,6 +13,7 @@ export default class Pot extends Component{
     }
     allowDrop(e) {
         e.preventDefault();
+        notifyCardIsDragged(false)
     }
     render(){
 

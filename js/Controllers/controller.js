@@ -30,7 +30,9 @@ function updateStateByRef(...refKeys){
         let newState = {};
 
             refKeys.forEach(key=>{
-                if(typeof key === 'object'){
+                if(Array.isArray(gameManager[`${key}`])){
+                    newState[`${key}`]= [...gameManager[`${key}`]];
+                } else if (typeof key === 'object'){
                     newState[`${key}`]= object.assign({},gameManager[`${key}`]);
                 }else newState[`${key}`]= gameManager[`${key}`];
             })
@@ -47,6 +49,27 @@ const notifyCardIsDragged = (isDragged) =>{
 
 }
 
+const  isPlayerHasLegitCardToThrow= () => gameManager.players[0].deck.some((card)=>gameManager.checkMoveValidity(card))
+
+
+const handlePulledTopCardClick = (event) => {
+    let isPlayer = event.isTrusted;
+    if(!gameManager.isTakiMode && !isPlayerHasLegitCardToThrow() && (gameManager.animationDelayCounter===0 || !isPlayer)){
+
+        if(( isPlayer && gameManager.activePlayer === 0) || (!isPlayer && gameManager.activePlayer===1 )){
+            let numberOFCardsToTake= gameManager.howMany2Plus===0 ? 1 : gameManager.howMany2Plus*2;
+            gameManager.howMany2Plus=0;
+            for (let i=0; i<numberOFCardsToTake; i++) {
+                gameManager.players[gameManager.activePlayer].addCardToDeck(gameManager.gameDeck.pop());
+                //TODO:// HANDLE LAST CARD IN GAME DECK SITUATION - NOT CARED YET
+
+            }
+            updateStateByRef('players','gameDeck');
+            // handleTurnEnd(true);
+        }
+
+    }
+}
 
 const notifyChangeColorCardDropped = () =>{
     updateStateByObject('userInteractionsEvents','chooseColorCardDropped',true);
@@ -161,14 +184,13 @@ const thereIsAWinner=()=>{
     return winner;
 
 }
-const handleColorChoosed = (event) => {
+const handleColorChoosed =  (event) => {
+
     let choosedColor= event.target.getAttribute('color');
     gameManager.pot.getTopCardValue().color=choosedColor;
     notifyColorChoosed()
-    console.log(...gameManager.pot.deck)
-    // updateStateByObject('pot','_cardArray',...gameManager.pot.deck)
     updateStateByRef('pot');
-    // potRef.forceUpdate()
+
     // handleTurnEnd(true);
 
 }
@@ -200,6 +222,7 @@ const onCardDroppedHandler = (event) => {
                 break;
         }
 
+
     }
 
 
@@ -207,6 +230,6 @@ const onCardDroppedHandler = (event) => {
 export{
     registerListener,timeElapsed,initGame,
     notifyCardIsDragged,onCardHoverStart,onCardHoverEnd,
-    onCardDroppedHandler,handleColorChoosed,notifyChangeColorCardDropped,
+    onCardDroppedHandler,handleColorChoosed,notifyChangeColorCardDropped,handlePulledTopCardClick
 
 }

@@ -5,7 +5,7 @@ import './css/card.css'
 
 
 import {notifyCardIsDragged} from './js/Controllers/controller.js'
-import {onCardHoverStart, onCardHoverEnd, registerPotRef} from "./js/Controllers/controller";
+import {onCardHoverStart, onCardHoverEnd, handlePulledTopCardClick} from "./js/Controllers/controller";
 
 export default class Deck extends Component{
     constructor(props) {
@@ -21,7 +21,6 @@ export default class Deck extends Component{
                 droppable: this.props.droppable
             },
             cardsBehaviour: this.mapCardBehaviourByOwner(),
-            cardsStyle:this.mapCardStyleByOwner(),
             actions:this.mapActionsByOwner(),
             deckCards:[],
             cardsRotationDegree:this.setRotationDegrees()
@@ -114,28 +113,7 @@ export default class Deck extends Component{
         return Object.assign(defaultBehaviour, newBehaviour);
 
     }
-    mapCardStyleByOwner() {
 
-        let defaultStyle = {
-            backgroundImage:null
-        }
-        let newStyle = {}
-
-        switch (this.props.owner) {
-
-            case 'pot':
-                let degree = Math.floor(Math.random() * 150);
-                newStyle = {
-
-                }
-
-                break;
-            default:
-                break;
-
-        }
-        return Object.assign({}, defaultStyle, newStyle)
-    }
 
     mapActionsByOwner(){
         let defaultsActions = {
@@ -154,7 +132,11 @@ export default class Deck extends Component{
             newActions.hoverStartHandler = this.hoverStartHandler;
             newActions.hoverStoppedHandler = this.hoverStoppedHandler;
             break;
-
+            case 'gameDeck':
+                newActions.clickHandler = this.clickHandler;
+                break;
+            default:
+                break;
         }
         return Object.assign({},defaultsActions,newActions)
 
@@ -204,7 +186,9 @@ export default class Deck extends Component{
         notifyCardIsDragged(true)
 
     }
-
+    clickHandler(e){
+        handlePulledTopCardClick(e)
+    }
 
     dragStoppedHandler(e){
         notifyCardIsDragged(false)

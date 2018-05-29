@@ -6,7 +6,6 @@ export default class Card extends Component{
     super(props)
 
         this.state={
-            style: this.props.style,
             behaviour:this.props.behaviour,
             actions: this.props.actions
         }
@@ -30,6 +29,7 @@ export default class Card extends Component{
         this.state.behaviour.initBehaviours(this)
     }
 
+
     preventCardInnerDrag(event){
         event.preventDefault();
 
@@ -38,17 +38,16 @@ export default class Card extends Component{
     render(){
         return(
 
-                    <span  id={this.props.id} style = {this.props.style} className={this.translateClasses(this.state.behaviour.styleClasses,'cardWrapper')}
+                    <span  id={this.props.id} style = {this.props.style} className={`${this.translateClasses(this.state.behaviour.styleClasses,'cardWrapper')} ${this.props.topCard ? 'topCardInGameDeck'  : ''}`}
                            onDragStart={this.props.behaviour.draggable ? this.props.actions.dragStartHandler : null} draggable={this.props.behaviour.draggable}
                            onDragEnd={this.props.behaviour.draggable ? this.props.actions.dragStoppedHandler : null}
                            onMouseOver={this.props.behaviour.hoverable ? this.props.actions.hoverStartHandler : null} onMouseLeave={this.props.behaviour.hoverable ? this.props.actions.hoverStoppedHandler : null}
-                           rank={this.props.rank} color={this.props.color}
+                           rank={this.props.rank} color={this.props.color} onClick={this.props.topCard? this.props.actions.clickHandler : null}
 
                     >
 
                             <span  className={this.translateClasses(this.state.behaviour.styleClasses,'cardBase')}
-                                  // draggable={this.props.behaviour.draggable} onDragStart={this.props.behaviour.draggable ? this.props.actions.dragStartHandler : null}
-                             draggable={this.props.behaviour.draggable ? true : false}  onDragStart={this.props.behaviour.draggable ? this.props.actions.dragStartHandler : null}
+                             draggable={this.props.behaviour.draggable }  onDragStart={this.props.behaviour.draggable ? this.props.actions.dragStartHandler : null}
                                    onDragEnd={this.props.actions.dragStoppedHandler}>
                         </span>
                     </span>
