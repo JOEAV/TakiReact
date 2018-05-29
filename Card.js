@@ -30,10 +30,7 @@ export default class Card extends Component{
     }
 
 
-    preventCardInnerDrag(event){
-        event.preventDefault();
 
-    }
 
     render(){
         return(

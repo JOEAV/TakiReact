@@ -11,7 +11,7 @@ export default class TopBar extends Component{
                 <Statistics totalMoves={this.props.totalMoves}
                             avgMovesTime={this.props.avgMovesTime}
                             reachedLastCard={this.props.reachedLastCard}
-                            timeElapsed={this.props.timeElapsed}/>
+                          />
                <button id="restart-button"  title='click' name='click1' onClick={(event)=>console.log('clicked')}>restart</button>
             </div>
         )

@@ -146,9 +146,9 @@ export default class Deck extends Component{
     initBehaviours(cardRef) {
         console.log('**************init card behaviour*************');
         let {owner} = this.state;
-        let delayTime = (owner === 'gameDeck' || owner ===  'pot' ) ? 0 : 500
+        let delayTime = (owner === 'gameDeck' || owner ===  'pot' ) ? 0 : 200
 
-        return new Promise((resolve)=>{
+
             setTimeout(function () {
                 let beforeSpeardStyleBehaviour = cardRef.state.behaviour
                 //behaviours = css behaviours
@@ -169,7 +169,7 @@ export default class Deck extends Component{
                     })
 
             }, delayTime)
-        })
+
 
     }
 
