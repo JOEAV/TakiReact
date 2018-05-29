@@ -103,6 +103,8 @@ function drop(event) {
 function toChangeTurn(droppedCard){
     return ((droppedCard.rank !== 'stop') && (droppedCard.rank !== 'plus'))
 }
+
+
 function updateStatistics()
 {
     let pad = function(time)

@@ -65,6 +65,35 @@ function updateStateByRef(...refKeys){
 
 const  isPlayerHasLegitCardToThrow= () => gameManager.players[0].deck.some((card)=>gameManager.checkMoveValidity(card))
 
+function toChangeTurn(card){
+    return ((card.rank !== 'stop') && (card.rank !== 'plus'))
+}
+
+const handleTurnEnd = (isChangeTurn) => {
+    do {
+        let cardToThrow = gameManager.changeTurn(isChangeTurn);
+        gameManager.thereIsAWinner()
+        if (gameManager.winner!==0) {
+            cardToThrow.forEach(cardLogic => {
+                gameManager.addDroppedCardToPot(cardLogic);
+            })
+
+            if (cardToThrow.length > 0) {
+                isChangeTurn = toChangeTurn(cardToThrow[cardToThrow.length - 1]);
+            }
+            else if (gameManager.activePlayer===1)
+                gameManager.players[1].addCardToDeck(gameManager.gameDeck.pop());
+
+        }
+        updateStateByRef('players','pot','activePlayer');
+    } while (gameManager.activePlayer===1 && gameManager.thereIsAWinner()===false)
+    updateStateByRef('players','gameDeck','activePlayer');
+    if (gameManager.thereIsAWinner()===true) {
+        if (gameManager.winner===1){
+            gameManager.changeTurn(true);
+        }
+    }
+}
 
 const handlePulledTopCardClick = (event) => {
     let isPlayer = event.isTrusted;
@@ -78,8 +107,10 @@ const handlePulledTopCardClick = (event) => {
                 //TODO:// HANDLE LAST CARD IN GAME DECK SITUATION - NOT CARED YET
 
             }
-            updateStateByRef('players','gameDeck');
-            // handleTurnEnd(true);
+
+            updateStateByRef('players','gameDeck','activePlayer');
+            handleTurnEnd(true);
+
         }
 
     }
@@ -92,9 +123,9 @@ const notifyChangeColorCardDropped = () =>{
 
 }
 const notifyColorChoosed = () =>{
+
     updateStateByObject('userInteractionsEvents','chooseColorCardDropped',false);
-
-
+    handleTurnEnd(true);
 
 }
 
@@ -240,7 +271,6 @@ const onCardDroppedHandler = (event) => {
 
 
     if (isLegalMove) {
-
         gameManager.addDroppedCardToPot(droppedCardComp);
         gameManager.players[0].throwCard(droppedCardComp);
         updateStateByRef('players','pot');
@@ -253,7 +283,7 @@ const onCardDroppedHandler = (event) => {
                 break;
             default:
                 if(!gameManager.isTakiMode){
-                    // handleTurnEnd(toChangeTurn(droppedCardComp));
+                    handleTurnEnd(toChangeTurn(droppedCardComp));
                 }
                 break;
         }
