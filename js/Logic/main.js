@@ -152,7 +152,6 @@ function gameFlowAnimationDelay(animation,args,cb,cbArgs){
                          cbArgs.forEach(arg=>cb.call(null,arg));
                      }
                  }
-
             }
         , (gameManager.animationDelayCounter) * 500);
 }
