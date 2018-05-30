@@ -67,6 +67,36 @@ function updateStateByRef(...refKeys){
 //
 // }
 
+function toChangeTurn(card){
+    return ((card.rank !== 'stop') && (card.rank !== 'plus'))
+}
+
+const handleTurnEnd = (isChangeTurn) => {
+    do {
+        let cardToThrow = gameManager.changeTurn(isChangeTurn);
+        gameManager.thereIsAWinner()
+        if (gameManager.winner!==0) {
+            cardToThrow.forEach(cardLogic => {
+                gameManager.addDroppedCardToPot(cardLogic);
+            })
+
+            if (cardToThrow.length > 0) {
+                isChangeTurn = toChangeTurn(cardToThrow[cardToThrow.length - 1]);
+            }
+            else if (gameManager.activePlayer===1)
+                gameManager.players[1].addCardToDeck(gameManager.gameDeck.pop());
+
+        }
+        updateStateByRef('players','pot','activePlayer');
+    } while (gameManager.activePlayer===1 && gameManager.thereIsAWinner()===false)
+    updateStateByRef('players','gameDeck','activePlayer');
+    if (gameManager.thereIsAWinner()===true) {
+        if (gameManager.winner===1){
+            gameManager.changeTurn(true);
+        }
+    }
+}
+
 const  isPlayerHasLegitCardToThrow= () => gameManager.players[0].deck.some((card)=>gameManager.checkMoveValidity(card))
 
 
@@ -83,7 +113,7 @@ const handlePulledTopCardClick = (event) => {
 
             }
             updateStateByRef('players','gameDeck');
-            // handleTurnEnd(true);
+            handleTurnEnd(true);
         }
 
     }
@@ -97,10 +127,9 @@ const notifyChangeColorCardDropped = () =>{
 }
 const notifyColorChoosed = () =>{
     updateStateByObject('userInteractionsEvents','chooseColorCardDropped',false);
-
-
-
+    handleTurnEnd(true);
 }
+
 const notifyTakiCardDropped = (color) =>{
     updateStateByObject('userInteractionsEvents','fireTakiColorAnimation',color);
 
@@ -260,7 +289,7 @@ const onCardDroppedHandler = (event) => {
                 break;
             default:
                 if(!gameManager.isTakiMode){
-                    // handleTurnEnd(toChangeTurn(droppedCardComp));
+                    handleTurnEnd(toChangeTurn(droppedCardComp));
                 }
                 break;
         }
