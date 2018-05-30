@@ -78,7 +78,7 @@ class Player {
         total /= this._moves;
 
         res.ms = Math.floor(total) % 100;
-        res.sec = Math.floor(total / 100);
+        res.sec =  Math.floor(Math.floor(total % 6000) / 100);
         res.min = Math.floor(total / 6000);
         this._avgMovesTime=res;
     }
@@ -91,7 +91,7 @@ class Player {
         ++this._totalMoves;
         total /= this._totalMoves;
         res.ms = Math.floor(total) % 100;
-        res.sec = Math.floor(total / 100);
+        res.sec = Math.floor(Math.floor(total % 6000)/ 100);
         res.min = Math.floor(total / 6000);
         this._totalAvgMoveTime=res;
     }

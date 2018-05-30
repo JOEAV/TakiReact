@@ -31,13 +31,13 @@ class Timer{
                 this.hour = 0;
 
                 this.count = setInterval(()=> {
-                    if (this.min == 60) {
+                    if (this.min == 59) {
                         this.min = 0;
                         this.hour++;
                     }
-                    if (this.ms == 100) {
+                    if (this.ms == 99) {
                         this.ms = 0;
-                        if (this.sec == 60) {
+                        if (this.sec == 59) {
                             this.sec = 0;
                             this.min++;
                         }

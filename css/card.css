@@ -157,7 +157,7 @@
     }
     .cardInsideCardRowAfterSpread{
         margin-left:5px;
-        margin-right:-5px;
+        margin-right:-10px;
     }
     .cardAllowedCue{
         border:3px solid lawngreen;
