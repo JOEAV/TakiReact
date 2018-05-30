@@ -27,8 +27,8 @@ class GameManager{
 
     initGame(restarted=false){
         this.resetPlayersPotAndGameDeck();
-        this.ensureFirstCardNotSpecial();
         this.dealCardForPlayers();
+        this.ensureFirstCardNotSpecial();
         this.pot.add(this.gameDeck.pop());
         this.activePlayer = 0;
         this.timer.start();
@@ -76,7 +76,6 @@ class GameManager{
         let lastCard=this.pot.pop();
         this.pot.shuffle();
         while  (this.pot.size()>0) {
-
             this.gameDeck.add(this.pot.pop());
         }
         this.pot.add(lastCard);

@@ -67,6 +67,8 @@ function updateStateByRef(...refKeys){
 //
 // }
 
+
+
 function toChangeTurn(card){
     return ((card.rank !== 'stop') && (card.rank !== 'plus'))
 }
@@ -83,8 +85,12 @@ const handleTurnEnd = (isChangeTurn) => {
             if (cardToThrow.length > 0) {
                 isChangeTurn = toChangeTurn(cardToThrow[cardToThrow.length - 1]);
             }
-            else if (gameManager.activePlayer===1)
-                gameManager.players[1].addCardToDeck(gameManager.gameDeck.pop());
+            else if (gameManager.activePlayer===1 ){
+                let numberOFCardsToTake= gameManager.howMany2Plus===0 ? 1 : gameManager.howMany2Plus*2;
+                gameManager.howMany2Plus=0;
+                for (let i=0; i<numberOFCardsToTake; i++)
+                    gameManager.players[1].addCardToDeck(gameManager.gameDeck.pop());
+            }
 
         }
         updateStateByRef('players','pot','activePlayer');
