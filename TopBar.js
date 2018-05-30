@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Component} from 'react'
 import Statistics from './Statistics';
-import {endGame} from './js/Controllers/controller'
+import {surrender} from './js/Controllers/controller'
 import './css/topBar.css'
 export default class TopBar extends Component{
     render(){
@@ -13,7 +13,7 @@ export default class TopBar extends Component{
                             avgMovesTime={this.props.avgMovesTime}
                             reachedLastCard={this.props.reachedLastCard}
                           />
-               <button className="surrender-button"  title='click' name='click1' onClick={endGame}>surrender</button>
+               <button className="surrender-button"  title='click' name='click1' onClick={surrender}>surrender</button>
             </div>
         )
 

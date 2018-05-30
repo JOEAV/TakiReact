@@ -13,15 +13,14 @@ const eventCompListeners = {
 
 
 const registerListener = (selfRef)=>{
-
     reactRootCompRef=selfRef
-
 }
 
 const registerPotRef = (potCompRef) => {
     potContainerRef=document.querySelector('.potContainer');
 
 }
+
 const registerTimerCompRef = (timerRef) =>{
     timerCompRef = timerRef;
 }
@@ -36,9 +35,8 @@ function updateStateByObject(parentKey,partialKey,partialValue){
         newState[parentKey] = Object.assign({},oldPartialState,newPartialState);
 
         reactRootCompRef.setState(newState);
-
-
 }
+
 function updateStateByRef(...refKeys){
 
         let newState = {};
@@ -52,8 +50,6 @@ function updateStateByRef(...refKeys){
             })
 
          reactRootCompRef.setState(newState)
-
-
 }
 
 
@@ -66,6 +62,12 @@ function updateStateByRef(...refKeys){
 //
 //
 // }
+
+const surrender=()=>{
+    gameManager.winner=1;
+    updateStateByRef("_winner");
+}
+
 
 
 
@@ -127,10 +129,8 @@ const handlePulledTopCardClick = (event) => {
 
 const notifyChangeColorCardDropped = () =>{
     updateStateByObject('userInteractionsEvents','chooseColorCardDropped',true);
-
-
-
 }
+
 const notifyColorChoosed = () =>{
     updateStateByObject('userInteractionsEvents','chooseColorCardDropped',false);
     handleTurnEnd(true);
@@ -351,7 +351,7 @@ const handleTakiCardDropped = (color)=>{
 
 export{
     timeElapsed,initGame,registerListener
-    ,onCardHoverStart,onCardHoverEnd,registerPotRef,onTopGameDeckCardHover,
+    ,onCardHoverStart,onCardHoverEnd,registerPotRef,onTopGameDeckCardHover,surrender,
     onCardDroppedHandler,handleColorChoosed,notifyChangeColorCardDropped,handlePulledTopCardClick,
     onDragStart,onDragEnd,registerTimerCompRef,TakiModeclickEventListener
 

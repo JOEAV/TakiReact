@@ -51,7 +51,6 @@ class GameManager{
     }
 
     addDroppedCardToPot(droppedCard){
-
         this.howMany2Plus= droppedCard.rank==='2plus' ? this.howMany2Plus+1 :0;
         this.pot.add(droppedCard);
     }
@@ -139,7 +138,7 @@ class GameManager{
 
     onTopGameDeckCardHover(event){
         let target = event.target.id !== "" ? event.target : event.target.parentNode;
-        let canTakeCardFromGameDeck = !gameManager.players[0].deck.some((card)=>gameManager.checkMoveValidity(card))
+        let canTakeCardFromGameDeck = (!gameManager.players[0].deck.some((card)=>gameManager.checkMoveValidity(card)))
         if(canTakeCardFromGameDeck){
             target.classList.add('cardAllowedCue')
         }else{
