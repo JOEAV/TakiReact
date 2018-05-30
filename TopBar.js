@@ -12,7 +12,7 @@ export default class TopBar extends Component{
                             avgMovesTime={this.props.avgMovesTime}
                             reachedLastCard={this.props.reachedLastCard}
                           />
-               <button id="restart-button"  title='click' name='click1' onClick={(event)=>console.log('clicked')}>restart</button>
+               <button className="surrender-button"  title='click' name='click1' onClick={()=>(console.log(""))}>surrender</button>
             </div>
         )
 

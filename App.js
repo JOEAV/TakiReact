@@ -26,7 +26,8 @@ export default class App extends Component{
 
             userInteractionsEvents:{
                 chooseColorCardDropped:false,
-                fireTakiColorAnimation: 'none'
+                fireTakiColorAnimation: 'none',
+                endGame:false
             }
 
         }
@@ -43,8 +44,8 @@ export default class App extends Component{
         return(
             <div>
             <TopBar totalMoves={this.state.players[0].moves+this.state.players[1].moves}
-                    avgMovesTime={timeToString(this.state.players[0].avgMovesTime)}
-                    reachedLastCard={this.state.players[0].reachedLastCard}
+                    avgMovesTime={timeToString(this.state.players[this.state.activePlayer].avgMovesTime)}
+                    reachedLastCard={this.state.players[this.state.activePlayer].reachedLastCard}
                     timeElapsed={this.state.timer.timeElapsed}
             />
             <Stage
