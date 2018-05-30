@@ -270,13 +270,26 @@ const onCardDroppedHandler = (event) => {
 
 
 }
+
+
+let isPlayerTurnAfterTaki = () =>{
+    let topPotCardRank = gameManager.pot.getTopCardValue().rank;
+    return turnIndicatorBackgroundImage = topPotCardRank==='stop' || topPotCardRank==='plus' ? 'backgroundImageBoy' : 'backgroundImageRobot'
+};
+
+let takiButtonClicked =(event)=>{
+
+
+
+}
+
+
+
 const TakiModeclickEventListener =(event)=>{
-    let colorUpperCase = gameManager.pot.getTopCardValue().color.toUpperCase();
-    let playerCardsElems = Array.from(playerCardsRow.childNodes);
-    let playerCardsDifferentColor = playerCardsElems.filter(card=>card.color!==colorUpperCase.toLowerCase())
-    event.color = colorUpperCase;
-    event.nonColorCards = playerCardsDifferentColor;
-    takiButtonClicked(event)
+    notifyTakiCardDropped('none');
+    gameManager.isTakiMode=false;
+    updateStateByRef('_isTakiMode');
+    // handleTurnEnd(toChangeTurn(gameManager.pot.getTopCardValue()));
 }
 const handleTakiCardDropped = (color)=>{
     gameManager.isTakiMode = true;
