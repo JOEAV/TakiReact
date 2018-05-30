@@ -35,7 +35,7 @@
 
     .cardPlayer:hover {
         box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-        transform: translateY(calc(-1 * var(--bounce-amplitude)));
+        transform: scale(0.85) translateY(calc(-1 * var(--bounce-amplitude)));
         transition:0.2s all;
     }
 
