@@ -20,6 +20,7 @@
         background-size: cover;
         background-position:center center;
         border-radius: 8px 8px 8px 8px;
+        transform: scale(0.85);
     }
 
 
@@ -156,7 +157,7 @@
     }
     .cardInsideCardRowAfterSpread{
         margin-left:5px;
-        margin-right:0;
+        margin-right:-5px;
     }
     .cardAllowedCue{
         border:3px solid lawngreen;
