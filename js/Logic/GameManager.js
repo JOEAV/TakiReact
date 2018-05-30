@@ -138,6 +138,17 @@ class GameManager{
         }
     }
 
+    onTopGameDeckCardHover(event){
+        let target = event.target.id !== "" ? event.target : event.target.parentNode;
+        let canTakeCardFromGameDeck = !gameManager.players[0].deck.some((card)=>gameManager.checkMoveValidity(card))
+        if(canTakeCardFromGameDeck){
+            target.classList.add('cardAllowedCue')
+        }else{
+            target.classList.add('cardNotAllowedCue')
+
+        }
+    }
+
     onCardHoverEnd(event){
         let target = event.target.id !== "" ? event.target : event.target.parentNode;
         target.classList.remove('cardAllowedCue','cardNotAllowedCue')

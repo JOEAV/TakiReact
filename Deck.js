@@ -114,7 +114,6 @@ export default class Deck extends Component{
 
     }
 
-
     mapActionsByOwner(){
         let defaultsActions = {
 
@@ -174,19 +173,20 @@ export default class Deck extends Component{
     }
 
     dragStartHandler(e){
-        onDragStart(e)
+        onDragStart(e);''
     }
     clickHandler(e){
         handlePulledTopCardClick(e)
     }
 
     dragStoppedHandler(e){
-        onDragEnd(e)
-
+        onDragEnd(e);
     }
+
     hoverStartHandler(e){
         onCardHoverStart(e);
     }
+
     hoverStoppedHandler(e){
         onCardHoverEnd(e);
     }

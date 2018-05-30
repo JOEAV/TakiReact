@@ -193,6 +193,11 @@ const onCardHoverStart = (event) => {
 
 }
 
+const onTopGameDeckCardHover = (event) => {
+    gameManager.onTopGameDeckCardHover(event);
+}
+
+
 const onCardHoverEnd = (event) => {
     gameManager.onCardHoverEnd(event);
 }
@@ -340,7 +345,7 @@ const handleTakiCardDropped = (color)=>{
 
 export{
     timeElapsed,initGame,registerListener
-    ,onCardHoverStart,onCardHoverEnd,registerPotRef,
+    ,onCardHoverStart,onCardHoverEnd,registerPotRef,onTopGameDeckCardHover,
     onCardDroppedHandler,handleColorChoosed,notifyChangeColorCardDropped,handlePulledTopCardClick,
     onDragStart,onDragEnd,registerTimerCompRef,TakiModeclickEventListener
 
