@@ -20,6 +20,7 @@
         background-size: cover;
         background-position:center center;
         border-radius: 8px 8px 8px 8px;
+        transform: scale(0.85);
     }
 
 
@@ -34,7 +35,7 @@
 
     .cardPlayer:hover {
         box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-        transform: translateY(calc(-1 * var(--bounce-amplitude)));
+        transform: scale(0.85) translateY(calc(-1 * var(--bounce-amplitude)));
         transition:0.2s all;
     }
 
@@ -156,7 +157,7 @@
     }
     .cardInsideCardRowAfterSpread{
         margin-left:5px;
-        margin-right:0;
+        margin-right:-10px;
     }
     .cardAllowedCue{
         border:3px solid lawngreen;

@@ -191,12 +191,9 @@ class GameManager{
         }
 
         if (this.activePlayer === 1 && this._winner===NoWinner) {
-            return this.players[1].play(this.pot.getTopCardValue(), this.howMany2Plus > 0);
+            cards= this.players[1].play(this.pot.getTopCardValue(), this.howMany2Plus > 0);
         }
-        else {
-            return cards;
-        }
-
+        return cards;
     }
 
     resetPlayersPotAndGameDeck()

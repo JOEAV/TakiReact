@@ -44,7 +44,7 @@ export default class App extends Component{
         return(
             <div>
             <TopBar totalMoves={this.state.players[0].moves+this.state.players[1].moves}
-                    avgMovesTime={timeToString(this.state.players[this.state.activePlayer].avgMovesTime)}
+                    avgMovesTime={timeToString(this.state.players[this.state.activePlayer].avgMovesTime,true)}
                     reachedLastCard={this.state.players[this.state.activePlayer].reachedLastCard}
                     timeElapsed={this.state.timer.timeElapsed}
             />
