@@ -92,6 +92,9 @@ class GameManager{
     }
     checkMoveValidity(droppedCard) {
         if (this.activePlayer===0) {
+            if (this.isTakiMode===true){
+                return (droppedCard.color===this.pot.getTopCardValue().color)
+            }
             let topPotCard = this.pot.getTopCardValue();
             let droppedColor = droppedCard.color;
             let droppedRank = droppedCard.rank;
