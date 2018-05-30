@@ -273,10 +273,10 @@ const onCardDroppedHandler = (event) => {
     const data = event.dataTransfer.getData("Text");
     let droppedCardComp = gameManager.players[0].getCardByID(parseInt(data));
     let isLegalMove = gameManager.checkMoveValidity(droppedCardComp, 'drop');
-
-
     if (isLegalMove) {
-
+        if (droppedCardComp.rank==='taki' && droppedCardComp.color==='colorful'){
+            droppedCardComp.color=gameManager.pot.getTopCardValue().color;
+        }
         gameManager.addDroppedCardToPot(droppedCardComp);
         gameManager.players[0].throwCard(droppedCardComp);
         updateStateByRef('pot');
@@ -285,7 +285,8 @@ const onCardDroppedHandler = (event) => {
                 notifyChangeColorCardDropped();
                 break;
             case 'taki':
-                handleTakiCardDropped(droppedCardComp.color);
+                if (droppedCardComp.color!=='colorful')
+                     handleTakiCardDropped(droppedCardComp.color);
                 break;
             default:
                 if(!gameManager.isTakiMode){

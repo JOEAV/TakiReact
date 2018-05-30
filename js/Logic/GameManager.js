@@ -27,6 +27,7 @@ class GameManager{
 
     initGame(restarted=false){
         this.resetPlayersPotAndGameDeck();
+        this.ensureFirstCardNotSpecial();
         this.dealCardForPlayers();
         this.pot.add(this.gameDeck.pop());
         this.activePlayer = 0;
@@ -90,6 +91,7 @@ class GameManager{
         }
         this._totalMoves=res;
     }
+
     checkMoveValidity(droppedCard) {
         if (this.activePlayer===0) {
             if (this.isTakiMode===true){

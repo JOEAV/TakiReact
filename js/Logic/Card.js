@@ -1,6 +1,6 @@
 
 const CARD_COLORS = ['green', 'blue', 'red', 'yellow', 'colorful'];
-const CARD_RANKS = ['1', '3', '4', '5', '6', '7', '8', '9', 'taki', 'changeColor', 'stop', 'plus'];
+const CARD_RANKS = ['1', '3', '4', '5', '6', '7', '8', '9', 'taki', 'changeColor', 'stop', 'plus','2plus'];
 class Card {
 
     constructor(color, rank,id) {
@@ -51,9 +51,10 @@ class CardDeck {
         let id =0;
         CARD_COLORS.forEach((color) => {
             CARD_RANKS.forEach((rank) => {
-                if ((color != "colorful") && (!isNaN(parseInt(rank)) || rank === 'stop' || rank === 'taki' || rank === 'plus' || rank === '2plus'))
+                if ((color !== "colorful") && (!isNaN(parseInt(rank)) || rank === 'stop' || rank === 'taki' || rank === 'plus' || rank === '2plus')
+                        || (color === "colorful" && rank === "taki"))
                     n = 2;
-                else if (color == "colorful" && rank === "changeColor")
+                else if (color === "colorful" && rank === "changeColor")
                     n = 4;
                 else
                     n = 0;
