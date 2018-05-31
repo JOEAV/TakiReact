@@ -65,6 +65,7 @@ function updateStateByRef(...refKeys){
 
 const surrender=()=>{
     gameManager.winner=1;
+    gameManager.timer.stop();
     updateStateByRef("_winner");
 }
 

@@ -177,7 +177,7 @@ class Algo extends Player {
 
     thereIsTaki(card)
     {
-        const takiWithSameColor = this._deck._cardArray.filter( myCard => (myCard.color === card.color && myCard.rank === 'taki'));
+        const takiWithSameColor = this._deck._cardArray.filter( myCard => ((myCard.color === card.color || myCard.color === 'colorful')&& myCard.rank === 'taki'));
         const taki=this._deck.cardsWithSameRank(card);
         return (takiWithSameColor.length > 0 || (taki.length>0 && card.rank==='taki'))
     }
@@ -188,6 +188,13 @@ class Algo extends Player {
     {
         let cardsToThrow = this._deck.cardsWithSameColor(card);
         let takiIndex = this.findCardByIndex(cardsToThrow,'taki');
+        if (takiIndex<0){
+            let colorfulTaki=this.deck.filter(card=> card.rank==='taki' && card.color==='colorful')
+            colorfulTaki=colorfulTaki[0];
+            cardsToThrow.unshift(colorfulTaki);
+            colorfulTaki.color=card.color;
+            takiIndex=0;
+        }
         if (takiIndex > 0)
             this.swapCards(cardsToThrow,0,takiIndex);
         else if (takiIndex<0)

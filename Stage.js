@@ -28,7 +28,7 @@ export default class Stage extends Component{
 
         return(
             <div id='mainContent'>
-                <Popup renderChooseColor = {this.props.userInteractionsEvents.chooseColorCardDropped} renderStatistics={this.props.winner !== -1}/>
+                <Popup renderChooseColor = {this.props.userInteractionsEvents.chooseColorCardDropped} renderStatistics={this.props.winner !== -1} players={this.props.players}/>
                 <Player player={this.props.players[1]} owner={'algo'} containerZIndex = {this.props.isTakiMode ? 100 : 1}  />
                 <GameRow userInteractionsEvents={this.props.userInteractionsEvents}
                     gameDeck = {this.props.gameDeck}
