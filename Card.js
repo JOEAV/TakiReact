@@ -27,7 +27,13 @@ export default class Card extends Component{
 
 
     componentWillMount(){
-        this.state.behaviour.initBehaviours(this)
+        this.state.behaviour.initBehaviours(this,this.props)
+    }
+
+    componentWillReceiveProps(props){
+        this.state.behaviour.initBehaviours(this,props)
+        return true;
+
     }
 
     extractMouseOver(){
@@ -55,7 +61,8 @@ export default class Card extends Component{
     render(){
         return(
             <span  id={this.props.id} style = {this.props.style} className={`${this.translateClasses(this.state.behaviour.styleClasses,'cardWrapper')} ${this.props.topCard ? 'topCardInGameDeck'  : ''}`}
-                   onDragStart={this.props.behaviour.draggable ? this.props.actions.dragStartHandler : null} draggable={this.props.behaviour.draggable}
+                   onDragStart={this.props.behaviour.draggable ? this.props.actions.dragStartHandler : null}
+                   draggable={this.props.behaviour.draggable}
                    onDragEnd={this.props.behaviour.draggable ? this.props.actions.dragStoppedHandler : null}
                    onMouseOver={this.extractMouseOver()}
                    onMouseLeave={this.extractMouseleave()}

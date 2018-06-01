@@ -38,17 +38,21 @@ class GameManager{
             activePlayer:this.activePlayer,
             timeElapsed:this.timer.timeElapsed
         }
+
         currentState.gameDeck._cardArray =[...this.gameDeck.deck];
         currentState.pot._cardArray =[...this.pot.deck];
+        currentState.gameDeck._cardArray=currentState.gameDeck._cardArray.map(card=>Object.assign({},card))
+        currentState.pot._cardArray=currentState.pot._cardArray.map(card=>Object.assign({},card))
         for (let i=0; i<2; i++){
             currentState.players[i] =Object.assign({},this.players[i]);
             currentState.players[i].avgMovesTime =Object.assign({},this.players[i].avgMovesTime);
-            currentState.players[i].deck =[...this.players[i].deck];
+            currentState.players[i]._deck=Object.assign({}, this.players[i]._deck);
+            currentState.players[i]._deck._cardArray=[...this.players[i]._deck._cardArray];
+            currentState.players[i]._deck._cardArray=currentState.players[i]._deck._cardArray.map(card=>Object.assign({},card))
             if (this.history.length>0 && i===0){
                 currentState.players[i]._moves++;
             }
         }
-
 
         this.history.push(currentState);
     }

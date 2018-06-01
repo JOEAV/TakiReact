@@ -158,23 +158,22 @@ export default class Deck extends Component{
 
     }
 
-    initBehaviours(cardRef) {
+    initBehaviours(cardRef,props) {
         console.log('**************init card behaviour*************');
         let {owner} = this.state;
         let delayTime = (owner === 'gameDeck' || owner ===  'pot' ) ? 0 : 200
+        let deck=this;
 
-
-        setTimeout(function () {
-            let beforeSpeardStyleBehaviour = cardRef.state.behaviour
-            //behaviours = css behaviours
+        setTimeout(() =>{
+            let beforeSpeardStyleBehaviour = cardRef.state.behaviour;
             let newBehaviours = [];
 
-            (cardRef.props.topCard && cardRef.props.behaviour.clickable) ? newBehaviours.push('topCardInGameDeck') : null
-            beforeSpeardStyleBehaviour.spreadable ?  newBehaviours.push('cardInsideCardRowAfterSpread') : null
-            beforeSpeardStyleBehaviour.hoverable ? newBehaviours.push('cardPlayer') : null;
+            (props.topCard && props.behaviour.clickable && !props.replayMode) ? newBehaviours.push('topCardInGameDeck') : null;
+            (beforeSpeardStyleBehaviour.spreadable) ?  newBehaviours.push('cardInsideCardRowAfterSpread') : null;
+            (beforeSpeardStyleBehaviour.hoverable  && !props.replayMode) ? newBehaviours.push('cardPlayer') : null;
             let afterSpreadStyleBehaviour = Object.assign(beforeSpeardStyleBehaviour , {
                 styleClasses:{
-                    cardWrapper: [...cardRef.state.behaviour.styleClasses.cardWrapper,...newBehaviours],
+                    cardWrapper: [...deck.state.cardsBehaviour.styleClasses.cardWrapper,...newBehaviours],
                     cardBase: ['cardBase']
                 }
             })
@@ -182,7 +181,6 @@ export default class Deck extends Component{
             cardRef.setState({
                 behaviour: afterSpreadStyleBehaviour,
             })
-
         }, delayTime)
 
 
@@ -269,12 +267,12 @@ export default class Deck extends Component{
                         this.props.cards.map((card,index)=>{
                             this.state.deckCards.push(card.id);
                             return(
-                                <Card id={card.id}  key={card.id} rank={card.rank} color={card.color}  behaviour={Object.assign({},this.state.cardsBehaviour)}
+                                <Card id={card.id}  key={card.id} rank={card._rank} color={card._color}  behaviour={Object.assign({},this.state.cardsBehaviour)}
                                       style={ this.state.cardsBehaviour.rotateable
-                                          ? Object.assign({},this.rotateCard(this.state.cardsRotationDegree[index]),this.setCardBackground(card.rank,card.color))
-                                          : Object.assign({},this.setCardBackground(card.rank,card.color))}
-                                      topCard={this.state.owner==='gameDeck' && index === numOfChildrenCards}
-                                      actions={ Object.assign({},this.state.actions)} />
+                                          ? Object.assign({},this.rotateCard(this.state.cardsRotationDegree[index]),this.setCardBackground(card._rank,card._color))
+                                          : Object.assign({},this.setCardBackground(card._rank,card._color))}
+                                      topCard={this.state.owner==='gameDeck' && index === numOfChildrenCards && !this.props.replayMode}
+                                      actions={ Object.assign({},this.state.actions)} replayMode={this.props.replayMode}/>
                             )
                         })
                         :

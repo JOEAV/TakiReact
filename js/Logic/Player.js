@@ -198,10 +198,12 @@ class Algo extends Player {
         let takiIndex = this.findCardByIndex(cardsToThrow,'taki');
         if (takiIndex<0){
             let colorfulTaki=this.deck.filter(card=> card.rank==='taki' && card.color==='colorful')
-            colorfulTaki=colorfulTaki[0];
-            cardsToThrow.unshift(colorfulTaki);
-            colorfulTaki.color=card.color;
-            takiIndex=0;
+            if (colorfulTaki.length>0) {
+                colorfulTaki = colorfulTaki[0];
+                cardsToThrow.unshift(colorfulTaki);
+                colorfulTaki.color = card.color;
+                takiIndex = 0;
+            }
         }
         if (takiIndex > 0)
             this.swapCards(cardsToThrow,0,takiIndex);
