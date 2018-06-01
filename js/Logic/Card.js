@@ -84,6 +84,9 @@ class CardDeck {
     get deck(){
         return this._cardArray;
     }
+    set deck(newDeck){
+        return this._cardArray=newDeck;
+    }
     shuffle() {
         this._cardArray = this._cardArray
             .map(card =>{

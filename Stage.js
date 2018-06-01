@@ -28,16 +28,17 @@ export default class Stage extends Component{
 
         return(
             <div id='mainContent'>
-                <Popup renderChooseColor = {this.props.userInteractionsEvents.chooseColorCardDropped} renderStatistics={this.props.winner !== -1} players={this.props.players}/>
-                <Player player={this.props.players[1]} owner={'algo'} containerZIndex = {this.props.isTakiMode ? 100 : 1}  />
+                <Popup renderChooseColor = {this.props.userInteractionsEvents.chooseColorCardDropped} renderStatistics={this.props.winner !== -1} players={this.props.players} winner={this.props.winner}/>
+                <Player player={this.props.players[1]} owner={'algo'} containerZIndex = {this.props.isTakiMode ? 100 : 1}  replayMode={this.props.replayMode} />
                 <GameRow userInteractionsEvents={this.props.userInteractionsEvents}
                     gameDeck = {this.props.gameDeck}
                     pot = {this.props.pot}
                     activePlayer={this.props.activePlayer}
                          containerZIndex = {this.props.isTakiMode ? 100 : 1}
                          isTakiMode={this.props.isTakiMode}
+                         replayMode={this.props.replayMode}
                 />
-                <Player  player={this.props.players[0]} owner={'player'} containerZIndex = {this.props.isTakiMode ? 100 : 1}
+                <Player  player={this.props.players[0]} owner={'player'} containerZIndex = {this.props.isTakiMode ? 100 : 1} replayMode={this.props.replayMode}
                          activeDescription={this.props.activePlayer===0?
                              'Active':
                              'NonActive'}/>

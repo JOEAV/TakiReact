@@ -20,7 +20,8 @@ export default class Pot extends Component{
         return(
 
             <div className={`potContainer` } onDragOver={this.allowDrop} onDrop={this.dropHandler} style={{zIndex:this.props.containerZIndex}}>
-                <Deck owner='pot' cards={this.props.pot.deck} />
+                <Deck owner='pot' cards={this.props.pot._cardArray}
+                      replayMode={this.props.replayMode} />
             </div>
         )
 

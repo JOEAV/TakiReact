@@ -53,20 +53,20 @@
     color:white;
 }
 
-#restart-button{
+#replay-button{
     color: white;
-    background-color: #e74c3c; /* Red */
+    background-color: #303F9F; /* Red */
     border-radius: 4px;
     border: none;
-    border: 2px solid #e74c3c ;
+    border: 2px solid #303F9F ;
     font-size:200%;
     margin-top:50px;
 }
 
-#restart-button:hover{
-    border: 2px solid #e74c3c;
+#replay-button:hover{
+    border: 2px solid #303F9F;
     background-color: white; /* Green */
-    color: #e74c3c;
+    color: #303F9F;
 
 }
 

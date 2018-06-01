@@ -8,7 +8,6 @@ const eventCompListeners = {
     cardIsDragged:[],
     colorIsChoosed:[]
 
-
 }
 
 
@@ -18,7 +17,6 @@ const registerListener = (selfRef)=>{
 
 const registerPotRef = (potCompRef) => {
     potContainerRef=document.querySelector('.potContainer');
-
 }
 
 const registerTimerCompRef = (timerRef) =>{
@@ -40,15 +38,17 @@ function updateStateByObject(parentKey,partialKey,partialValue){
 function updateStateByRef(...refKeys){
 
         let newState = {};
-
+        let sourceObject= !gameManager.replayMode ? gameManager: gameManager.history[gameManager.replayIndex];
             refKeys.forEach(key=>{
-                if(Array.isArray(gameManager[`${key}`])){
-                    newState[`${key}`]= [...gameManager[`${key}`]];
+                if (`${key}`==='_winner' || `${key}`==='replayMode'){
+                    newState[`${key}`]= gameManager[`${key}`];
+                }
+                else if(Array.isArray(sourceObject[`${key}`])){
+                    newState[`${key}`]= [...sourceObject[`${key}`]];
                 } else if (typeof key === 'object'){
-                    newState[`${key}`]= object.assign({},gameManager[`${key}`]);
-                }else newState[`${key}`]= gameManager[`${key}`];
+                    newState[`${key}`]= Object.assign({},sourceObject[`${key}`]);
+                }else newState[`${key}`]= sourceObject[`${key}`];
             })
-
          reactRootCompRef.setState(newState)
 }
 
@@ -62,6 +62,23 @@ function updateStateByRef(...refKeys){
 //
 //
 // }
+
+const replay = () => {
+    gameManager.replayMode=true;
+    gameManager._winner=-1;
+    gameManager.replayIndex=0;
+    updateStateByRef('pot','players','gameDeck','activePlayer','timeElapsed','_totalMoves','replayMode','_winner');
+}
+
+const next = () => {
+    gameManager.replayIndex=gameManager.replayIndex < gameManager.history.length-1 ? gameManager.replayIndex+1: gameManager.replayIndex;
+    updateStateByRef('pot','players','gameDeck','activePlayer','timeElapsed','_totalMoves','replayMode','_winner');
+}
+
+const prev = () => {
+    gameManager.replayIndex=gameManager.replayIndex>0 ? gameManager.replayIndex-1:0;
+    updateStateByRef('pot','players','gameDeck','activePlayer','timeElapsed','_totalMoves','replayMode','_winner');
+}
 
 const surrender=()=>{
     gameManager.winner=1;
@@ -92,7 +109,7 @@ const handleTurnEnd = (isChangeTurn) => {
                 let numberOFCardsToTake= gameManager.howMany2Plus===0 ? 1 : gameManager.howMany2Plus*2;
                 gameManager.howMany2Plus=0;
                 for (let i=0; i<numberOFCardsToTake; i++)
-                    gameManager.players[1].addCardToDeck(gameManager.gameDeck.pop());
+                    gameManager.addCardFromGameDeckToPlayer(1);
             }
 
         }
@@ -103,6 +120,9 @@ const handleTurnEnd = (isChangeTurn) => {
         if (gameManager.winner===1){
             gameManager.changeTurn(true);
         }
+        gameManager.timer.stop();
+        updateStateByRef('players','gameDeck','activePlayer',"_winner");
+
     }
 }
 
@@ -117,7 +137,7 @@ const handlePulledTopCardClick = (event) => {
             let numberOFCardsToTake= gameManager.howMany2Plus===0 ? 1 : gameManager.howMany2Plus*2;
             gameManager.howMany2Plus=0;
             for (let i=0; i<numberOFCardsToTake; i++) {
-                gameManager.players[gameManager.activePlayer].addCardToDeck(gameManager.gameDeck.pop());
+                gameManager.addCardFromGameDeckToPlayer(gameManager.activePlayer);
                 //TODO:// HANDLE LAST CARD IN GAME DECK SITUATION - NOT CARED YET
 
             }
@@ -148,11 +168,14 @@ const addDroppedCardToPot = (droppedCard) =>{
     updateStateByRef('howMany2Plus','pot');
 }
 
-const initGame = () =>{
+const restart = () => {
+    initGame();
+}
+
+const initGame = () => {
     gameManager.initGame();
-    updateStateByRef('pot','players','gameDeck','activePlayer',
-        'timeElapsed','howMany2Plus','lastTime','nowTime','animationDelayCounter','timer',
-        '_isTakiMode','_winner','restarted');
+    updateStateByRef('pot','players','gameDeck','activePlayer','howMany2Plus','lastTime','nowTime','animationDelayCounter','timer','timeElapsed',
+        '_isTakiMode','_winner','restarted','replayMode',);
 }
 
 const isTakiMode = (mode)=>{
@@ -250,10 +273,15 @@ const handleColorChoosed =  (event) => {
 
     let choosedColor= event.target.getAttribute('color');
     gameManager.pot.getTopCardValue().color=choosedColor;
+    gameManager.updateHistory();
     notifyColorChoosed()
     updateStateByRef('pot');
 
     // handleTurnEnd(true);
+
+}
+
+const replayMode=()=>{
 
 }
 
@@ -289,8 +317,8 @@ const onCardDroppedHandler = (event) => {
         if (droppedCardComp.rank==='taki' && droppedCardComp.color==='colorful'){
             droppedCardComp.color=gameManager.pot.getTopCardValue().color;
         }
-        gameManager.addDroppedCardToPot(droppedCardComp);
         gameManager.players[0].throwCard(droppedCardComp);
+        gameManager.addDroppedCardToPot(droppedCardComp);
         updateStateByRef('pot');
         switch(droppedCardComp.rank){
             case 'changeColor':
@@ -343,7 +371,6 @@ const handleTakiCardDropped = (color)=>{
 
 
 
-
     // playerCardsDifferentColor.forEach((card)=>{
     //     removePlayerCardBehavior(card)
     // });
@@ -351,7 +378,7 @@ const handleTakiCardDropped = (color)=>{
 
 
 export{
-    timeElapsed,initGame,registerListener
+    timeElapsed,initGame,registerListener,replay,next,prev,restart
     ,onCardHoverStart,onCardHoverEnd,registerPotRef,onTopGameDeckCardHover,surrender,
     onCardDroppedHandler,handleColorChoosed,notifyChangeColorCardDropped,handlePulledTopCardClick,
     onDragStart,onDragEnd,registerTimerCompRef,TakiModeclickEventListener

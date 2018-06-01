@@ -20,8 +20,8 @@ export default class Deck extends Component{
             deckBehaviour: {
                 droppable: this.props.droppable
             },
-            cardsBehaviour: this.mapCardBehaviourByOwner(),
-            actions:this.mapActionsByOwner(),
+            cardsBehaviour: this.mapCardBehaviourByOwner(this.props),
+            actions:this.mapActionsByOwner(this.props),
             deckCards:[],
             cardsRotationDegree:this.setRotationDegrees()
         }
@@ -50,7 +50,7 @@ export default class Deck extends Component{
         return res;
     }
 
-    mapCardBehaviourByOwner(){
+    mapCardBehaviourByOwner(props){
 
         let defaultBehaviour = {
             clickable: false,
@@ -76,7 +76,7 @@ export default class Deck extends Component{
                 cardBase: ['cardBase']
             }
         }
-        switch (this.props.owner) {
+        switch (props.owner) {
             case 'playerActive':
                 newBehaviour.backgroundShown = true;
                 newBehaviour.hoverable = true
@@ -110,11 +110,19 @@ export default class Deck extends Component{
                 throw new Error('no such owner !');
 
         }
+
+        if (props.replayMode===true){
+            newBehaviour.clickable= false;
+            newBehaviour.hoverable=false;
+            newBehaviour.draggable = false;
+        }
+
+
         return Object.assign(defaultBehaviour, newBehaviour);
 
     }
 
-    mapActionsByOwner(){
+    mapActionsByOwner(props){
         let defaultsActions = {
 
         }
@@ -123,19 +131,27 @@ export default class Deck extends Component{
 
         }
 
-        switch(this.props.owner){
+        switch(props.owner){
 
             case 'playerActive':
-            newActions.dragStartHandler = this.dragStartHandler;
-            newActions.dragStoppedHandler = this.dragStoppedHandler;
-            newActions.hoverStartHandler = this.hoverStartHandler;
-            newActions.hoverStoppedHandler = this.hoverStoppedHandler;
-            break;
+                newActions.dragStartHandler = this.dragStartHandler;
+                newActions.dragStoppedHandler = this.dragStoppedHandler;
+                newActions.hoverStartHandler = this.hoverStartHandler;
+                newActions.hoverStoppedHandler = this.hoverStoppedHandler;
+                break;
             case 'gameDeck':
                 newActions.clickHandler = this.clickHandler;
                 break;
             default:
                 break;
+        }
+
+        if (props.replayMode===true){
+            newActions.dragStartHandler =null;
+            newActions.dragStoppedHandler = null;
+            newActions.hoverStartHandler = null;
+            newActions.hoverStoppedHandler = null;
+            newActions.clickHandler = null;
         }
         return Object.assign({},defaultsActions,newActions)
 
@@ -148,26 +164,26 @@ export default class Deck extends Component{
         let delayTime = (owner === 'gameDeck' || owner ===  'pot' ) ? 0 : 200
 
 
-            setTimeout(function () {
-                let beforeSpeardStyleBehaviour = cardRef.state.behaviour
-                //behaviours = css behaviours
-                let newBehaviours = [];
+        setTimeout(function () {
+            let beforeSpeardStyleBehaviour = cardRef.state.behaviour
+            //behaviours = css behaviours
+            let newBehaviours = [];
 
-                cardRef.props.topCard ? newBehaviours.push('topCardInGameDeck') : null
-                beforeSpeardStyleBehaviour.spreadable ?  newBehaviours.push('cardInsideCardRowAfterSpread') : null
-                beforeSpeardStyleBehaviour.hoverable ? newBehaviours.push('cardPlayer') : null;
-                let afterSpreadStyleBehaviour = Object.assign(beforeSpeardStyleBehaviour , {
-                    styleClasses:{
-                        cardWrapper: [...cardRef.state.behaviour.styleClasses.cardWrapper,...newBehaviours],
-                        cardBase: ['cardBase']
-                    }
-                })
+            (cardRef.props.topCard && cardRef.props.behaviour.clickable) ? newBehaviours.push('topCardInGameDeck') : null
+            beforeSpeardStyleBehaviour.spreadable ?  newBehaviours.push('cardInsideCardRowAfterSpread') : null
+            beforeSpeardStyleBehaviour.hoverable ? newBehaviours.push('cardPlayer') : null;
+            let afterSpreadStyleBehaviour = Object.assign(beforeSpeardStyleBehaviour , {
+                styleClasses:{
+                    cardWrapper: [...cardRef.state.behaviour.styleClasses.cardWrapper,...newBehaviours],
+                    cardBase: ['cardBase']
+                }
+            })
 
-                    cardRef.setState({
-                        behaviour: afterSpreadStyleBehaviour,
-                    })
+            cardRef.setState({
+                behaviour: afterSpreadStyleBehaviour,
+            })
 
-            }, delayTime)
+        }, delayTime)
 
 
     }
@@ -204,7 +220,7 @@ export default class Deck extends Component{
         for(let i =0; i < 100; i++) {
             degrees.push(Math.floor(Math.random() * 150));
         }
-    return degrees
+        return degrees
     }
 
 
@@ -215,12 +231,34 @@ export default class Deck extends Component{
                 : `url(./img/card_back.png)`
         })
 
-   }
+    }
+
+    needsToSetState(props){
+        if(props.replayMode === false
+            && this.state.cardsBehaviour.clickable === false
+            && this.state.cardsBehaviour.hoverable === false
+            && this.state.cardsBehaviour.draggable === false)
+        {
+            this.setState({cardsBehaviour: this.mapCardBehaviourByOwner(props),actions:this.mapActionsByOwner(props)})
+        }
+        if(props.replayMode === true
+            && (this.state.cardsBehaviour.clickable === true
+                ||this.state.cardsBehaviour.hoverable === true
+                || this.state.cardsBehaviour.draggable === true))
+        {
+            this.setState({cardsBehaviour: this.mapCardBehaviourByOwner(props),actions:this.mapActionsByOwner(props)})
+        }
+
+
+    }
+
+    componentWillReceiveProps(props){
+        this.needsToSetState(props);
+    }
+
 
     render(){
-        console.log('card is rendered');
-        if(this.props.owner === 'pot'){
-        }
+
         let  numOfChildrenCards  = this.props.cards.length-1
         return(
             <div className={this.state.deckCssName} style={{zIndex: this.props.containerZIndex}}>
@@ -228,17 +266,17 @@ export default class Deck extends Component{
 
                     this.props.cards
                         ?
-                    this.props.cards.map((card,index)=>{
-                        this.state.deckCards.push(card.id);
-                        return(
-                            <Card id={card.id}  key={card.id} rank={card.rank} color={card.color}  behaviour={Object.assign({},this.state.cardsBehaviour)}
-                                  style={ this.state.cardsBehaviour.rotateable
-                                      ? Object.assign({},this.rotateCard(this.state.cardsRotationDegree[index]),this.setCardBackground(card.rank,card.color))
-                                      : Object.assign({},this.setCardBackground(card.rank,card.color))}
-                                  topCard={this.state.owner==='gameDeck' && index === numOfChildrenCards}
-                                  actions={ Object.assign({},this.state.actions)} />
-                        )
-                    })
+                        this.props.cards.map((card,index)=>{
+                            this.state.deckCards.push(card.id);
+                            return(
+                                <Card id={card.id}  key={card.id} rank={card.rank} color={card.color}  behaviour={Object.assign({},this.state.cardsBehaviour)}
+                                      style={ this.state.cardsBehaviour.rotateable
+                                          ? Object.assign({},this.rotateCard(this.state.cardsRotationDegree[index]),this.setCardBackground(card.rank,card.color))
+                                          : Object.assign({},this.setCardBackground(card.rank,card.color))}
+                                      topCard={this.state.owner==='gameDeck' && index === numOfChildrenCards}
+                                      actions={ Object.assign({},this.state.actions)} />
+                            )
+                        })
                         :
                         <div/>
                 }

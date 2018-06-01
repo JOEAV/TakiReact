@@ -21,7 +21,6 @@ class Timer{
         let update = (txt)=>{
             this.timeElapsed=txt;
             timeElapsed(txt);
-
         }
 
             if (!this.count) {

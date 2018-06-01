@@ -4,7 +4,7 @@ import './css/main.css'
 import './css/chooseColor.css'
 import './css/endGame.css'
 import timeToString from './js/serviceUtils/timeUtils'
-import {handleColorChoosed}  from "./js/Controllers/controller";
+import {handleColorChoosed,replay}  from "./js/Controllers/controller";
 export default class Popup extends Component{
 
     constructor(props){
@@ -34,11 +34,11 @@ export default class Popup extends Component{
             let player=this.props.players[0];
             let algo=this.props.players[1];
             return(
-                <div id="popup" style={{display:'flex'}}>
+                <div id="popup" style={{display:'block'}}>
                     <div className="endGamePopupContent">
                             <div className="endGamePopupHeader" style={{display: 'flex'}}>Game Statistics</div>
                             <div className="endGamePopupBody" color="blue">
-                                <div id="winner">You Loose!</div>
+                                <div id="winner">{this.props.winner===1 ? 'You Loose!':'You Win!'}</div>
                                 <div id="endGameStats">
                                     <div id="myStats">
                                         <div id="myStatHeader">My Stats</div>
@@ -55,7 +55,7 @@ export default class Popup extends Component{
                                         <div id="algoTotalMoves" className="algoStatsInfo">{'Num Of Moves : '+algo.moves}</div>
                                     </div>
                                 </div>
-                                <button id="restart-button" onClick={()=>console.log("")}>restart</button>
+                                <button id="replay-button" onClick={replay}>replay</button>
                             </div>
                     </div>
                 </div>

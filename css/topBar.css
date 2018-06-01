@@ -26,6 +26,15 @@
 
 }
 
+#topBarButtonsContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+
 .topBarItemFirstRow {
     display: flex;
     font-size: 1.5em;
@@ -60,4 +69,24 @@
     border: 2px solid #e74c3c ;
     background-color: white; /* Green */
     color: #e74c3c;
+}
+
+.replay-button{
+    min-width:117px;
+    margin-right:25px;
+    margin-left:25px;
+    margin-top:30px;
+    padding: 10px 15px;
+    color: white;
+    background-color: #74b9ff; /* Red */
+    border-radius: 4px;
+    border: none;
+    font-size: 110%;
+    border: 2px solid #74b9ff;
+}
+
+.replay-button:hover{
+    border: 2px solid #74b9ff ;
+    background-color: white; /* Green */
+    color: #74b9ff;
 }

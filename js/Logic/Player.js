@@ -37,6 +37,9 @@ class Player {
     get deck(){
         return this._deck.deck;
     }
+    set deck(newDeck){
+        return this._deck.deck=newDeck;
+    }
     get score() {
         return this._score;
     }
@@ -57,6 +60,11 @@ class Player {
 
     get avgMovesTime() {
         return this._avgMovesTime;
+
+    }
+
+    set avgMovesTime(time) {
+        return this._avgMovesTime=time;
 
     }
 

@@ -6,7 +6,7 @@ export default class GameDeck extends Component{
     render(){
         return(
             <div className={'gameDeckContainer'} style={{zIndex: this.props.containerZIndex}}>
-                <Deck owner={'gameDeck'} cards={this.props.gameDeck.deck}></Deck>
+                <Deck owner={'gameDeck'} cards={this.props.gameDeck._cardArray} replayMode={this.props.replayMode}></Deck>
             </div>
         )
 

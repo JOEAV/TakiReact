@@ -13,8 +13,9 @@ export default class TimerStatsFragment extends Component{
         }
     }
     componentWillMount(){
-    registerTimerCompRef(this);
+        registerTimerCompRef(this);
     }
+
     render(){
 
         return(

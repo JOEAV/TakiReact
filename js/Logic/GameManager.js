@@ -1,12 +1,11 @@
 import timer from './Timer'
 import CardFactory from './Card.js'
 import PlayerFactory from  './Player'
-
+//import cloneObject  from '../serviceUtils/cloneUtils'
 const NoWinner=-1;
 class GameManager{
 
     constructor(){
-
         this.gameDeck = new CardFactory.CardDeck(true);
         this.players =  [];
         this.pot = new CardFactory.CardDeck();
@@ -23,6 +22,35 @@ class GameManager{
         this._winner=NoWinner;
         this.restarted=false;
         this._totalMoves=0;
+        this.history=[]
+        this.replayMode=false;
+        this.replayIndex=0;
+    }
+
+
+
+    updateHistory(){
+        let currentState={
+            gameDeck:Object.assign({},this.gameDeck),
+            pot:Object.assign({},this.pot),
+            players:Object.assign({},this.players),
+            _totalMoves:this._totalMoves,
+            activePlayer:this.activePlayer,
+            timeElapsed:this.timer.timeElapsed
+        }
+        currentState.gameDeck._cardArray =[...this.gameDeck.deck];
+        currentState.pot._cardArray =[...this.pot.deck];
+        for (let i=0; i<2; i++){
+            currentState.players[i] =Object.assign({},this.players[i]);
+            currentState.players[i].avgMovesTime =Object.assign({},this.players[i].avgMovesTime);
+            currentState.players[i].deck =[...this.players[i].deck];
+            if (this.history.length>0 && i===0){
+                currentState.players[i]._moves++;
+            }
+        }
+
+
+        this.history.push(currentState);
     }
 
     initGame(restarted=false){
@@ -40,6 +68,10 @@ class GameManager{
         this._winner=NoWinner;
         this.restarted=restarted;
         this._totalMoves=0;
+        this.history=[]
+        this.updateHistory();
+        this.replayIndex=0;
+        this.replayMode=false;
     }
 
     dealCardForPlayers(){
@@ -50,9 +82,16 @@ class GameManager{
         }
     }
 
+    addCardFromGameDeckToPlayer(index){
+        gameManager.players[index].addCardToDeck(gameManager.gameDeck.pop());
+        this.updateHistory();
+    }
+
     addDroppedCardToPot(droppedCard){
         this.howMany2Plus= droppedCard.rank==='2plus' ? this.howMany2Plus+1 :0;
         this.pot.add(droppedCard);
+        if (droppedCard.rank!=='changeColor')
+            this.updateHistory();
     }
 
 
