@@ -84,10 +84,12 @@ class CardDeck {
     get deck(){
         return this._cardArray;
     }
+
     set deck(newDeck){
         return this._cardArray=newDeck;
     }
-    shuffle() {
+
+    shuffle(takiID) {
         this._cardArray = this._cardArray
             .map(card =>{
                 if (card.rank==='changeColor') {
@@ -96,6 +98,16 @@ class CardDeck {
                 return [Math.random(), card];})
             .sort((card, random) => card[0] - random[0])
             .map(card => card[1]);
+        if (takiID!==undefined) {
+            this._cardArray = this._cardArray.map((card) => {
+                for (let id of takiID) {
+                    if (id === card.id) {
+                        card.color = 'colorful'
+                    }
+                }
+                return card;
+            })
+        }
     }
 
     removeCard(card)

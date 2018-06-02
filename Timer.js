@@ -15,11 +15,10 @@ export default class TimerStatsFragment extends Component{
     componentWillMount(){
         registerTimerCompRef(this);
     }
-
     render(){
-
+        let val=this.props.replayMode? this.props.timeElapsed:this.state.timeElapsed;
         return(
-            <StatsFragment style='topBarItemFirstRow' title="Time Elapsed" val={this.state.timeElapsed} />
+            <StatsFragment style='topBarItemFirstRow' title="Time Elapsed" val={val} />
         )
 
     }

@@ -365,8 +365,12 @@ class Algo extends Player {
         {
             return this.throwSameRank(topCardInDeck);
         }
-        else
+        else if (this._deck.cardsWithSameColor(topCardInDeck).length>0) {
             return this.throwSameColor(topCardInDeck);
+        }
+        else{
+            return this.throwSpecial()
+        }
 
     }
 
@@ -392,8 +396,13 @@ class Algo extends Player {
                 return this.throwSameRank(card);
             }
 
-            else
-                return this.throwSpecial()
+            else {
+                let cards=this.throwSpecial();
+                if (cards[0].rank==='taki'){
+                    cards[0].color=card.color;
+                }
+                return cards;
+            }
         }
         return cardsToThrow;
     }

@@ -47,8 +47,9 @@ export default class App extends Component{
             <TopBar totalMoves={this.state.players[0]._moves+this.state.players[1]._moves}
                     avgMovesTime={timeToString(this.state.players[this.state.activePlayer].avgMovesTime,true)}
                     reachedLastCard={this.state.players[this.state.activePlayer].reachedLastCard}
-                    timeElapsed={this.state.timer.timeElapsed}
+                    timeElapsed={this.state.timeElapsed}
                     replayMode={this.state.replayMode}
+                    isTakiMode={this.state._isTakiMode}
             />
             <Stage
                 userInteractionsEvents={this.state.userInteractionsEvents}

@@ -25,6 +25,7 @@ class GameManager{
         this.history=[]
         this.replayMode=false;
         this.replayIndex=0;
+        this.takiID=this.gameDeck.deck.filter(card=>card.rank==='taki' && card.color==='colorful').map(card=>card.id);
     }
 
 
@@ -89,6 +90,8 @@ class GameManager{
     addCardFromGameDeckToPlayer(index){
         gameManager.players[index].addCardToDeck(gameManager.gameDeck.pop());
         this.updateHistory();
+        if (this.gameDeck.length===0)
+            this.flushShuffledPotToGameDeck();
     }
 
     addDroppedCardToPot(droppedCard){
@@ -116,10 +119,10 @@ class GameManager{
 
     flushShuffledPotToGameDeck(){
         let lastCard=this.pot.pop();
-        this.pot.shuffle();
-        while  (this.pot.size()>0) {
+        while (this.pot.size()>0){
             this.gameDeck.add(this.pot.pop());
         }
+        this.gameDeck.shuffle(this.takiID);
         this.pot.add(lastCard);
 
     }
@@ -251,7 +254,7 @@ class GameManager{
         while (this.pot.size()>0){
             this.gameDeck.add(this.pot.pop());
         }
-        this.gameDeck.shuffle();
+        this.gameDeck.shuffle(this.takiID);
 
     }
 
