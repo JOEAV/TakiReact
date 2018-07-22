@@ -100,7 +100,7 @@ export default class Deck extends Component{
                 newBehaviour.styleClasses.cardWrapper= [...newBehaviour.styleClasses.cardWrapper,'cardInsideGameDeck']
                 break;
             case 'algo':
-                newBehaviour.backgroundShown = true;
+                newBehaviour.backgroundShown = false;
                 newBehaviour.hoverable = false;
                 newBehaviour.draggable = false;
                 newBehaviour.spreadable = true;

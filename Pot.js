@@ -1,6 +1,7 @@
 import React from 'react';
 import {Component} from 'react'
 import './css/main.css'
+import './css/pot.css'
 import Deck from './Deck'
 import {registerPotRef, onCardDroppedHandler} from "./js/Controllers/controller";
 export default class Pot extends Component{
@@ -14,6 +15,19 @@ export default class Pot extends Component{
     }
     componentDidMount(){
         registerPotRef();
+    }
+
+    mapInstructions(){
+        switch(this.props.pot.getTopCardValue().rank){
+
+            case 'plus':
+                return 'You have another turn'
+            case '2plus':
+                return 'Put another +2 or take cards from the dekc'
+            default:
+                return ''
+        }
+
     }
     render(){
 
