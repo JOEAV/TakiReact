@@ -74,7 +74,7 @@ class GameManager{
         this.restarted=restarted;
         this._totalMoves=0;
         this.history=[]
-        this.updateHistory();
+        setTimeout(()=> this.updateHistory(),10);
         this.replayIndex=0;
         this.replayMode=false;
     }
@@ -90,7 +90,7 @@ class GameManager{
     addCardFromGameDeckToPlayer(index){
         gameManager.players[index].addCardToDeck(gameManager.gameDeck.pop());
         this.updateHistory();
-        if (this.gameDeck.length===0)
+        if (this.gameDeck.deck.length===0)
             this.flushShuffledPotToGameDeck();
     }
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import {Component} from 'react'
 import './css/card.css'
+import './css/gameDeck.css'
 import Deck from './Deck'
 export default class GameDeck extends Component{
     render(){

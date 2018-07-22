@@ -113,9 +113,9 @@ const handleTurnEnd = (isChangeTurn) => {
             }
 
         }
-        updateStateByRef('players','pot','activePlayer');
+        updateStateByRef('players','pot','activePlayer',"howMany2Plus");
     } while (gameManager.activePlayer===1 && gameManager.thereIsAWinner()===false)
-    updateStateByRef('players','gameDeck','activePlayer');
+    updateStateByRef('players','gameDeck','activePlayer',"howMany2Plus");
     if (gameManager.thereIsAWinner()===true) {
         if (gameManager.winner===1){
             gameManager.changeTurn(true);

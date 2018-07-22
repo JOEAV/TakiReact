@@ -13,7 +13,7 @@ export default class App extends Component{
             players:null,
             pot:null,
             activePlayer:0,
-            howMany2Plus:null,
+            howMany2Plus:0,
             //TODO:refactor this
             animationDelayCounter:null,
             replayMode:false,
