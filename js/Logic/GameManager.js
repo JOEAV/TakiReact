@@ -5,13 +5,16 @@ import PlayerFactory from  './Player'
 const NoWinner=-1;
 class GameManager{
 
-    constructor(){
+    constructor(numOfPlayers){
+        this.numOfPlayers=numOfPlayers;
+        this.myIndex=0;
         this.gameDeck = new CardFactory.CardDeck(true);
         this.players =  [];
         this.pot = new CardFactory.CardDeck();
         this.activePlayer = 0;
-        this.players[0] = new PlayerFactory.Player('player');
-        this.players[1] = new PlayerFactory.Algo();
+        for (let i=0; i<numOfPlayers;i++) {//TODO
+            this.players[i] = new PlayerFactory.Player('player');
+        }
         this.timer = timer;
         this.timeElapsed = this.timer.timeElapsed;
         this.howMany2Plus=0;
@@ -44,7 +47,7 @@ class GameManager{
         currentState.pot._cardArray =[...this.pot.deck];
         currentState.gameDeck._cardArray=currentState.gameDeck._cardArray.map(card=>Object.assign({},card))
         currentState.pot._cardArray=currentState.pot._cardArray.map(card=>Object.assign({},card))
-        for (let i=0; i<2; i++){
+        for (let i=0; i<numOfPlayers; i++){
             currentState.players[i] =Object.assign({},this.players[i]);
             currentState.players[i].avgMovesTime =Object.assign({},this.players[i].avgMovesTime);
             currentState.players[i]._deck=Object.assign({}, this.players[i]._deck);
@@ -124,8 +127,8 @@ class GameManager{
         }
         this.gameDeck.shuffle(this.takiID);
         this.pot.add(lastCard);
-
     }
+
     totalMoves()
     {
         let res=0;
@@ -137,7 +140,7 @@ class GameManager{
     }
 
     checkMoveValidity(droppedCard) {
-        if (this.activePlayer===0) {
+        if (this.activePlayer=== this.myIndex) {
             if (this.isTakiMode===true){
                 return (droppedCard.color===this.pot.getTopCardValue().color)
             }
@@ -184,7 +187,7 @@ class GameManager{
 
     onTopGameDeckCardHover(event){
         let target = event.target.id !== "" ? event.target : event.target.parentNode;
-        let canTakeCardFromGameDeck = (!gameManager.players[0].deck.some((card)=>gameManager.checkMoveValidity(card)))
+        let canTakeCardFromGameDeck = (!gameManager.players[myIndex].deck.some((card)=>gameManager.checkMoveValidity(card)))
         if(canTakeCardFromGameDeck){
             target.classList.add('cardAllowedCue')
         }else{
@@ -233,11 +236,7 @@ class GameManager{
         if (this.players[this.activePlayer].howManyCards() === 1)
             this.players[this.activePlayer].reachedLastCard++;
         if (isChangeTurn) {
-            this.activePlayer = 1 - this.activePlayer;
-        }
-
-        if (this.activePlayer === 1 && this._winner===NoWinner) {
-            cards= this.players[1].play(this.pot.getTopCardValue(), this.howMany2Plus > 0);
+            this.activePlayer = this.activePlayer + 1 % this.numOfPlayers
         }
         return cards;
     }

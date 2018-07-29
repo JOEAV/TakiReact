@@ -97,7 +97,7 @@ const handleTurnEnd = (isChangeTurn) => {
     do {
         let cardToThrow = gameManager.changeTurn(isChangeTurn);
         gameManager.thereIsAWinner()
-        if (gameManager.winner!==0) {
+        if (gameManager.winner!==gameManager.myIndex) {
             cardToThrow.forEach(cardLogic => {
                 gameManager.addDroppedCardToPot(cardLogic);
             })
@@ -105,19 +105,19 @@ const handleTurnEnd = (isChangeTurn) => {
             if (cardToThrow.length > 0) {
                 isChangeTurn = toChangeTurn(cardToThrow[cardToThrow.length - 1]);
             }
-            else if (gameManager.activePlayer===1 ){
+            else if (gameManager.activePlayer!==gameManager.myIndex ){
                 let numberOFCardsToTake= gameManager.howMany2Plus===0 ? 1 : gameManager.howMany2Plus*2;
                 gameManager.howMany2Plus=0;
                 for (let i=0; i<numberOFCardsToTake; i++)
-                    gameManager.addCardFromGameDeckToPlayer(1);
+                    gameManager.addCardFromGameDeckToPlayer(gameManager.activePlayer);
             }
 
         }
         updateStateByRef('players','pot','activePlayer',"howMany2Plus");
-    } while (gameManager.activePlayer===1 && gameManager.thereIsAWinner()===false)
+    } while (gameManager.activePlayer!==gameManager.myIndex && gameManager.thereIsAWinner()===false)
     updateStateByRef('players','gameDeck','activePlayer',"howMany2Plus");
     if (gameManager.thereIsAWinner()===true) {
-        if (gameManager.winner===1){
+        if (gameManager.winner!==gameManager.myIndex){
             gameManager.changeTurn(true);
         }
         gameManager.timer.stop();
@@ -126,14 +126,14 @@ const handleTurnEnd = (isChangeTurn) => {
     }
 }
 
-const  isPlayerHasLegitCardToThrow= () => gameManager.players[0].deck.some((card)=>gameManager.checkMoveValidity(card))
+const  isPlayerHasLegitCardToThrow= () => gameManager.players[gameManager.myIndex].deck.some((card)=>gameManager.checkMoveValidity(card))
 
 
 const handlePulledTopCardClick = (event) => {
     let isPlayer = event.isTrusted;
     if(!gameManager.isTakiMode && !isPlayerHasLegitCardToThrow() && (gameManager.animationDelayCounter===0 || !isPlayer)){
 
-        if(( isPlayer && gameManager.activePlayer === 0) || (!isPlayer && gameManager.activePlayer===1 )){
+        if(( isPlayer && gameManager.activePlayer === gameManager.myIndex) || (!isPlayer && gameManager.activePlayer!==gameManager.myIndex )){
             let numberOFCardsToTake= gameManager.howMany2Plus===0 ? 1 : gameManager.howMany2Plus*2;
             gameManager.howMany2Plus=0;
             for (let i=0; i<numberOFCardsToTake; i++) {
