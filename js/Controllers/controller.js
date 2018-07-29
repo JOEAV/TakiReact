@@ -90,7 +90,7 @@ const surrender=()=>{
 
 
 function toChangeTurn(card){
-    return ((card.rank !== 'stop') && (card.rank !== 'plus'))
+    return ((card.rank !== 'stop') && (card.rank !== 'plus') && (card.rank!=='plus2'))
 }
 
 const handleTurnEnd = (isChangeTurn) => {
@@ -105,16 +105,17 @@ const handleTurnEnd = (isChangeTurn) => {
             if (cardToThrow.length > 0) {
                 isChangeTurn = toChangeTurn(cardToThrow[cardToThrow.length - 1]);
             }
-            else if (gameManager.activePlayer===1 ){
+            //TODO - REMOVE THIS HARDCODED CODE - SHOULD BE TYPE !== HUMAN
+            else if (gameManager.activePlayer !== 0 ){
                 let numberOFCardsToTake= gameManager.howMany2Plus===0 ? 1 : gameManager.howMany2Plus*2;
                 gameManager.howMany2Plus=0;
                 for (let i=0; i<numberOFCardsToTake; i++)
-                    gameManager.addCardFromGameDeckToPlayer(1);
+                    gameManager.addCardFromGameDeckToPlayer(gameManager.activePlayer);
             }
 
         }
         updateStateByRef('players','pot','activePlayer',"howMany2Plus");
-    } while (gameManager.activePlayer===1 && gameManager.thereIsAWinner()===false)
+    } while (gameManager.activePlayer!==0 && gameManager.thereIsAWinner()===false)
     updateStateByRef('players','gameDeck','activePlayer',"howMany2Plus");
     if (gameManager.thereIsAWinner()===true) {
         if (gameManager.winner===1){
@@ -126,7 +127,7 @@ const handleTurnEnd = (isChangeTurn) => {
     }
 }
 
-const  isPlayerHasLegitCardToThrow= () => gameManager.players[0].deck.some((card)=>gameManager.checkMoveValidity(card))
+const  isPlayerHasLegitCardToThrow= () => gameManager.players[gameManager.activePlayer].deck.some((card)=>gameManager.checkMoveValidity(card))
 
 
 const handlePulledTopCardClick = (event) => {
@@ -262,6 +263,9 @@ const gameStatistics=()=> {
 }
 
 
+const shouldRenderStopCardInstruction = ()=>{
+    return gameManager.players.length < 3
+}
 
 const thereIsAWinner=()=>{
     let winner =gameManager.thereIsAWinner();
@@ -311,13 +315,13 @@ const onCardDroppedHandler = (event) => {
     onDragEnd(event);
     event.dataTransfer.dropEffect = "copy";
     const data = event.dataTransfer.getData("Text");
-    let droppedCardComp = gameManager.players[0].getCardByID(parseInt(data));
+    let droppedCardComp = gameManager.players[gameManager.activePlayer].getCardByID(parseInt(data));
     let isLegalMove = gameManager.checkMoveValidity(droppedCardComp, 'drop');
     if (isLegalMove) {
         if (droppedCardComp.rank==='taki' && droppedCardComp.color==='colorful'){
             droppedCardComp.color=gameManager.pot.getTopCardValue().color;
         }
-        gameManager.players[0].throwCard(droppedCardComp);
+        gameManager.players[gameManager.activePlayer].throwCard(droppedCardComp);
         gameManager.addDroppedCardToPot(droppedCardComp);
         updateStateByRef('pot');
         switch(droppedCardComp.rank){
@@ -327,6 +331,13 @@ const onCardDroppedHandler = (event) => {
             case 'taki':
                 if (droppedCardComp.color!=='colorful')
                      handleTakiCardDropped(droppedCardComp.color);
+                break;
+            case 'stop':
+                gameManager.changeTurn(true,true);
+                if(!gameManager.isTakiMode){
+                    handleTurnEnd(toChangeTurn(droppedCardComp));
+                }
+
                 break;
             default:
                 if(!gameManager.isTakiMode){
@@ -367,7 +378,7 @@ const handleTakiCardDropped = (color)=>{
     reactRootCompRef.setState({_isTakiMode:true})
     notifyTakiCardDropped(color);
     let colorUpperCase = color.toUpperCase();
-    let playerCardsDifferentColor = gameManager.players[0].deck.filter(card=>card.color!==colorUpperCase.toLowerCase())
+    let playerCardsDifferentColor = gameManager.players[gameManager.activePlayer].deck.filter(card=>card.color!==colorUpperCase.toLowerCase())
 
 
 
@@ -381,6 +392,6 @@ export{
     timeElapsed,initGame,registerListener,replay,next,prev,restart
     ,onCardHoverStart,onCardHoverEnd,registerPotRef,onTopGameDeckCardHover,surrender,
     onCardDroppedHandler,handleColorChoosed,notifyChangeColorCardDropped,handlePulledTopCardClick,
-    onDragStart,onDragEnd,registerTimerCompRef,TakiModeclickEventListener
+    onDragStart,onDragEnd,registerTimerCompRef,TakiModeclickEventListener,shouldRenderStopCardInstruction
 
 }

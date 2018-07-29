@@ -72,14 +72,14 @@ function drop(event) {
     event.dataTransfer.dropEffect = "copy";
     const data = event.dataTransfer.getData("Text");
     const droppedCardElement = document.getElementById(data);
-    let droppedCardComp = gameManager.players[0].getCardByID(parseInt(droppedCardElement.getAttribute("id")));
+    let droppedCardComp = gameManager.players[gameManager.activePlayer].getCardByID(parseInt(droppedCardElement.getAttribute("id")));
     let isLegalMove = gameManager.checkMoveValidity(droppedCardComp, 'drop');
 
 
     if (isLegalMove) {
 
         gameManager.addDroppedCardToPot(droppedCardComp);
-        gameManager.players[0].throwCard(droppedCardComp);
+        gameManager.players[gameManager.activePlayer].throwCard(droppedCardComp);
         setDroppedCardCssInPot(droppedCardElement);
         switch(droppedCardComp.rank){
             case 'changeColor':
@@ -117,7 +117,7 @@ function updateStatistics()
 
          },
          null,setPlayerCardBehavior,Array.from(playerCardsRow.childNodes));
-     let statistics=gameManager.players[0].playerStatistics();
+     let statistics=gameManager.players[gameManager.activePlayer].playerStatistics();
     let reachLastCard = document.getElementById('reachedLastCard');
     reachLastCard.innerHTML = statistics.reachLastCard;
     let avgMoveTime = document.getElementById('avgMoveTime');
@@ -268,202 +268,211 @@ function removePlayerCardBehavior(card){
 function spreadCardsAnimation() {
     let playersUiCards = Array.from(playerCardsRow.childNodes);
     let algoUiCards = Array.from(algoCardsRow.childNodes);
-    playersUiCards.forEach((uiCard)=>{uiCard.classList.remove('cardInsideCardRow')})
-    playersUiCards.forEach((uiCard)=>{uiCard.classList.add('cardInsideCardRowAfterSpread')});
-    algoUiCards.forEach((uiCard)=>{uiCard.classList.remove('cardInsideCardRow')})
-    algoUiCards.forEach((uiCard)=>{uiCard.classList.add('cardInsideCardRowAfterSpread')});
+    playersUiCards.forEach((uiCard) => {
+        uiCard.classList.remove('cardInsideCardRow')
+    })
+    playersUiCards.forEach((uiCard) => {
+        uiCard.classList.add('cardInsideCardRowAfterSpread')
+    });
+    algoUiCards.forEach((uiCard) => {
+        uiCard.classList.remove('cardInsideCardRow')
+    })
+    algoUiCards.forEach((uiCard) => {
+        uiCard.classList.add('cardInsideCardRowAfterSpread')
+    });
 
 
+    function initBeforeRender() {
+        updateTurn(gameManager.activePlayer);
+        initGameDeckUi();
+    }
 
-function initBeforeRender() {
-    updateTurn(gameManager.activePlayer);
-    initGameDeckUi();
-}
+    function initOnRender() {
+        pullTopCardFromGameDeck(-1);
+        gameManager.players.forEach((player, index) => {
+            dealCardsForPlayer(index)
+            setTimeout(() => {
+            }, 1000)
+        });
 
-function initOnRender() {
-    pullTopCardFromGameDeck(-1);
-    gameManager.players.forEach((player, index) => {
-        dealCardsForPlayer(index)
         setTimeout(() => {
-        }, 1000)
-    });
+            spreadCardsAnimation()
+        }, 500);
 
-    setTimeout(() => {
-        spreadCardsAnimation()
-    }, 500);
+        gameManager.timerElapsed.start();
+    }
 
-    gameManager.timerElapsed.start();
-}
-function isPlayerHasLegitCardToThrow(){
-    let playerCardsUi = Array.from(playerCardsRow.childNodes);
+    function isPlayerHasLegitCardToThrow() {
+        let playerCardsUi = Array.from(playerCardsRow.childNodes);
 
-    return playerCardsUi.some((cardUi)=>{
-        let cardComp = gameManager.players[0].getCardByID(parseInt(cardUi.getAttribute("id")));
-        return gameManager.checkMoveValidity(cardComp);
-    });
-}
-function handlePulledTopCardClick(event) {
-    let isPlayer = event.isTrusted;
-    if(!gameManager.isTakiMode && !isPlayerHasLegitCardToThrow() && (gameManager.animationDelayCounter===0 || !isPlayer)){
-        let cardsRowContainer = isPlayer ? playerCardsRow : algoCardsRow ;
+        return playerCardsUi.some((cardUi) => {
+            let cardComp = gameManager.players[0].getCardByID(parseInt(cardUi.getAttribute("id")));
+            return gameManager.checkMoveValidity(cardComp);
+        });
+    }
 
-        if(( isPlayer && gameManager.activePlayer === 0) || (!isPlayer && gameManager.activePlayer===1 )){
-            let numberOFCardsToTake= gameManager.howMany2Plus===0 ? 1 : gameManager.howMany2Plus*2;
-            gameManager.howMany2Plus=0;
-            for (let i=0; i<numberOFCardsToTake; i++) {
-                gameManager.players[gameManager.activePlayer].addCardToDeck(gameManager.gameDeck.pop());
-                let card = pullTopCardFromGameDeck(gameManager.activePlayer);
-                gameFlowAnimationDelay((card)=>{cardsRowContainer.appendChild(card)},[card],setPlayerCardBehavior,Array.from(playerCardsRow.childNodes));
+    function handlePulledTopCardClick(event) {
+        let isPlayer = event.isTrusted;
+        if (!gameManager.isTakiMode && !isPlayerHasLegitCardToThrow() && (gameManager.animationDelayCounter === 0 || !isPlayer)) {
+            let cardsRowContainer = isPlayer ? playerCardsRow : algoCardsRow;
+
+            if ((isPlayer && gameManager.activePlayer === 0) || (!isPlayer && gameManager.activePlayer === 1)) {
+                let numberOFCardsToTake = gameManager.howMany2Plus === 0 ? 1 : gameManager.howMany2Plus * 2;
+                gameManager.howMany2Plus = 0;
+                for (let i = 0; i < numberOFCardsToTake; i++) {
+                    gameManager.players[gameManager.activePlayer].addCardToDeck(gameManager.gameDeck.pop());
+                    let card = pullTopCardFromGameDeck(gameManager.activePlayer);
+                    gameFlowAnimationDelay((card) => {
+                        cardsRowContainer.appendChild(card)
+                    }, [card], setPlayerCardBehavior, Array.from(playerCardsRow.childNodes));
+                }
+                handleTurnEnd(true);
             }
-            handleTurnEnd(true);
+
         }
-
     }
-}
 
-function flushShuffledPotToGameDeck()
-{
-    gameManager.flushShuffledPotToGameDeck();
-    while(potElement.firstChild!==potElement.lastChild){
-        potElement.removeChild(potElement.firstChild);
-    }
-    initGameDeckUICards();
-
-}
-
-function resetPopup(){
-    elem=document.getElementById("winner").innerHTML="";
-    document.getElementById("myTotalMoves").innerHTML="";
-    document.getElementById("myAvgMoveTime").innerHTML="";
-    document.getElementById("myReachedLast").innerHTML="";
-    document.getElementById("myTotalAvgMoveTime").innerHTML="";
-    document.getElementById("algoTotalAvgMoveTime").innerHTML="";
-    document.getElementById("algoAvgMoveTime").innerHTML="";
-    document.getElementById("algoReachedLast").innerHTML="";
-    document.getElementById("algoTotalMoves").innerHTML="";
-    popupContent.style.width='20%';
-    popupContent.style.maxHeight='300px';
-    popupContent.style.minHeight='300px';
-    popupContent.style.minWidth='300px';
-    popupContent.style.height='25%';
-    endGamePopupHeader[0].style.display="none";
-    popupHeader[0].style.display="flex";
-    changeColorPopupContainerElement.style.display="flex";
-    restartButtonElement.hidden=true;
-    endGamePopupContainer.style.diplay="none";
-    popupElement.style.display="none";
-}
-
-function clearCards(){
-    while (gameDeckElem.firstChild){
-        gameDeckElem.removeChild(gameDeckElem.firstChild);
-    }
-    while (potElement.firstChild){
-        potElement.removeChild(potElement.firstChild);
-    }
-    while (playerCardsRow.firstChild){
-        playerCardsRow.removeChild(playerCardsRow.firstChild);
-    }
-    while (algoCardsRow.firstChild){
-        algoCardsRow.removeChild(algoCardsRow.firstChild);
-    }
-}
-
-function restartGame(event){
-    resetPopup();
-    gameManager.resetGame();
-    updateStatistics();
-    clearCards();
-    initBeforeRender();
-    initOnRender();
-
-}
-
-
-function surrender(event){
-    gameManager.winner=1;
-    exitGameIfSomeoneWon();
-}
-
-function exitGameIfSomeoneWon(){
-
-    if (gameManager.thereIsAWinner()===true) {
-        setEndGameStatistics();
-        raiseEndGamePopup();
-    }
-}
-
-function setEndGameStatistics() {
-    let statistics;
-    let elem;
-    statistics = gameManager.gameStatistics();
-    elem=document.getElementById("winner");
-    elem.innerHTML = statistics.whoWon===0? "You Won!" : "You Loose!";
-    document.getElementById("myAvgMoveTime").innerHTML="Avg. Move Time: " + statistics.players[0].avgMovesTime;
-    document.getElementById("myReachedLast").innerHTML="Last Card: "+ statistics.players[0].reachLastCard;
-    document.getElementById("myTotalMoves").innerHTML="Num Of Moves : "+ statistics.players[0].moves;
-    document.getElementById("algoAvgMoveTime").innerHTML="Avg. Move Time: "+ statistics.players[1].avgMovesTime;
-    document.getElementById("algoReachedLast").innerHTML="Last Card: "+ statistics.players[1].reachLastCard;
-    document.getElementById("algoTotalMoves").innerHTML="Num Of Moves : "+ statistics.players[1].moves;
-    if (gameManager.restarted===true)
-    {
-        document.getElementById("myTotalAvgMoveTime").innerHTML="Total Avg. Move Time: " + statistics.players[0].totalAvgMoveTime;
-        document.getElementById("algoTotalAvgMoveTime").innerHTML="Total Avg. Move Time: " + statistics.players[1].totalAvgMoveTime;
-
-    }
-}
-
-function pullTopCardFromGameDeck(index) {
-
-    let initiator;
-    if (index == -1) {
-        initiator = 'pot';
-    } else {
-        initiator = gameManager.players[index] instanceof Algo ? 'algo' : 'player';
-    }
-    if (gameDeckElem.childNodes.length > 0) {
-        //removes card from the game deck
-        let topPulledCard = gameDeckElem.lastChild;
-        topPulledCard.classList.remove('topCardInGameDeck', 'cardInsideGameDeck');
-        topPulledCard.removeEventListener("click", handlePulledTopCardClick, true);
-
-        gameDeckElem.removeChild(topPulledCard);
-
-        let nextTopCard = gameDeckElem.lastChild;
-
-        if (nextTopCard !== null) {
-
-            nextTopCard.classList.add('topCardInGameDeck');
-            nextTopCard.addEventListener("click", handlePulledTopCardClick, true);
-
-        } else{
-            flushShuffledPotToGameDeck();
+    function flushShuffledPotToGameDeck() {
+        gameManager.flushShuffledPotToGameDeck();
+        while (potElement.firstChild !== potElement.lastChild) {
+            potElement.removeChild(potElement.firstChild);
         }
+        initGameDeckUICards();
 
-        if (initiator === 'player') {
-            setPlayerCardBehavior(topPulledCard);
-            return topPulledCard
+    }
 
-        } else if (initiator === 'pot') {
-            gameManager.addDroppedCardToPot(gameManager.gameDeck.pop());
-            setDroppedCardCssInPot(topPulledCard);
+    function resetPopup() {
+        elem = document.getElementById("winner").innerHTML = "";
+        document.getElementById("myTotalMoves").innerHTML = "";
+        document.getElementById("myAvgMoveTime").innerHTML = "";
+        document.getElementById("myReachedLast").innerHTML = "";
+        document.getElementById("myTotalAvgMoveTime").innerHTML = "";
+        document.getElementById("algoTotalAvgMoveTime").innerHTML = "";
+        document.getElementById("algoAvgMoveTime").innerHTML = "";
+        document.getElementById("algoReachedLast").innerHTML = "";
+        document.getElementById("algoTotalMoves").innerHTML = "";
+        popupContent.style.width = '20%';
+        popupContent.style.maxHeight = '300px';
+        popupContent.style.minHeight = '300px';
+        popupContent.style.minWidth = '300px';
+        popupContent.style.height = '25%';
+        endGamePopupHeader[0].style.display = "none";
+        popupHeader[0].style.display = "flex";
+        changeColorPopupContainerElement.style.display = "flex";
+        restartButtonElement.hidden = true;
+        endGamePopupContainer.style.diplay = "none";
+        popupElement.style.display = "none";
+    }
+
+    function clearCards() {
+        while (gameDeckElem.firstChild) {
+            gameDeckElem.removeChild(gameDeckElem.firstChild);
         }
-        else {
-            if(gameManager.totalMfoves()!==0){
-                topPulledCard.classList.add('cardInsideCardRowAfterSpread');
+        while (potElement.firstChild) {
+            potElement.removeChild(potElement.firstChild);
+        }
+        while (playerCardsRow.firstChild) {
+            playerCardsRow.removeChild(playerCardsRow.firstChild);
+        }
+        while (algoCardsRow.firstChild) {
+            algoCardsRow.removeChild(algoCardsRow.firstChild);
+        }
+    }
 
-            }else{
-                topPulledCard.classList.add('cardInsideCardRow');
+    function restartGame(event) {
+        resetPopup();
+        gameManager.resetGame();
+        updateStatistics();
+        clearCards();
+        initBeforeRender();
+        initOnRender();
 
+    }
+
+
+    function surrender(event) {
+        gameManager.winner = 1;
+        exitGameIfSomeoneWon();
+    }
+
+    function exitGameIfSomeoneWon() {
+
+        if (gameManager.thereIsAWinner() === true) {
+            setEndGameStatistics();
+            raiseEndGamePopup();
+        }
+    }
+
+    function setEndGameStatistics() {
+        let statistics;
+        let elem;
+        statistics = gameManager.gameStatistics();
+        elem = document.getElementById("winner");
+        elem.innerHTML = statistics.whoWon === 0 ? "You Won!" : "You Loose!";
+        document.getElementById("myAvgMoveTime").innerHTML = "Avg. Move Time: " + statistics.players[0].avgMovesTime;
+        document.getElementById("myReachedLast").innerHTML = "Last Card: " + statistics.players[0].reachLastCard;
+        document.getElementById("myTotalMoves").innerHTML = "Num Of Moves : " + statistics.players[0].moves;
+        document.getElementById("algoAvgMoveTime").innerHTML = "Avg. Move Time: " + statistics.players[1].avgMovesTime;
+        document.getElementById("algoReachedLast").innerHTML = "Last Card: " + statistics.players[1].reachLastCard;
+        document.getElementById("algoTotalMoves").innerHTML = "Num Of Moves : " + statistics.players[1].moves;
+        if (gameManager.restarted === true) {
+            document.getElementById("myTotalAvgMoveTime").innerHTML = "Total Avg. Move Time: " + statistics.players[0].totalAvgMoveTime;
+            document.getElementById("algoTotalAvgMoveTime").innerHTML = "Total Avg. Move Time: " + statistics.players[1].totalAvgMoveTime;
+
+        }
+    }
+
+    function pullTopCardFromGameDeck(index) {
+
+        let initiator;
+        if (index == -1) {
+            initiator = 'pot';
+        } else {
+            initiator = gameManager.players[index] instanceof Algo ? 'algo' : 'player';
+        }
+        if (gameDeckElem.childNodes.length > 0) {
+            //removes card from the game deck
+            let topPulledCard = gameDeckElem.lastChild;
+            topPulledCard.classList.remove('topCardInGameDeck', 'cardInsideGameDeck');
+            topPulledCard.removeEventListener("click", handlePulledTopCardClick, true);
+
+            gameDeckElem.removeChild(topPulledCard);
+
+            let nextTopCard = gameDeckElem.lastChild;
+
+            if (nextTopCard !== null) {
+
+                nextTopCard.classList.add('topCardInGameDeck');
+                nextTopCard.addEventListener("click", handlePulledTopCardClick, true);
+
+            } else {
+                flushShuffledPotToGameDeck();
             }
-            return topPulledCard
+
+            if (initiator === 'player') {
+                setPlayerCardBehavior(topPulledCard);
+                return topPulledCard
+
+            } else if (initiator === 'pot') {
+                gameManager.addDroppedCardToPot(gameManager.gameDeck.pop());
+                setDroppedCardCssInPot(topPulledCard);
+            }
+            else {
+                if (gameManager.totalMfoves() !== 0) {
+                    topPulledCard.classList.add('cardInsideCardRowAfterSpread');
+
+                } else {
+                    topPulledCard.classList.add('cardInsideCardRow');
+
+                }
+                return topPulledCard
+            }
+
+
         }
-
-
     }
+
 }
-
-
 
 
 initBeforeRender()

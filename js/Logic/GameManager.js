@@ -12,6 +12,8 @@ class GameManager{
         this.activePlayer = 0;
         this.players[0] = new PlayerFactory.Player('player');
         this.players[1] = new PlayerFactory.Algo();
+        this.players[2] = new PlayerFactory.Algo();
+        this.players[3] = new PlayerFactory.Algo();
         this.timer = timer;
         this.timeElapsed = this.timer.timeElapsed;
         this.howMany2Plus=0;
@@ -219,7 +221,7 @@ class GameManager{
         return time;
     }
 
-    changeTurn(isChangeTurn){
+    changeTurn(isChangeTurn,skipPlayer){
         let cards = [];
         this.nowTime.ms = this.timer.ms;
         this.nowTime.min = this.timer.min;
@@ -233,11 +235,16 @@ class GameManager{
         if (this.players[this.activePlayer].howManyCards() === 1)
             this.players[this.activePlayer].reachedLastCard++;
         if (isChangeTurn) {
-            this.activePlayer = 1 - this.activePlayer;
+            //TODO: REMOVE THIS HARD CODED CODE
+            this.activePlayer = ++gameManager.activePlayer % 4 ;
+        }
+        if(skipPlayer){
+            this.activePlayer = ++gameManager.activePlayer % 4 ;
+
         }
 
-        if (this.activePlayer === 1 && this._winner===NoWinner) {
-            cards= this.players[1].play(this.pot.getTopCardValue(), this.howMany2Plus > 0);
+        if (this.activePlayer !== 0 && this._winner===NoWinner) {
+            cards= this.players[gameManager.activePlayer].play(this.pot.getTopCardValue(), this.howMany2Plus > 0);
         }
         return cards;
     }

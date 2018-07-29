@@ -11,6 +11,7 @@ export default class Player extends Component{
                           :
                           this.props.owner}
                           containerZIndex={this.props.containerZIndex}
+                          layout={this.props.layout}
                       replayMode={this.props.replayMode}
                  />
 

@@ -35,10 +35,10 @@ export default class Deck extends Component{
         switch (this.props.owner) {
             case 'playerActive':
             case 'playerNonActive':
-                res = 'cardsRowPlayer';
+                res = this.props.layout === 'row'  ? 'cardsRowPlayer' : 'cardColPlayer';
                 break;
             case 'algo':
-                res = 'cardsRowAlgo';
+                res = this.props.layout === 'row'  ? 'cardsRowAlgo' : 'cardColAlgo';
                 break;
             case 'pot':
                 res = 'pot';
@@ -100,7 +100,7 @@ export default class Deck extends Component{
                 newBehaviour.styleClasses.cardWrapper= [...newBehaviour.styleClasses.cardWrapper,'cardInsideGameDeck']
                 break;
             case 'algo':
-                newBehaviour.backgroundShown = false;
+                newBehaviour.backgroundShown = true;
                 newBehaviour.hoverable = false;
                 newBehaviour.draggable = false;
                 newBehaviour.spreadable = true;
