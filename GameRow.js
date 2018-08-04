@@ -13,7 +13,7 @@ export default class GameRow extends Component{
             <div className={'gameDeckRow'}>
                 <TurnIndicator activePlayer={this.props.activePlayer} isTakiMode={this.props.isTakiMode} takiAnimationColor={this.props.userInteractionsEvents.fireTakiColorAnimation}/>
                 <Pot pot = {this.props.pot}  containerZIndex={this.props. containerZIndex} replayMode={this.props.replayMode}/>
-                <GameDeck gameDeck = {this.props.gameDeck} containerZIndex={this.props. containerZIndex} replayMode={this.props.replayMode}/>
+                <GameDeck gameDeck = {this.props.gameDeck} containerZIndex={this.props.containerZIndex} replayMode={this.props.replayMode}/>
             </div>
         )
     }

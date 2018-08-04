@@ -35,10 +35,11 @@ export default class Deck extends Component{
         switch (this.props.owner) {
             case 'playerActive':
             case 'playerNonActive':
-                res = this.props.layout === 'row'  ? 'cardsRowPlayer' : 'cardColPlayer';
+                res = this.props.layout.formation === 'row' ? 'cardsRowPlayer' : 'cardsColPlayer';
+
                 break;
             case 'algo':
-                res = this.props.layout === 'row'  ? 'cardsRowAlgo' : 'cardColAlgo';
+                res = this.props.layout.formation === 'row' ? 'cardsRowAlgo' : 'cardsColAlgo';
                 break;
             case 'pot':
                 res = 'pot';
@@ -46,6 +47,15 @@ export default class Deck extends Component{
             case 'gameDeck':
                 res = 'gameDeck';
                 break;
+        }
+        if(this.props.layout){
+            switch (this.props.layout.formation) {
+                case 'col':
+                    res = `${res} ${this.props.layout.position === 'left' ? 'cardsColLeft' : 'cardsColRight'}`
+                    break;
+        }
+
+                return res;
         }
         return res;
     }
@@ -169,7 +179,7 @@ export default class Deck extends Component{
             let newBehaviours = [];
 
             (props.topCard && props.behaviour.clickable && !props.replayMode) ? newBehaviours.push('topCardInGameDeck') : null;
-            (beforeSpeardStyleBehaviour.spreadable) ?  newBehaviours.push('cardInsideCardRowAfterSpread') : null;
+            (beforeSpeardStyleBehaviour.spreadable) ?  newBehaviours.push(props.layout.formation === 'row' ? 'cardInsideCardRowAfterSpread' : 'cardInsideCardColAfterSpread') : null;
             (beforeSpeardStyleBehaviour.hoverable  && !props.replayMode) ? newBehaviours.push('cardPlayer') : null;
             let afterSpreadStyleBehaviour = Object.assign(beforeSpeardStyleBehaviour , {
                 styleClasses:{
@@ -254,6 +264,21 @@ export default class Deck extends Component{
         this.needsToSetState(props);
     }
 
+    // columnLayoutFixer(){
+    //     this.props.layout ?
+    //         this.props.layout.formation==='col' ?
+    //             this.props.layout.position = 'left'
+    //                 ?
+    //                 return 'cardColLeft'
+    //                 :
+    //                 return 'cardColRight'
+    //         :
+    //         return ''
+    //     :
+    //     return ''
+    //
+    //
+    // }
 
     render(){
 
@@ -270,9 +295,11 @@ export default class Deck extends Component{
                                 <Card id={card.id}  key={card.id} rank={card._rank} color={card._color}  behaviour={Object.assign({},this.state.cardsBehaviour)}
                                       style={ this.state.cardsBehaviour.rotateable
                                           ? Object.assign({},this.rotateCard(this.state.cardsRotationDegree[index]),this.setCardBackground(card._rank,card._color))
-                                          : Object.assign({},this.setCardBackground(card._rank,card._color))}
+                                          : Object.assign({},this.setCardBackground(card._rank,card._color)
+
+                                          )}
                                       topCard={this.state.owner==='gameDeck' && index === numOfChildrenCards && !this.props.replayMode}
-                                      actions={ Object.assign({},this.state.actions)} replayMode={this.props.replayMode}/>
+                                      actions={ Object.assign({},this.state.actions)} replayMode={this.props.replayMode} layout={this.props.layout} />
                             )
                         })
                         :

@@ -38,7 +38,8 @@ export default class Stage extends Component{
         return(
             <div id='mainContent'>
                 <Popup renderChooseColor = {this.props.userInteractionsEvents.chooseColorCardDropped} renderStatistics={this.props.winner !== -1} players={this.props.players} winner={this.props.winner}/>
-                <Player player={this.props.players[1]} owner={'algo'} containerZIndex = {this.props.isTakiMode ? 100 : 1}  replayMode={this.props.replayMode} layout={'row'} />
+                <Player player={this.props.players[1]} owner={'algo'} containerZIndex = {this.props.isTakiMode ? 100 : 1}  replayMode={this.props.replayMode} layout={{formation:'row',position:'top'}}/>
+
                 <GameRow userInteractionsEvents={this.props.userInteractionsEvents}
                     gameDeck = {this.props.gameDeck}
                     pot = {this.props.pot}
@@ -46,14 +47,16 @@ export default class Stage extends Component{
                          containerZIndex = {this.props.isTakiMode ? 100 : 1}
                          isTakiMode={this.props.isTakiMode}
                          replayMode={this.props.replayMode}
-                />
+                >
+
+                </GameRow>
                 <h1 id="cardInstructions">{this.mapInstructions(this.props)}</h1>
+                <Player player={this.props.players[2]} owner={'algo'} containerZIndex = {this.props.isTakiMode ? 100 : 1}  replayMode={this.props.replayMode} layout={{formation:'col',position:'left'}}/>
+                {/*<Player player={this.props.players[3]} owner={'algo'} containerZIndex = {this.props.isTakiMode ? 100 : 1}  replayMode={this.props.replayMode} layout={{formation:'col',position:'right'}} />*/}
 
-                <Player player={this.props.players[2]} owner={'algo'} containerZIndex = {this.props.isTakiMode ? 100 : 1}  replayMode={this.props.replayMode} layout={'col'}/>
-                <Player player={this.props.players[3]} owner={'algo'} containerZIndex = {this.props.isTakiMode ? 100 : 1}  replayMode={this.props.replayMode} layout={'col'} />
 
 
-                <Player  player={this.props.players[0]} owner={'player'} containerZIndex = {this.props.isTakiMode ? 100 : 1} replayMode={this.props.replayMode} layout={'col'}
+                <Player  player={this.props.players[0]} owner={'player'} containerZIndex = {this.props.isTakiMode ? 100 : 1} replayMode={this.props.replayMode} layout={{formation:'row',position:'bottom'}}
                          activeDescription={this.props.activePlayer===0?
                              'Active':
                              'NonActive'}/>

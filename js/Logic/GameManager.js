@@ -13,7 +13,7 @@ class GameManager{
         this.players[0] = new PlayerFactory.Player('player');
         this.players[1] = new PlayerFactory.Algo();
         this.players[2] = new PlayerFactory.Algo();
-        this.players[3] = new PlayerFactory.Algo();
+        // this.players[3] = new PlayerFactory.Algo();
         this.timer = timer;
         this.timeElapsed = this.timer.timeElapsed;
         this.howMany2Plus=0;
@@ -66,7 +66,6 @@ class GameManager{
         this.ensureFirstCardNotSpecial();
         this.pot.add(this.gameDeck.pop());
         this.activePlayer = 0;
-        this.timer.start();
         this.howMany2Plus=0;
         this.lastTime={ ms :0, sec :0, min : 0};
         this.nowTime={ ms :0, sec :0, min : 0};
@@ -195,6 +194,9 @@ class GameManager{
         }
     }
 
+    numPlayers(){
+        return this.players.length
+    }
     onCardHoverEnd(event){
         let target = event.target.id !== "" ? event.target : event.target.parentNode;
         target.classList.remove('cardAllowedCue','cardNotAllowedCue')
@@ -236,10 +238,10 @@ class GameManager{
             this.players[this.activePlayer].reachedLastCard++;
         if (isChangeTurn) {
             //TODO: REMOVE THIS HARD CODED CODE
-            this.activePlayer = ++gameManager.activePlayer % 4 ;
+            this.activePlayer = ++gameManager.activePlayer % this.numPlayers() ;
         }
         if(skipPlayer){
-            this.activePlayer = ++gameManager.activePlayer % 4 ;
+            this.activePlayer = ++gameManager.activePlayer % this.numPlayers() ;
 
         }
 
